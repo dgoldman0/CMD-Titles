@@ -48,7 +48,11 @@ contract WRLDTitles is ERC721, VotingRights, DefaultDemocratized {
     }
   }
   function getVotingWeight(uint titleID) external view override returns (uint weight) {
-    return (titles[titleID].rank == 12);
+    if (titles[titleID].rank == 12) return 1;
+    return 0;
+  }
+  function hasFiduciaryPower(address addr, uint titleID) external view override returns (bool hasPower) {
+    return ownerOf(titleID) == addr;
   }
   function mintCost(uint8 rank) public view returns (uint cost) {
     require(rank < 13, "No such rank!");

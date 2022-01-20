@@ -43,7 +43,7 @@ contract VotingMachine {
   function addProposition(address sender, uint threshold, uint startTime, uint endTime) public returns (uint propositionID) {
     uint propID = propositionCount;
     propositionCount++;
-    propositions[propID] = Proposition(propID, sender, msg.sender, threshold, requestID, startTime, endTime, false);
+    propositions[propID] = Proposition(propID, sender, msg.sender, threshold, startTime, endTime, false);
     emit NewProposition(propID, sender, msg.sender, threshold, startTime, endTime);
     return propID;
   }
@@ -87,7 +87,7 @@ contract VotingMachine {
     require(block.timestamp > prop.endTime, "Proposition voting is still ongoing.");
     require(_checkPropositionThreshold(propositionID), "Proposition has not been approved.");
     require(!prop.executed, "Proposition already executed.");
-		require(prop.democratized == msg.sender, "This is not the democratized contract that initiated the proposal.	");
+		require(prop.democratized == msg.sender, "This is not the democratized contract that initiated the proposal.");
     prop.executed = true;
     emit PropositionExecuted(propositionID, executedBy);
   }

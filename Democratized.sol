@@ -16,10 +16,13 @@ contract Democratized is ERC1155Holder {
     address receiver;
     uint propositionID;
   }
+
   mapping (uint => BEP20Request) bep20Requests;
+
   constructor(address _machineAddr) {
     voting = VotingMachine(_machineAddr);
   }
+  
   // Request a withdraw of BEP-20 tokens
   function _requestWithdraw20(address token, uint amt, uint threshold, address receiver, uint startTime, uint endTime) internal returns (uint propositionID) {
     uint requestID = bep20RequestCount;

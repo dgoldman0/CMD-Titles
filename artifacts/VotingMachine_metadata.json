@@ -34,7 +34,7 @@
 					{
 						"indexed": false,
 						"internalType": "address",
-						"name": "democretized",
+						"name": "democratized",
 						"type": "address"
 					},
 					{
@@ -204,7 +204,13 @@
 					}
 				],
 				"name": "executeProposition",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -293,50 +299,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"Executors.sol": {
-			"keccak256": "0xb13da93b002ae87f21aa5e15268716d92b8eff423134c84905bebd49bbe363f8",
-			"urls": [
-				"bzz-raw://69c3d7345dd3f74557eaf38809c9d948e570fe51050ada31da78f83079bc4df8",
-				"dweb:/ipfs/QmQ6sPfMxT4FYtL7zzRqjMARADzXa9Caa1pgikZGEUaYSD"
-			]
-		},
-		"OpenZeppelin/Context.sol": {
-			"keccak256": "0x81d5fc973a522c8909d60be6a201869d46aa47b030b8813f60616404628c2b94",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://9755b505799e622d964a843a8ed1fd60fedffca230178e5cb95ae9280df4dcd2",
-				"dweb:/ipfs/QmRkhUYUUgRZ2QYJjmtQct2ubyYwS3bdUMhbuFYM12VfYn"
-			]
-		},
-		"OpenZeppelin/ERC20.sol": {
-			"keccak256": "0x5efb754c527aac1a6bfd40afee7969fdefc4044bc09d29cccd96e68a8d0ee152",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://d0b46d93f8b19df03a91f693c4c3c9dd8213b28f12cc8c16f7d694cc4c461838",
-				"dweb:/ipfs/QmUifcrnv5Q4FtG2VAzCNob6KS4em4zywP3i3U4SLMDzAd"
-			]
-		},
-		"OpenZeppelin/IERC20.sol": {
-			"keccak256": "0xd3498b152364c51284e38a01585debf7f69c6908fbab1da8f11a75ba5b89c251",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://bb8f6252c31c2ffb1143ca2d9e89e2cf6f031f1dd2e6a9b06fd81ab3ab6cf12b",
-				"dweb:/ipfs/QmSJp6A2Ku5F1nZvRp8PnmKtCocurhVcXiZtKC7L86zY6b"
-			]
-		},
-		"OpenZeppelin/IERC20Metadata.sol": {
-			"keccak256": "0x94dc88716e92464d240916e16167a8a900f88a2a954fb23cd2ac7f8f96d4d1b4",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://ad787a2de87b357623f979896b283138de1b491859c55c03ea19e5b3f85196fc",
-				"dweb:/ipfs/QmRgyyXYMDTkwejZMpcDgmE3kgPQKkfvHGHDeunXCgTMJr"
-			]
-		},
 		"VotingMachine.sol": {
-			"keccak256": "0x164274f0ea7978fff01962179d803ef8f201bd5bce8017a38fff03d595dc765b",
+			"keccak256": "0x9a552aab88131d99e01b9f9f88011013a47145be76c7daf7b055be81e446833c",
 			"urls": [
-				"bzz-raw://514a741b440d591022acf5b5c2c18f7ef066c5cd16c1b871af6152ab246f9950",
-				"dweb:/ipfs/QmTxPks7Hxa1jHHEJW8By6LMqXxixz1vUZQ656fEgE1zbz"
+				"bzz-raw://c769c331e89450f01f1b4ac2a7f5c4ad6f844d9dcf4f5ffec7109ea28662c39e",
+				"dweb:/ipfs/QmdrPqWTBKCsVp7QJmkvXngoyd669WjpxZGfu5vCPAF9pi"
 			]
 		},
 		"VotingRights.sol": {

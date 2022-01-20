@@ -184,10 +184,10 @@
 			]
 		},
 		"VotingMachine.sol": {
-			"keccak256": "0x92674466e0348dc965ac81c4f8acfe0c52c9f8de705dde5a78ed7d7590b0e7a2",
+			"keccak256": "0x9a552aab88131d99e01b9f9f88011013a47145be76c7daf7b055be81e446833c",
 			"urls": [
-				"bzz-raw://2459ab5b105befd859b23dfb102f8de805d82bd8e4482d313ddd200718b0fa7e",
-				"dweb:/ipfs/Qme1U3b2vgY5v6tpYv664YfnYVWsRrMVB3E7TeBmRR5rww"
+				"bzz-raw://c769c331e89450f01f1b4ac2a7f5c4ad6f844d9dcf4f5ffec7109ea28662c39e",
+				"dweb:/ipfs/QmdrPqWTBKCsVp7QJmkvXngoyd669WjpxZGfu5vCPAF9pi"
 			]
 		},
 		"VotingRights.sol": {
