@@ -37,7 +37,7 @@ contract WRLDTitles is ERC721, VotingRights, DefaultDemocratized {
 
   mapping (uint8 => Rank) ranks;
 
-  constructor() {
+  constructor() ERC721Full("GameItem", "ITM") public { {
     // Initial settings for ranks
     uint8 i;
     uint64 cost = 1000000000000; // Cost of god title is 1M CMD

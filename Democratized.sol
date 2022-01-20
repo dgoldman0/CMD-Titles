@@ -5,7 +5,8 @@ import "./VotingMachine.sol";
 import "./openZeppelin/ERC20.sol";
 import "./openZeppelin/ERC1155Holder.sol";
 
-contract Democratized is ERC1155Holder {
+// Will extend  is ERC1155Holder when working on 1155 contracts
+contract Democratized {
   VotingMachine voting;
   VotingRights rightsContract;
   uint bep20RequestCount;
