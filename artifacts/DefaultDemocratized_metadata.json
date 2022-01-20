@@ -6,13 +6,7 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_machineAddr",
-						"type": "address"
-					}
-				],
+				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -72,7 +66,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Democratized.sol": "Democratized"
+			"Democratized.sol": "DefaultDemocratized"
 		},
 		"evmVersion": "london",
 		"libraries": {},

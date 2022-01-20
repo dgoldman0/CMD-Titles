@@ -8,17 +8,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_machineAddr",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint256",
 						"name": "requestID",
 						"type": "uint256"
@@ -26,6 +15,84 @@
 				],
 				"name": "executeWithdraw20",
 				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155BatchReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -57,11 +124,34 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -72,7 +162,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Democratized.sol": "Democratized"
+			"Democratized.sol": "DefaultDemocretized"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -87,17 +177,17 @@
 	},
 	"sources": {
 		"Democratized.sol": {
-			"keccak256": "0xe9e69d923f5c07c1dbeda32778340fad2b318257a1a0b0307652f0269269c69e",
+			"keccak256": "0x3e3b1d003035d27d2fee95d856c3f3d406500881ca917794aa3070df9090f069",
 			"urls": [
-				"bzz-raw://a87982c2372570f6012f0322a74fbcab141fa9f6197553f16ab501388d8f362c",
-				"dweb:/ipfs/QmfQfXjnDGhhUNZ78hbYqT9Usyp7WSWx5xopKWLT6AcxBV"
+				"bzz-raw://8aad4aa6ba6844443b2a22a0f3cd4b2aa3a9aa880045647dcf0d8d8ae387105a",
+				"dweb:/ipfs/QmV8YA9foAaBr9FZKJ5SzVGktst8mneTaCPsBzVeRT9GsJ"
 			]
 		},
 		"VotingMachine.sol": {
-			"keccak256": "0x9a552aab88131d99e01b9f9f88011013a47145be76c7daf7b055be81e446833c",
+			"keccak256": "0x92674466e0348dc965ac81c4f8acfe0c52c9f8de705dde5a78ed7d7590b0e7a2",
 			"urls": [
-				"bzz-raw://c769c331e89450f01f1b4ac2a7f5c4ad6f844d9dcf4f5ffec7109ea28662c39e",
-				"dweb:/ipfs/QmdrPqWTBKCsVp7QJmkvXngoyd669WjpxZGfu5vCPAF9pi"
+				"bzz-raw://2459ab5b105befd859b23dfb102f8de805d82bd8e4482d313ddd200718b0fa7e",
+				"dweb:/ipfs/Qme1U3b2vgY5v6tpYv664YfnYVWsRrMVB3E7TeBmRR5rww"
 			]
 		},
 		"VotingRights.sol": {

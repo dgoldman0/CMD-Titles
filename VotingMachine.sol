@@ -1,6 +1,5 @@
 pragma solidity ^0.8.0;
 import "VotingRights.sol";
-import "Executors.sol";
 
 // Should reduce some uints to uint64 to save gas
 
@@ -11,8 +10,7 @@ contract VotingMachine {
   struct Proposition {
     uint id;
     address sender;
-    address executor;
-    uint requestID;
+    address democratized;
     uint threshold; // vote threshold for confirmation in increments of 0.00001
     uint startTime;
     uint endTime;
@@ -36,17 +34,17 @@ contract VotingMachine {
   mapping (uint => uint) votesForProp;
   mapping (uint => uint) votesAgainstProp;
 
-  event NewProposition(uint id, address sender, address executor, uint threshold, uint requestID, uint startTime, uint endTime);
+  event NewProposition(uint id, address sender, address democratized, uint threshold, uint startTime, uint endTime);
   event PropositionExecuted(uint propositionID, address executedBy);
   event NewVote(uint id, address votingAddress, uint voterID, uint propositionID, uint propositionVoteID, bool vote, uint weight);
   constructor(address rights) {
     rightsContract = VotingRights(rights);
   }
-  function addProposition(address sender, address executor, uint threshold, uint requestID, uint startTime, uint endTime) public returns (uint propositionID) {
+  function addProposition(address sender, uint threshold, uint startTime, uint endTime) public returns (uint propositionID) {
     uint propID = propositionCount;
     propositionCount++;
-    propositions[propID] = Proposition(propID, sender, executor, threshold, requestID, startTime, endTime, false);
-    emit NewProposition(propID, sender, executor, threshold, requestID, startTime, endTime);
+    propositions[propID] = Proposition(propID, sender, msg.sender, threshold, startTime, endTime, false);
+    emit NewProposition(propID, sender, msg.sender, threshold, startTime, endTime);
     return propID;
   }
   function castVote(uint propositionID, uint voterID, bool vote) public returns (uint voteID) {
@@ -84,14 +82,13 @@ contract VotingMachine {
     // Need to be careful to make sure that I'm calculating the threshold properly since floating point arithemtic is not allowed
     return votesForProp[propositionID] * 100000 / votesAgainstProp[propositionID] >= propositions[propositionID].threshold;
   }
-  function executeProposition(uint propositionID) public returns (bool success) {
+  function executeProposition(uint propositionID, address executedBy) public returns (bool success) {
     Proposition storage prop = propositions[propositionID];
     require(block.timestamp > prop.endTime, "Proposition voting is still ongoing.");
     require(_checkPropositionThreshold(propositionID), "Proposition has not been approved.");
     require(!prop.executed, "Proposition already executed.");
+		require(prop.democratized == msg.sender, "This is not the democratized contract that initiated the proposal.");
     prop.executed = true;
-    IExecutor executor = IExecutor(prop.executor);
-    executor.execute(prop.requestID);
-    emit PropositionExecuted(propositionID, msg.sender);
+    emit PropositionExecuted(propositionID, executedBy);
   }
 }
