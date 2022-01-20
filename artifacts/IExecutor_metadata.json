@@ -1,0 +1,90 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "execute",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Executors.sol": "IExecutor"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Executors.sol": {
+			"keccak256": "0x4cf7db13a77a7285a709fd1b50e2f009aea27e7c18f68a5c076eb4a89857ea3f",
+			"urls": [
+				"bzz-raw://6e42d2d63c55683b324c1ad8586f8083a0f1cba7e4f40fd858d7d2cd3bfff044",
+				"dweb:/ipfs/QmWpP74ZtoRiYmnKqcbZwwuFhWwYmaEQuFA3KwkmGhQUau"
+			]
+		},
+		"OpenZeppelin/Context.sol": {
+			"keccak256": "0x81d5fc973a522c8909d60be6a201869d46aa47b030b8813f60616404628c2b94",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9755b505799e622d964a843a8ed1fd60fedffca230178e5cb95ae9280df4dcd2",
+				"dweb:/ipfs/QmRkhUYUUgRZ2QYJjmtQct2ubyYwS3bdUMhbuFYM12VfYn"
+			]
+		},
+		"OpenZeppelin/ERC20.sol": {
+			"keccak256": "0x5efb754c527aac1a6bfd40afee7969fdefc4044bc09d29cccd96e68a8d0ee152",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d0b46d93f8b19df03a91f693c4c3c9dd8213b28f12cc8c16f7d694cc4c461838",
+				"dweb:/ipfs/QmUifcrnv5Q4FtG2VAzCNob6KS4em4zywP3i3U4SLMDzAd"
+			]
+		},
+		"OpenZeppelin/IERC20.sol": {
+			"keccak256": "0xd3498b152364c51284e38a01585debf7f69c6908fbab1da8f11a75ba5b89c251",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bb8f6252c31c2ffb1143ca2d9e89e2cf6f031f1dd2e6a9b06fd81ab3ab6cf12b",
+				"dweb:/ipfs/QmSJp6A2Ku5F1nZvRp8PnmKtCocurhVcXiZtKC7L86zY6b"
+			]
+		},
+		"OpenZeppelin/IERC20Metadata.sol": {
+			"keccak256": "0x94dc88716e92464d240916e16167a8a900f88a2a954fb23cd2ac7f8f96d4d1b4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ad787a2de87b357623f979896b283138de1b491859c55c03ea19e5b3f85196fc",
+				"dweb:/ipfs/QmRgyyXYMDTkwejZMpcDgmE3kgPQKkfvHGHDeunXCgTMJr"
+			]
+		}
+	},
+	"version": 1
+}

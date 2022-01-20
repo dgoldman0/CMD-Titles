@@ -1,11 +1,11 @@
 pragma solidity ^0.8.0;
-import "ERC721.sol";
-import "SafeERC20.sol";
-import "Address.sol";
-import "VotingRights.sol"
-import "iDemocretized.sol";
+import "./OpenZeppelin/ERC721.sol";
+import "./OpenZeppelin/SafeERC20.sol";
+import "./OpenZeppelin/Address.sol";
+import "./VotingRights.sol"
+import "./Democretized.sol";
 
-contract WRLDTitles is ERC721, VotingRights, iDemocretized {
+contract WRLDTitles is ERC721, VotingRights, Democratized {
 	using Address for address;
 
   uint64 titleCount;
