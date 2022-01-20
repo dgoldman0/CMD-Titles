@@ -2,10 +2,11 @@ pragma solidity ^0.8.0;
 import "./openZeppelin/ERC20.sol";
 import "./openZeppelin/Address.sol";
 import "./openZeppelin/ERC721.sol";
+import "./openZeppelin/ERC721Enumerable.sol";
 import "./VotingRights.sol";
 import "./Democratized.sol";
 
-contract WRLDTitles is ERC721, VotingRights, DefaultDemocratized {
+contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 	using Address for address;
   ERC20 cmd_contract;
   uint64 titleCount;
@@ -37,7 +38,7 @@ contract WRLDTitles is ERC721, VotingRights, DefaultDemocratized {
 
   mapping (uint8 => Rank) ranks;
 
-  constructor() ERC721Full("GameItem", "ITM") public { {
+  constructor() ERC721("CMD Title", "TTL") public {
     // Initial settings for ranks
     uint8 i;
     uint64 cost = 1000000000000; // Cost of god title is 1M CMD

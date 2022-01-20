@@ -33,84 +33,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "bytes",
-						"name": "",
-						"type": "bytes"
-					}
-				],
-				"name": "onERC1155BatchReceived",
-				"outputs": [
-					{
-						"internalType": "bytes4",
-						"name": "",
-						"type": "bytes4"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bytes",
-						"name": "",
-						"type": "bytes"
-					}
-				],
-				"name": "onERC1155Received",
-				"outputs": [
-					{
-						"internalType": "bytes4",
-						"name": "",
-						"type": "bytes4"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "token",
 						"type": "address"
 					},
@@ -135,34 +57,11 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bytes4",
-						"name": "interfaceId",
-						"type": "bytes4"
-					}
-				],
-				"name": "supportsInterface",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {
-				"supportsInterface(bytes4)": {
-					"details": "See {IERC165-supportsInterface}."
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
@@ -188,10 +87,10 @@
 	},
 	"sources": {
 		"Democratized.sol": {
-			"keccak256": "0x99522311cfe20059a33af2a8453749d0d4cacb6e532eb2c7b4d9f812414d1bdc",
+			"keccak256": "0xe9e69d923f5c07c1dbeda32778340fad2b318257a1a0b0307652f0269269c69e",
 			"urls": [
-				"bzz-raw://66d70a261d3aa1fa11514c88f239c92d75bef67915cb90971f13e20f28beb0de",
-				"dweb:/ipfs/QmdGgatuqqcAAjprsyYHRafZb6eas61sacSDUzoK2xud6m"
+				"bzz-raw://a87982c2372570f6012f0322a74fbcab141fa9f6197553f16ab501388d8f362c",
+				"dweb:/ipfs/QmfQfXjnDGhhUNZ78hbYqT9Usyp7WSWx5xopKWLT6AcxBV"
 			]
 		},
 		"VotingMachine.sol": {
