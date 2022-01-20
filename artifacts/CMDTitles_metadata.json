@@ -169,13 +169,20 @@
 					}
 				],
 				"name": "executeGodMint",
-				"outputs": [
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "tokenID",
+						"name": "requestID",
 						"type": "uint256"
 					}
 				],
+				"name": "executeRankChange",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -724,7 +731,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Titles.sol": "WRLDTitles"
+			"Titles.sol": "CMDTitles"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -746,10 +753,10 @@
 			]
 		},
 		"Titles.sol": {
-			"keccak256": "0x0fc8073760a0e99648fac7abca814239729e24ca5a335456b452b1d6e16cc5ac",
+			"keccak256": "0xa93fe6031693eff0bef36ef53c3de8f14849d6e78bfb286cbe397321baa7bb85",
 			"urls": [
-				"bzz-raw://d69efb0a1d3ceec237a7313fa914c1d4322018453f77bdfbc1fd0a8ab71b1733",
-				"dweb:/ipfs/QmZzK2fqWJEV36zEiuSgp5UQxdgQZf8h4RegKs35f5gsUt"
+				"bzz-raw://d299ed4b4153d6979808dacd2806aea9ee1127d6d6b8c9ea217a3f2e17a1a92e",
+				"dweb:/ipfs/QmNafhofzuHgk1pmtNaJeNwCbBC8J5Sryba6zQCu2ZwsMC"
 			]
 		},
 		"VotingMachine.sol": {

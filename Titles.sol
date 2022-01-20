@@ -6,16 +6,17 @@ import "./openZeppelin/ERC721Enumerable.sol";
 import "./VotingRights.sol";
 import "./Democratized.sol";
 
-contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
+contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 	using Address for address;
   ERC20 cmd_contract;
   uint64 titleCount;
+  uint64 godTitleCount;
 
 	mapping(address => uint) private _addressCMDBalance;
   uint private _reserveBalance; // The amount of CMD reserved to pay for CMDBalance
 	uint private _reservedForExecutor; // Amount of CMD reserved for the executor
 
-	event TitleMinted(uint64 titleID, uint8 rank, uint parentID, address minter);
+	event TitleMinted(uint titleID, address minter);
 	event CMDClaim(address minter, uint amount);
 
 	//Tight packing would allow for multiple attributes to be stored in a single uint256 slot in evm.
@@ -41,11 +42,19 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   // Requests
   struct RankChangeRequest {
     uint8 rank;
-    uint64 cost;
+    uint64 val;
+    bool cost_children; // Whether the request is to change the cost or the max child limit. True/false=cost/children
+    uint propositionID;
+  }
+  struct GodMintRequest {
+    uint8 amt; // Number of god titles to mint: Max 255 at a time
+    address receiver;
     uint propositionID;
   }
   uint rankChangeRequestCNT;
+  uint godMintRequestCNT;
   mapping (uint => RankChangeRequest) rankChangeRequests;
+  mapping (uint => GodMintRequest) godMintRequests;
 
   constructor() ERC721("CMD Title", "TTL") public {
     // Initial settings for ranks
@@ -55,6 +64,9 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     for (i = 0; i < 13; i++) {
       ranks[i] = Rank(cost, maxChildren);
       cost = cost / 10; // Each lower rank costs 1/10th the cost of the previous rank
+    }
+    for (i = 0; i < 10; i++) {
+      _mintGodTitle(msg.sender);
     }
   }
   function getVotingWeight(uint titleID) external view override returns (uint weight) {
@@ -69,11 +81,12 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     return ranks[rank].mintCost;
   }
 
-  function mintTitle(uint _parentID) public returns (uint64 id) {
+  function mintTitle(uint _parentID) public returns (uint id) {
     // Mint the title
     Title storage parent = titles[_parentID];
     require(ownerOf(_parentID) == msg.sender, "User does not own this title.");
     uint8 rank = parent.rank + 1;
+    require(rank > 0, "God titles must be minted through vote.");
     require(rank < 12, "Provincial titles cannot mint lower tier titles.");
     uint cost = ranks[rank].mintCost;
     require(cmd_contract.balanceOf(msg.sender) >= cost, "Insufficient Funds");
@@ -98,6 +111,17 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
       curtitle = titles[curtitle.parentTitleID];
       yield = yield / 2;
     } while (curtitle.rank != 0);
+    emit TitleMinted(id, msg.sender); 
+    return id;
+  }
+  function _mintGodTitle(address receiver) private returns (uint tokenID) {
+    uint id = titleCount;
+    titleCount++;
+    titles[id] = Title(0, id, 0, godTitleCount, 0, msg.sender);
+    godTitleCount++;
+    _safeMint(receiver, id);
+    emit TitleMinted(id, msg.sender);
+    return id;
   }
 	// Withdraws the available CMD held in reserve for the user
   function withdrawCMD() public returns (uint amt) {
@@ -109,19 +133,48 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 	// Override ERC20 withdraw to prevent CMD from being withdrawn or otherwise ensure that the DAO is not drained of CMD needed or _reserveBalance
 
 	// Democretized Controls
-	function requestRankChange(uint8 rank, uint cost) public returns (uint requestID) {
+  // Could roll these two into one function
+	function requestRankCostChange(uint8 rank, uint64 cost) public returns (uint requestID) {
     require(rank < 13, "No such rank exists.");
     require(cost > 0, "Free minting is never allowed."); // Should I set a higher floor though? 1/10^6 is still a VERY small fee!
     uint requestID = rankChangeRequestCNT;
     rankChangeRequestCNT++;
-    uint propID = voting.addProposition(msg.sender, 5000000, startTime, endTime);
-    rankChangeRequests[requestID] = RankChangeRequest(rank, cost, propID);
+    // Simple majority vote starting 24 hours after request and ending one week after request
+    uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+    rankChangeRequests[requestID] = RankChangeRequest(rank, cost, true, propID);
     return requestID;
 	}
 	function requestMintLimitChange(uint8 rank, uint64 limit) public returns (uint propositionID) {
-
+    require(rank > 0, "Can't set mint limit for god titles.");
+    require(rank < 12, "Only titles higher than a provincial title can be minted.");
+    uint requestID = rankChangeRequestCNT;
+    rankChangeRequestCNT++;
+    // Simple majority vote starting 24 hours after request and ending one week after request
+    uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+    rankChangeRequests[requestID] = RankChangeRequest(rank, limit, false, propID);
+    return requestID;
 	}
-	function requestGotMint(address receiver) public returns (uint requestID) {
-
+	function requestGodMint(uint8 amt, address receiver) public returns (uint requestID) {
+    uint requestID = godMintRequestCNT;
+    godMintRequestCNT++;
+    uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+    godMintRequests[requestID] = GodMintRequest(amt, receiver, propID);
+    return requestID;
 	}
+  function executeRankChange(uint requestID) public {
+    require(requestID < rankChangeRequestCNT, "No such request.");
+    RankChangeRequest memory request = rankChangeRequests[requestID];
+    voting.executeProposition(request.propositionID, msg.sender);
+    if (request.cost_children)
+      ranks[request.rank].mintCost = request.val;
+    else ranks[request.rank].maxChildren = request.val;
+  }
+  function executeGodMint(uint requestID) public {
+    require(requestID < godMintRequestCNT, "No such request.");
+    GodMintRequest memory request = godMintRequests[requestID];
+    voting.executeProposition(request.propositionID, msg.sender);
+    for (uint8 i = 0; i < request.amt; i++) {
+      _mintGodTitle(request.receiver);
+    }
+  }
 }

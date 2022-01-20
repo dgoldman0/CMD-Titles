@@ -1,10 +1,9 @@
 pragma solidity ^0.8.0;
 import "VotingRights.sol";
 
-// Should reduce some uints to uint64 to save gas
-
 contract VotingMachine {
   VotingRights rightsContract;
+  address creator;
   uint propositionCount;
   uint voteCount;
   struct Proposition {
@@ -37,8 +36,17 @@ contract VotingMachine {
   event NewProposition(uint id, address sender, address democratized, uint threshold, uint startTime, uint endTime);
   event PropositionExecuted(uint propositionID, address executedBy);
   event NewVote(uint id, address votingAddress, uint voterID, uint propositionID, uint propositionVoteID, bool vote, uint weight);
-  constructor(address rights) {
-    rightsContract = VotingRights(rights);
+  modifier isCreator() {
+    if (msg.sender != creator) {
+        revert();
+      }
+      _; // continue executing rest of method body
+  }
+  constructor() {
+  }
+  function setVotingRightsContract(address addr) public isCreator {
+    require(address(rightsContract) == address(0), "Rights contract already set.");
+    rightsContract = VotingRights(addr);
   }
   function addProposition(address sender, uint threshold, uint startTime, uint endTime) public returns (uint propositionID) {
     uint propID = propositionCount;

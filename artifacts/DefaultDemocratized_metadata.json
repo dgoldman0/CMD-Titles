@@ -81,17 +81,17 @@
 	},
 	"sources": {
 		"Democratized.sol": {
-			"keccak256": "0xe9e69d923f5c07c1dbeda32778340fad2b318257a1a0b0307652f0269269c69e",
+			"keccak256": "0xa41cb2099b3cb0966014ee2c24f8e8f9e70b5e044ea5d3df650f8d4960ca4f65",
 			"urls": [
-				"bzz-raw://a87982c2372570f6012f0322a74fbcab141fa9f6197553f16ab501388d8f362c",
-				"dweb:/ipfs/QmfQfXjnDGhhUNZ78hbYqT9Usyp7WSWx5xopKWLT6AcxBV"
+				"bzz-raw://1b6bcb19ff39ecf79a7de53346ef3d546efd74dccf138db12f99840712b5d86d",
+				"dweb:/ipfs/QmTHFZYySL1pLHfe9XyckgyHLiwz5sZEUCKt8wtX2Kg16o"
 			]
 		},
 		"VotingMachine.sol": {
-			"keccak256": "0x9a552aab88131d99e01b9f9f88011013a47145be76c7daf7b055be81e446833c",
+			"keccak256": "0xb9c81a4677b0ca2ce91ae34f4b07b79fbb27b9023a13df6e213efa7dffc1dc67",
 			"urls": [
-				"bzz-raw://c769c331e89450f01f1b4ac2a7f5c4ad6f844d9dcf4f5ffec7109ea28662c39e",
-				"dweb:/ipfs/QmdrPqWTBKCsVp7QJmkvXngoyd669WjpxZGfu5vCPAF9pi"
+				"bzz-raw://ea225345898bf6e3830a52161acd4b9fa85b4716083b8e20450528f062ba6988",
+				"dweb:/ipfs/QmXKoDvsY2jjnVe1R2GTiyEonZzmnbyU7dB4jPnyB9xGyp"
 			]
 		},
 		"VotingRights.sol": {

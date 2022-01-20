@@ -1,6 +1,5 @@
 // A general DAO contract integrating titles
 pragma solidity ^0.8.0;
-import "./VotingRights.sol";
 import "./VotingMachine.sol";
 import "./openZeppelin/ERC20.sol";
 import "./openZeppelin/ERC1155Holder.sol";
@@ -8,7 +7,6 @@ import "./openZeppelin/ERC1155Holder.sol";
 // Will extend  is ERC1155Holder when working on 1155 contracts
 contract Democratized {
   VotingMachine voting;
-  VotingRights rightsContract;
   uint bep20RequestCount;
 
   struct BEP20Request {
@@ -37,6 +35,7 @@ contract Democratized {
     return _requestWithdraw20(token, amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
   }
   function executeWithdraw20(uint requestID) public {
+    require(requestID < bep20RequestCount, "No such request.");
     BEP20Request memory request = bep20Requests[requestID];
     // Make sure proposition is set to executed FIRST
     voting.executeProposition(request.propositionID, msg.sender);
@@ -48,7 +47,7 @@ contract Democratized {
 // Will preset Voting Machine address but should I allow change of voting machine by vote too?
 // Note: Until final testing is done, the addresses will be the contracts on TESTNET!
 contract DefaultDemocratized is Democratized {
-  constructor() Democratized(address(0)) {
+  constructor() Democratized(address(0xC6492d2c22b3860e116246c877b201889E5Fe796)) {
 
   }
 }
