@@ -734,10 +734,10 @@
 			]
 		},
 		"Titles.sol": {
-			"keccak256": "0x0e23ce90e3fee42f9116c7d6b224451a3a2b17e53eef3ece04f26fb36d287f2d",
+			"keccak256": "0x0b6d4cbe505b005089b366f4745fdc18e1ec6ee0c4672ec9c32bab032ea63f44",
 			"urls": [
-				"bzz-raw://2037d9e8328d5087190ba35f607d19c946d29636c19ae061c12907fcf5c4649b",
-				"dweb:/ipfs/QmYnXVk3FMsCL8RyR7Dh5GxmMtre33XarF8Zd5RzZHADdp"
+				"bzz-raw://9735cdc1b4b410276a8abbcfa94cc0c23f9bb9e295ad4d52700403fd7fde0695",
+				"dweb:/ipfs/QmbaraYtXju3GmDKQc7xBJhDkKwpTpkJLTA8qGKNjtAYDa"
 			]
 		},
 		"VotingMachine.sol": {
@@ -851,11 +851,11 @@
 			]
 		},
 		"openZeppelin/IERC721.sol": {
-			"keccak256": "0x64984813f269a5107ebace224a0842026ff938c8f6fe6a1d24b9543a1b7ac5b5",
+			"keccak256": "0x486e7ce5d4f79638a587d78af78241dd176b1ba853b0e1c2a086cccf1d13d6d1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://991a36964c91afbee7d06f47b5848e8c1265679783c9378bdbddee21cff5bd15",
-				"dweb:/ipfs/Qmbp45VVH7A9iFtuWM2QxudfzpJ9mquHsNoRgqyVrBYTgb"
+				"bzz-raw://11dbec61bab3d8876df013757ae9e54f70a4901fe8115fabff1e33c36e347b98",
+				"dweb:/ipfs/QmWRKN35GMhoVVkoSgRc2mWLXigMZNSTwJoGdD51g4H4dX"
 			]
 		},
 		"openZeppelin/IERC721Enumerable.sol": {

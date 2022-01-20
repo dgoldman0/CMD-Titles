@@ -18,7 +18,7 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 	event TitleMinted(uint64 titleID, uint8 rank, uint parentID, address minter);
 	event CMDClaim(address minter, uint amount);
 
-	//tight packing would allow for multiple attributes to be stored in a single uint256 slot in evm.
+	//Tight packing would allow for multiple attributes to be stored in a single uint256 slot in evm.
 	struct Title {
 		uint8 rank;
 		uint titleID; // Global ID of this token
@@ -37,6 +37,15 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   }
 
   mapping (uint8 => Rank) ranks;
+
+  // Requests
+  struct RankChangeRequest {
+    uint8 rank;
+    uint64 cost;
+    uint propositionID;
+  }
+  uint rankChangeRequestCNT;
+  mapping (uint => RankChangeRequest) rankChangeRequests;
 
   constructor() ERC721("CMD Title", "TTL") public {
     // Initial settings for ranks
@@ -98,9 +107,16 @@ contract WRLDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     cmd_contract.transferFrom(address(this), msg.sender, cmd);
   }
 	// Override ERC20 withdraw to prevent CMD from being withdrawn or otherwise ensure that the DAO is not drained of CMD needed or _reserveBalance
-	// Democretized Controls
-	function requestRankChange(uint8 rank, uint cost) public returns (uint propositionID) {
 
+	// Democretized Controls
+	function requestRankChange(uint8 rank, uint cost) public returns (uint requestID) {
+    require(rank < 13, "No such rank exists.");
+    require(cost > 0, "Free minting is never allowed."); // Should I set a higher floor though? 1/10^6 is still a VERY small fee!
+    uint requestID = rankChangeRequestCNT;
+    rankChangeRequestCNT++;
+    uint propID = voting.addProposition(msg.sender, 5000000, startTime, endTime);
+    rankChangeRequests[requestID] = RankChangeRequest(rank, cost, propID);
+    return requestID;
 	}
 	function requestMintLimitChange(uint8 rank, uint64 limit) public returns (uint propositionID) {
 
