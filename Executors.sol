@@ -16,6 +16,7 @@ contract BEP20Executor is IExecutor {
   uint requestCount;
   mapping (uint => Request) requests;
 
+  // Why don't I just keep these commands in the governance contract...? Do I even need an executor? Let me think about it. 
   function execute(uint requestID) external override {
     require(requestID < requestCount, "No such request");
     Request memory req = requests[requestID];

@@ -8,17 +8,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_machineAddr",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint256",
 						"name": "requestID",
 						"type": "uint256"
@@ -173,7 +162,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Democratized.sol": "Democratized"
+			"Democratized.sol": "DefaultDemocratized"
 		},
 		"evmVersion": "london",
 		"libraries": {},

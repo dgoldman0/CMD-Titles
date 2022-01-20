@@ -8,17 +8,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_machineAddr",
-						"type": "address"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint256",
 						"name": "requestID",
 						"type": "uint256"
@@ -173,7 +162,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Democratized.sol": "Democratized"
+			"Democratized.sol": "DefaultDemocretized"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -188,10 +177,10 @@
 	},
 	"sources": {
 		"Democratized.sol": {
-			"keccak256": "0x99522311cfe20059a33af2a8453749d0d4cacb6e532eb2c7b4d9f812414d1bdc",
+			"keccak256": "0x3e3b1d003035d27d2fee95d856c3f3d406500881ca917794aa3070df9090f069",
 			"urls": [
-				"bzz-raw://66d70a261d3aa1fa11514c88f239c92d75bef67915cb90971f13e20f28beb0de",
-				"dweb:/ipfs/QmdGgatuqqcAAjprsyYHRafZb6eas61sacSDUzoK2xud6m"
+				"bzz-raw://8aad4aa6ba6844443b2a22a0f3cd4b2aa3a9aa880045647dcf0d8d8ae387105a",
+				"dweb:/ipfs/QmV8YA9foAaBr9FZKJ5SzVGktst8mneTaCPsBzVeRT9GsJ"
 			]
 		},
 		"VotingMachine.sol": {
