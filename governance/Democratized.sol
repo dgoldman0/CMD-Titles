@@ -1,8 +1,8 @@
 // A general DAO contract integrating titles
 pragma solidity ^0.8.0;
 import "./VotingMachine.sol";
-import "./openZeppelin/ERC20.sol";
-import "./openZeppelin/ERC1155Holder.sol";
+import "../openZeppelin/ERC20.sol";
+import "../openZeppelin/ERC1155Holder.sol";
 
 // Will extend  is ERC1155Holder when working on 1155 contracts
 contract Democratized {

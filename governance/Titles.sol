@@ -1,8 +1,8 @@
 pragma solidity ^0.8.0;
-import "./openZeppelin/ERC20.sol";
-import "./openZeppelin/Address.sol";
-import "./openZeppelin/ERC721.sol";
-import "./openZeppelin/ERC721Enumerable.sol";
+import "../openZeppelin/ERC20.sol";
+import "../openZeppelin/Address.sol";
+import "../openZeppelin/ERC721.sol";
+import "../openZeppelin/ERC721Enumerable.sol";
 import "./VotingRights.sol";
 import "./Democratized.sol";
 
