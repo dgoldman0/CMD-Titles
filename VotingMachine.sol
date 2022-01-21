@@ -43,6 +43,7 @@ contract VotingMachine {
       _; // continue executing rest of method body
   }
   constructor() {
+    creator = msg.sender;
   }
   function setVotingRightsContract(address addr) public isCreator {
     require(address(rightsContract) == address(0), "Rights contract already set.");

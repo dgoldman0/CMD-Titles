@@ -300,17 +300,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"VotingMachine.sol": {
-			"keccak256": "0xb9c81a4677b0ca2ce91ae34f4b07b79fbb27b9023a13df6e213efa7dffc1dc67",
+			"keccak256": "0x7f4123b766354285c088da5336fee9f8ca9ba37de06bc6e2fe10a55a5f77f98e",
 			"urls": [
-				"bzz-raw://ea225345898bf6e3830a52161acd4b9fa85b4716083b8e20450528f062ba6988",
-				"dweb:/ipfs/QmXKoDvsY2jjnVe1R2GTiyEonZzmnbyU7dB4jPnyB9xGyp"
+				"bzz-raw://172a6f6958b3bb874f61e524abafce84a8da0a22520599a4ead9ab88a2a0ff7b",
+				"dweb:/ipfs/QmY7we6aAdSReNETfdZMhH4joAF8cDeAYyGt2CWyz9twxs"
 			]
 		},
 		"VotingRights.sol": {

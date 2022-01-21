@@ -47,7 +47,7 @@ contract Democratized {
 // Will preset Voting Machine address but should I allow change of voting machine by vote too?
 // Note: Until final testing is done, the addresses will be the contracts on TESTNET!
 contract DefaultDemocratized is Democratized {
-  constructor() Democratized(address(0xC6492d2c22b3860e116246c877b201889E5Fe796)) {
+  constructor() Democratized(address(0xf8e81D47203A594245E36C48e151709F0C19fBe8)) {
 
   }
 }
