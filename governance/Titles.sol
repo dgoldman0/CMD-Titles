@@ -10,7 +10,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 	using Address for address;
   ERC20 cmd_contract;
   uint64 titleCount;
-  uint64 godTitleCount;
+  mapping (uint8 => uint64) rankTitleCount;
 
 	mapping(address => uint) private _addressCMDBalance;
   uint private _reserveBalance; // The amount of CMD reserved to pay for CMDBalance
@@ -39,23 +39,6 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 
   mapping (uint8 => Rank) ranks;
 
-  // Requests
-  struct RankChangeRequest {
-    uint8 rank;
-    uint64 val;
-    bool cost_children; // Whether the request is to change the cost or the max child limit. True/false=cost/children
-    uint propositionID;
-  }
-  struct GodMintRequest {
-    uint8 amt; // Number of god titles to mint: Max 255 at a time
-    address receiver;
-    uint propositionID;
-  }
-  uint rankChangeRequestCNT;
-  uint godMintRequestCNT;
-  mapping (uint => RankChangeRequest) rankChangeRequests;
-  mapping (uint => GodMintRequest) godMintRequests;
-
   constructor() ERC721("CMD Title", "TTL") public {
     // Initial settings for ranks
     uint8 i;
@@ -75,6 +58,9 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   }
   function hasFiduciaryPower(address addr, uint titleID) external view override returns (bool hasPower) {
     return ownerOf(titleID) == addr;
+  }
+  function electorateSize() external view override returns (uint size) {
+    return rankTitleCount[12];
   }
   function mintCost(uint8 rank) public view returns (uint cost) {
     require(rank < 13, "No such rank!");
@@ -98,6 +84,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     titleCount++;
     titles[id] = Title(rank, id, _parentID, lid, 0, msg.sender);
     _safeMint(msg.sender, id);
+    rankTitleCount[rank]++;
 
     // Distribute CMD
     cmd_contract.transferFrom(msg.sender, address(this), cost);
@@ -117,8 +104,8 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   function _mintGodTitle(address receiver) private returns (uint tokenID) {
     uint id = titleCount;
     titleCount++;
-    titles[id] = Title(0, id, 0, godTitleCount, 0, msg.sender);
-    godTitleCount++;
+    titles[id] = Title(0, id, 0, rankTitleCount[0], 0, msg.sender);
+    rankTitleCount[0]++;
     _safeMint(receiver, id);
     emit TitleMinted(id, msg.sender);
     return id;
@@ -130,6 +117,24 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     _reserveBalance -= cmd;
     cmd_contract.transferFrom(address(this), msg.sender, cmd);
   }
+  /* Governance */
+  // Requests
+  struct RankChangeRequest {
+    uint8 rank;
+    uint64 val;
+    bool cost_children; // Whether the request is to change the cost or the max child limit. True/false=cost/children
+    uint propositionID;
+  }
+  struct GodMintRequest {
+    uint8 amt; // Number of god titles to mint: Max 255 at a time
+    address receiver;
+    uint propositionID;
+  }
+  uint rankChangeRequestCNT;
+  uint godMintRequestCNT;
+  mapping (uint => RankChangeRequest) rankChangeRequests;
+  mapping (uint => GodMintRequest) godMintRequests;
+
 	// Override ERC20 withdraw to prevent CMD from being withdrawn or otherwise ensure that the DAO is not drained of CMD needed or _reserveBalance
 
 	// Democretized Controls
