@@ -5,7 +5,7 @@ import "../openZeppelin/Address.sol";
 import "../governance/Democratized.sol";
 
 // ERC20Forgable token that allows for additional minting resources and with built in governance control. 
-/// @dev Since external view functions won't be altering anything, there's no need to check if a resource token is actually set.
+/// @dev It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.
 contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     struct ResourceToken {
         ERC20 tokenAddress;
@@ -143,6 +143,7 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         uint256 tokenID = _resourceTokenCount;
         _resourceTokenCount++;
         _resourceTokens[tokenID] = ResourceToken(ERC20(request.tokenAddress), request.conversionRate, request.conversionRate, 0);
+        emit NewResourceAdded(tokenID, requestID_, request.tokenAddress);
         return tokenID;
     }
     function executeResourceAdjustment(uint256 requestID_) public {

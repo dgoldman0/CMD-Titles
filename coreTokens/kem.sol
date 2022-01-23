@@ -1,6 +1,7 @@
 pragma solidity ^0.8.0;
 
-import "../forgable/MultiERC20Forgable.sol";
+import "../openZeppelin/ERC20.sol";
+import "../governance/Democratized.sol";
 
 contract KemToken is ERC20, DefaultDemocratized {
     constructor() ERC20("kemet", "kem") {

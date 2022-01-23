@@ -899,10 +899,10 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0x525988d27bfb0921960a5539acf6bb08b6b35f0f96968b4614ddbde01b2e49bb",
+			"keccak256": "0x3827afdde2814ce8a6573a7f7cea73186ac6d9d23a397ca8dd2e053b796d8395",
 			"urls": [
-				"bzz-raw://4ef80e8693897878c9b22f9a382a2586211428f528b3b095b761a040209e818d",
-				"dweb:/ipfs/QmYxfE4yTkg3FEWmjPfAahkSsmvCqTrDAJPVmBbyf31VWN"
+				"bzz-raw://b479d805a871366f0b8f93935d88d6143af981de6b2c4991565a25596e5d88bf",
+				"dweb:/ipfs/QmNkg5YzjkAtXNJ4AhVpBne7xyUcxo4PcikQQfQhcUT92P"
 			]
 		},
 		"governance/Democratized.sol": {

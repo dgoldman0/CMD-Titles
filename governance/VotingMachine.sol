@@ -1,7 +1,7 @@
 pragma solidity ^0.8.0;
 import "./VotingRights.sol";
 
-// Should add the ability to set what percentage of the electorate is needed 
+/// @dev Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.
 contract VotingMachine {
   VotingRights rightsContract;
   address creator;

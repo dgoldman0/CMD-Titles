@@ -127,6 +127,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   struct RankChangeRequest {
     uint8 rank;
     uint64 val;
+    /// @dev Rename as toggle and roll the two request functions into one function.
     bool cost_children; // Whether the request is to change the cost or the max child limit. True/false=cost/children
     uint propositionID;
   }
