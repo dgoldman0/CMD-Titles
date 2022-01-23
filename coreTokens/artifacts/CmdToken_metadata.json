@@ -6,38 +6,7 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "name_",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "symbol_",
-						"type": "string"
-					},
-					{
-						"internalType": "address",
-						"name": "resourceToken_",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "rate_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "limit_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "initial_",
-						"type": "uint256"
-					}
-				],
+				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -505,35 +474,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "resourceID_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "toggle_",
-						"type": "bool"
-					},
-					{
-						"internalType": "uint256",
-						"name": "val_",
-						"type": "uint256"
-					}
-				],
-				"name": "requestResourceAdjustment",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "requetID",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "token",
 						"type": "address"
@@ -718,7 +658,6 @@
 			}
 		],
 		"devdoc": {
-			"details": "Since external view functions won't be altering anything, there's no need to check if a resource token is actually set.",
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -755,11 +694,6 @@
 					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`."
 				}
 			},
-			"stateVariables": {
-				"_resourceTokenCount": {
-					"details": "We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!"
-				}
-			},
 			"version": 1
 		},
 		"userdoc": {
@@ -770,7 +704,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"forgable/MultiERC20Forgable.sol": "MultiERC20Forgable"
+			"coreTokens/cmd.sol": "CmdToken"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -784,6 +718,13 @@
 		"remappings": []
 	},
 	"sources": {
+		"coreTokens/cmd.sol": {
+			"keccak256": "0x1989b349bf048fc5243a26223b7fda6dcf10909cd2184989d29031abf06e47f4",
+			"urls": [
+				"bzz-raw://1fcc92ebc81415e49d2872fb0fc03448e781e7d4bb312e0da1ea8a6937bbade5",
+				"dweb:/ipfs/QmUjEHGTp916M9vdAE2qS2GYNYWhSnyF8N2hw2vhTkCgHh"
+			]
+		},
 		"forgable/IERC20Forgable.sol": {
 			"keccak256": "0x95761765ffe2750d01c29b7dc8f31e52b4f429ca302ce0c1aaf12d6d84829565",
 			"urls": [
@@ -792,10 +733,10 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0x9e4b653155eb4cce803f1c4b4ab4d543fd82588576879240b0a76a2add6f2de7",
+			"keccak256": "0x3f31201c6a7d0a301386d1f6e100ad5265a209846e2188d37c45048abc05768e",
 			"urls": [
-				"bzz-raw://cd89d5348470bc418af7df92fe1124cd4aeb4227e4224366bdf00f6b468872cc",
-				"dweb:/ipfs/QmXwQd9WpTAnLkPyuzekGHX1SThMWTop1Q34qCkevW6Qtg"
+				"bzz-raw://4188b47db54f3f791d33a847cc2a0651bac14f248c0b859931a8d78e2219b80a",
+				"dweb:/ipfs/QmbyYZyybs8r3ivdAnbRhNVa5kZVDWRcautVQcghSGzWmL"
 			]
 		},
 		"governance/Democratized.sol": {

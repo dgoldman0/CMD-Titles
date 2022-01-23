@@ -6,38 +6,7 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "name_",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "symbol_",
-						"type": "string"
-					},
-					{
-						"internalType": "address",
-						"name": "resourceToken_",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "rate_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "limit_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "initial_",
-						"type": "uint256"
-					}
-				],
+				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -64,50 +33,6 @@
 					}
 				],
 				"name": "Approval",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "cost",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "amt",
-						"type": "uint256"
-					}
-				],
-				"name": "Forged",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "fee",
-						"type": "uint256"
-					}
-				],
-				"name": "NewSmith",
 				"type": "event"
 			},
 			{
@@ -204,70 +129,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "canSmith",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "able",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "addr_",
-						"type": "address"
-					}
-				],
-				"name": "canSmith",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenID_",
-						"type": "uint256"
-					}
-				],
-				"name": "conversionRate",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "conversionRate",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "decimals",
 				"outputs": [
 					{
@@ -307,25 +168,6 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "requestID_",
-						"type": "uint256"
-					}
-				],
-				"name": "executeAddResource",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "resourceID",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
 						"name": "requestID",
 						"type": "uint256"
 					}
@@ -333,81 +175,6 @@
 				"name": "executeWithdraw20",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "amt_",
-						"type": "uint256"
-					}
-				],
-				"name": "forge",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amt",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenID_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amt_",
-						"type": "uint256"
-					}
-				],
-				"name": "forge",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amt",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "forgeLimit",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenID_",
-						"type": "uint256"
-					}
-				],
-				"name": "forgeLimit",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "limit",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -436,19 +203,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "lastMint",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "date",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "name",
 				"outputs": [
 					{
@@ -458,77 +212,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "paySmithingFee",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "paid",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "addr_",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "rate_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "limit_",
-						"type": "uint256"
-					}
-				],
-				"name": "requestNewResource",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "requestID",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "resourceID_",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "toggle_",
-						"type": "bool"
-					},
-					{
-						"internalType": "uint256",
-						"name": "val_",
-						"type": "uint256"
-					}
-				],
-				"name": "requestResourceAdjustment",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "requetID",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -562,89 +245,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "smithCount",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "count",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "smithFee",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "fee",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "symbol",
 				"outputs": [
 					{
 						"internalType": "string",
 						"name": "",
 						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "addr",
-						"type": "address"
-					}
-				],
-				"name": "timeToForge",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "time",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenID_",
-						"type": "uint256"
-					}
-				],
-				"name": "totalMaterialUsed",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "totalUsed",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "totalMaterialUsed",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "totalUsed",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -718,7 +324,6 @@
 			}
 		],
 		"devdoc": {
-			"details": "Since external view functions won't be altering anything, there's no need to check if a resource token is actually set.",
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -755,11 +360,6 @@
 					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`."
 				}
 			},
-			"stateVariables": {
-				"_resourceTokenCount": {
-					"details": "We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!"
-				}
-			},
 			"version": 1
 		},
 		"userdoc": {
@@ -770,7 +370,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"forgable/MultiERC20Forgable.sol": "MultiERC20Forgable"
+			"coreTokens/kem.sol": "KemToken"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -784,6 +384,13 @@
 		"remappings": []
 	},
 	"sources": {
+		"coreTokens/kem.sol": {
+			"keccak256": "0x49ad81869a6358018c77b561c2bf0c4932a9cb02a792c8ac4e00268ae3c9bd29",
+			"urls": [
+				"bzz-raw://4a437878cedbf20a86e6d218d35aa0144e1850e1b5849bd230195b3d2c9f74e7",
+				"dweb:/ipfs/QmQaT9ngh1XW23v5K44fRdseEqVLWtW94ZEvMBYjciYTTL"
+			]
+		},
 		"forgable/IERC20Forgable.sol": {
 			"keccak256": "0x95761765ffe2750d01c29b7dc8f31e52b4f429ca302ce0c1aaf12d6d84829565",
 			"urls": [
@@ -792,10 +399,10 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0x9e4b653155eb4cce803f1c4b4ab4d543fd82588576879240b0a76a2add6f2de7",
+			"keccak256": "0x3f31201c6a7d0a301386d1f6e100ad5265a209846e2188d37c45048abc05768e",
 			"urls": [
-				"bzz-raw://cd89d5348470bc418af7df92fe1124cd4aeb4227e4224366bdf00f6b468872cc",
-				"dweb:/ipfs/QmXwQd9WpTAnLkPyuzekGHX1SThMWTop1Q34qCkevW6Qtg"
+				"bzz-raw://4188b47db54f3f791d33a847cc2a0651bac14f248c0b859931a8d78e2219b80a",
+				"dweb:/ipfs/QmbyYZyybs8r3ivdAnbRhNVa5kZVDWRcautVQcghSGzWmL"
 			]
 		},
 		"governance/Democratized.sol": {

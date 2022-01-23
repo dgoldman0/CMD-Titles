@@ -8,10 +8,10 @@ import "./Democratized.sol";
 
 contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 	using Address for address;
-  ERC20 cmd_contract;
+  ERC20 cmd;
   uint64 titleCount;
   mapping (uint8 => uint64) rankTitleCount;
-
+  address private _creator;
 	mapping(address => uint) private _addressCMDBalance;
   uint private _reserveBalance; // The amount of CMD reserved to pay for CMDBalance
 	uint private _reservedForExecutor; // Amount of CMD reserved for the executor
@@ -41,6 +41,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 
   constructor() ERC721("CMD Title", "TTL") public {
     // Initial settings for ranks
+    _creator = msg.sender;
     uint8 i;
     uint64 cost = 1000000000000; // Cost of god title is 1M CMD
     uint64 maxChildren = 10; // Only ten children titles per title
@@ -51,6 +52,10 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     for (i = 0; i < 10; i++) {
       _mintGodTitle(msg.sender);
     }
+  }
+  function setCMD(address addr_) external {
+    require(msg.sender == _creator, "Not creator!");
+    if (address(cmd) == address(0)) cmd = ERC20(addr_);
   }
   function getVotingWeight(uint titleID) external view override returns (uint weight) {
     if (titles[titleID].rank == 12) return 1;
@@ -75,8 +80,8 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     require(rank > 0, "God titles must be minted through vote.");
     require(rank < 12, "Provincial titles cannot mint lower tier titles.");
     uint cost = ranks[rank].mintCost;
-    require(cmd_contract.balanceOf(msg.sender) >= cost, "Insufficient Funds");
-    require(cmd_contract.allowance(msg.sender, address(this)) >= cost, "Insufficient Approval");
+    require(cmd.balanceOf(msg.sender) >= cost, "Insufficient Funds");
+    require(cmd.allowance(msg.sender, address(this)) >= cost, "Insufficient Approval");
     uint64 lid = parent.childCount;
     require(lid < ranks[rank].maxChildren, "This title has reached its maximum mint count.");
     parent.childCount++;
@@ -87,7 +92,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     rankTitleCount[rank]++;
 
     // Distribute CMD
-    cmd_contract.transferFrom(msg.sender, address(this), cost);
+    cmd.transferFrom(msg.sender, address(this), cost);
     // Automatically reserve 1/3 for the DAO: uses 1/3 rather than 2/3 because I divide yield by 2 AFTER distributing
     uint yield = cost * 1 / 3;
     Title storage curtitle = parent;
@@ -115,7 +120,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     uint cmd = _addressCMDBalance[msg.sender];
     _addressCMDBalance[msg.sender] = 0;
     _reserveBalance -= cmd;
-    cmd_contract.transferFrom(address(this), msg.sender, cmd);
+    cmd.transferFrom(address(this), msg.sender, cmd);
   }
   /* Governance */
   // Requests

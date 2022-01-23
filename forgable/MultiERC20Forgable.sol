@@ -13,13 +13,14 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         uint256 forgeLimit;
         uint256 totalUsed;
     }
+    /// @dev We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!
     uint256 _resourceTokenCount;
     mapping (uint256 => ResourceToken) _resourceTokens; // The token that will be used in the forging process.
     mapping (address => uint256) _lastMinted;
     uint256 _smithCount;
     uint256 _smithFee;
     mapping (address => bool) _registered;
-
+    
     constructor(string memory name_, string memory symbol_, address resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
         _resourceTokens[0] = ResourceToken(ERC20(resourceToken_), rate_, limit_, 0);
         _mint(msg.sender, initial_);
@@ -94,8 +95,16 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         uint256 forgeLimit;
         uint256 propositionID;
     }
+    struct ResourceAdjustmentRequest {
+        uint256 resourceID;
+        bool toggle; // Toggle whether the request is for a rate change or limit change
+        uint256 val;
+        uint256 propositionID;
+    }
     mapping (uint256 => NewResourceRequest) _newResourceRequests;
+    mapping (uint256 => ResourceAdjustmentRequest) _resourceAdjustmentRequests;
     uint256 _newResourceRequestCNT;
+    uint256 _resourceAdjustmentRequestCNT;
     function requestNewResource(address addr_, uint256 rate_, uint256 limit_) public returns (uint256 requestID) {
         uint256 requestID = _newResourceRequestCNT;
         _newResourceRequestCNT++;
@@ -103,8 +112,21 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, propID);
         return requestID;
     }
-    function executeAddResource(uint256 requestID_) returns (uint256 resourceID) {
-        require(requestID < _newResourceRequestCNT, "No such request.");
-
+    function requestResourceAdjustment(uint256 resourceID_, bool toggle_, uint256 val_) public returns (uint256 requetID) {
+        require(resourceID_ < _resourceTokenCount, "No such resource defined.");
+        uint256 requestID = _resourceAdjustmentRequestCNT;
+        _resourceAdjustmentRequestCNT++;
+        uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+        _resourceAdjustmentRequests[requestID] = ResourceAdjustmentRequest(resourceID_, toggle_, val_, propID);
+        return requestID;
+    }
+    function executeAddResource(uint256 requestID_) public returns (uint256 resourceID) {
+        require(requestID_ < _newResourceRequestCNT, "No such request.");
+        NewResourceRequest memory request = _newResourceRequests[requestID_];
+        voting.executeProposition(request.propositionID, msg.sender);
+        uint256 tokenID = _resourceTokenCount;
+        _resourceTokenCount++;
+        _resourceTokens[tokenID] = ResourceToken(ERC20(request.tokenAddress), request.conversionRate, request.conversionRate, 0);
+        return tokenID;
     }
 }
