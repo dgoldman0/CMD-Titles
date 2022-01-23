@@ -97,14 +97,20 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     }
     struct ResourceAdjustmentRequest {
         uint256 resourceID;
-        bool toggle; // Toggle whether the request is for a rate change or limit change
+        bool toggle; // Toggle whether the request is for a rate change (true) or limit change (false)
         uint256 val;
+        uint256 propositionID;
+    }
+    struct FeeChangeRequest {
+        uint256 newFee;
         uint256 propositionID;
     }
     mapping (uint256 => NewResourceRequest) _newResourceRequests;
     mapping (uint256 => ResourceAdjustmentRequest) _resourceAdjustmentRequests;
+    mapping (uint256 => FeeChangeRequest) _feeChangeRequests;
     uint256 _newResourceRequestCNT;
     uint256 _resourceAdjustmentRequestCNT;
+    uint256 _feeChangeRequestCNT;
     function requestNewResource(address addr_, uint256 rate_, uint256 limit_) public returns (uint256 requestID) {
         uint256 requestID = _newResourceRequestCNT;
         _newResourceRequestCNT++;
@@ -120,6 +126,13 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         _resourceAdjustmentRequests[requestID] = ResourceAdjustmentRequest(resourceID_, toggle_, val_, propID);
         return requestID;
     }
+    function requestFeeChange(uint256 newFee_) public returns (uint256 requestID) {
+        uint256 requestID = _feeChangeRequestCNT;
+        _feeChangeRequestCNT++;
+        uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+        FeeChangeRequests[requestID] = FeeChangeRequest(newFee_, propID);
+        return requestID;
+    }
     function executeAddResource(uint256 requestID_) public returns (uint256 resourceID) {
         require(requestID_ < _newResourceRequestCNT, "No such request.");
         NewResourceRequest memory request = _newResourceRequests[requestID_];
@@ -128,5 +141,12 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         _resourceTokenCount++;
         _resourceTokens[tokenID] = ResourceToken(ERC20(request.tokenAddress), request.conversionRate, request.conversionRate, 0);
         return tokenID;
+    }
+    function executeResourceAdjustment(uint256 requestID_) public {
+        require(requestID_ < _newResourceRequestCNT, "No such request.");
+        ResourceAdjustmentRequest memory request = _resourceAdjustmentRequests[requestID_];
+        ResourceToken storage token = _resourceTokens[request.resourceID];
+        if (token.toggle) token.conversionRate = request.val;
+        else token.forgeLimit = request.val;
     }
 }
