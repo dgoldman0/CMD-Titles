@@ -95,6 +95,68 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "resourceID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "NewResourceAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "converesionRate",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "forgeLimit",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "propID",
+						"type": "uint256"
+					}
+				],
+				"name": "NewResourceRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "",
@@ -326,6 +388,32 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeFeeChange",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeResourceAdjustment",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "requestID",
 						"type": "uint256"
 					}
@@ -471,6 +559,25 @@
 					}
 				],
 				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newFee_",
+						"type": "uint256"
+					}
+				],
+				"name": "requestFeeChange",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -792,10 +899,10 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0x9e4b653155eb4cce803f1c4b4ab4d543fd82588576879240b0a76a2add6f2de7",
+			"keccak256": "0x525988d27bfb0921960a5539acf6bb08b6b35f0f96968b4614ddbde01b2e49bb",
 			"urls": [
-				"bzz-raw://cd89d5348470bc418af7df92fe1124cd4aeb4227e4224366bdf00f6b468872cc",
-				"dweb:/ipfs/QmXwQd9WpTAnLkPyuzekGHX1SThMWTop1Q34qCkevW6Qtg"
+				"bzz-raw://4ef80e8693897878c9b22f9a382a2586211428f528b3b095b761a040209e818d",
+				"dweb:/ipfs/QmYxfE4yTkg3FEWmjPfAahkSsmvCqTrDAJPVmBbyf31VWN"
 			]
 		},
 		"governance/Democratized.sol": {

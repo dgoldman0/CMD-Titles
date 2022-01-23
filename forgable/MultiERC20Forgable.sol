@@ -111,11 +111,14 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     uint256 _newResourceRequestCNT;
     uint256 _resourceAdjustmentRequestCNT;
     uint256 _feeChangeRequestCNT;
+    event NewResourceRequested(uint256 requestID, address tokenAddress, uint256 converesionRate, uint256 forgeLimit, uint256 propID);
+    event NewResourceAdded(uint256 resourceID, uint256 requestID, address tokenAddress);
     function requestNewResource(address addr_, uint256 rate_, uint256 limit_) public returns (uint256 requestID) {
         uint256 requestID = _newResourceRequestCNT;
         _newResourceRequestCNT++;
         uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
         _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, propID);
+        emit NewResourceRequested(requestID, addr_, rate_, limit_, propID);
         return requestID;
     }
     function requestResourceAdjustment(uint256 resourceID_, bool toggle_, uint256 val_) public returns (uint256 requetID) {
@@ -130,7 +133,7 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         uint256 requestID = _feeChangeRequestCNT;
         _feeChangeRequestCNT++;
         uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
-        FeeChangeRequests[requestID] = FeeChangeRequest(newFee_, propID);
+        _feeChangeRequests[requestID] = FeeChangeRequest(newFee_, propID);
         return requestID;
     }
     function executeAddResource(uint256 requestID_) public returns (uint256 resourceID) {
@@ -146,7 +149,12 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         require(requestID_ < _newResourceRequestCNT, "No such request.");
         ResourceAdjustmentRequest memory request = _resourceAdjustmentRequests[requestID_];
         ResourceToken storage token = _resourceTokens[request.resourceID];
-        if (token.toggle) token.conversionRate = request.val;
+        if (request.toggle) token.conversionRate = request.val;
         else token.forgeLimit = request.val;
+    }
+    function executeFeeChange(uint256 requestID_) public {
+        require(requestID_ < _feeChangeRequestCNT, "No such request.");
+        FeeChangeRequest memory request = _feeChangeRequests[requestID_];
+        _smithFee = request.newFee;
     }
 }
