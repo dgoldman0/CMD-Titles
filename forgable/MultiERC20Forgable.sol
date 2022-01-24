@@ -21,8 +21,9 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     uint256 _smithFee;
     mapping (address => bool) _registered;
     
-    constructor(string memory name_, string memory symbol_, address resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
+    constructor(string memory name_, string memory symbol_, uint256 smithFee_, address resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
         _resourceTokens[0] = ResourceToken(ERC20(resourceToken_), rate_, limit_, 0);
+        _smithFee = smithFee_;
         _mint(msg.sender, initial_);
     }
     function forge(uint256 amt_) external override returns (uint256 amt) {

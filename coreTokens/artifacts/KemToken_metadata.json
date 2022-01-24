@@ -168,6 +168,19 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeMint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "requestID",
 						"type": "uint256"
 					}
@@ -212,6 +225,30 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "receiver_",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amt_",
+						"type": "uint256"
+					}
+				],
+				"name": "requestMint",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -378,31 +415,31 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 100000
 		},
 		"remappings": []
 	},
 	"sources": {
 		"coreTokens/kem.sol": {
-			"keccak256": "0x2b252e38a47c63ad67292a4e9049ec108d73b418a9d1944579fd429e8aee08f4",
+			"keccak256": "0x853fd65f4160a70a14c1b253883fbd9ac7da2bfc75ba17015becf53f87562a7f",
 			"urls": [
-				"bzz-raw://4e7147fdb72d9ae15933403369ed16f1facbf1ac02d78522a8f9b6fc30a8c0fb",
-				"dweb:/ipfs/QmZ8ziTus9S2fmnv43uEWLjSCF7aT4YsjX4hWdQzukTNsp"
+				"bzz-raw://8ed2b086c6bf414c09fdd7b6c73461970b9c07ca6bade3b7fdaded0be001ea89",
+				"dweb:/ipfs/QmWsDetF89ngxYFkdscfoSYsc7xKmuQHERnTvYobt3E2rt"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0x99e5407be5a189048dd22bf56be472559f9ebf38ff1ed0ef4483872b3fab3fa0",
+			"keccak256": "0xf5485a01c480866d1bc4560e6f781cfa06b0c5e3f4253effd74f535b65b13872",
 			"urls": [
-				"bzz-raw://46ee924a1a264f34368cec41994caa2d9f531e2a0031a9cdb0d3fe3afb3f415a",
-				"dweb:/ipfs/QmSuqWeKkBv2xMBD8jSuvt1UZkbNhFVvg3DYrfCmZtmJeR"
+				"bzz-raw://70d6021e53872178283d427e997e51402cadce49a39529826f62d1de6158c548",
+				"dweb:/ipfs/QmWowzCqEEAKzxrZbu2hdnChp4ZkqrkRFbgjxp6TENf4Xi"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x6fad18f88f618545b1d13bc603105e7fa5ce7992b3dd0a2ec31846af88c45528",
+			"keccak256": "0x11a29ef23e8512316b28835fd77aa7b9f92164c7bdbeee508bce0d352b656911",
 			"urls": [
-				"bzz-raw://40e2f3ba81b605564b9f9f936d191a0f992d6b60736f539068ae081e6d10f3ba",
-				"dweb:/ipfs/QmVunW1Yzhc9ZWUZDy3eZLqM9KPUAop3jvi2H8tYBTzWAs"
+				"bzz-raw://b82221bd51239add63f978fa88af7ebd9ae20b6dd635927e4ddf850c54a98704",
+				"dweb:/ipfs/QmXmj1aJMGqseYoREWdiVuBDMgmJCg9ztgusaaah7peHap"
 			]
 		},
 		"governance/VotingRights.sol": {

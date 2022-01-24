@@ -33,7 +33,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 
   // Gives details about how many children a title of a given rank can mint and how much it costs to mint
   struct Rank {
-    uint64 mintCost; // The cost to mint a new title of the given rank
+    uint256 mintCost; // The cost to mint a new title of the given rank
     uint64 maxChildren; // The maximum number of child titles the rank can have
   }
 
@@ -43,11 +43,11 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     // Initial settings for ranks
     _creator = msg.sender;
     uint8 i;
-    uint64 cost = 1000000000000; // Cost of god title is 1M CMD
+    uint256 cost = 40960000000000000000000; // Cost of god title is 40960 CMD
     uint64 maxChildren = 10; // Only ten children titles per title
     for (i = 0; i < 13; i++) {
       ranks[i] = Rank(cost, maxChildren);
-      cost = cost / 10; // Each lower rank costs 1/10th the cost of the previous rank
+      cost = cost / 2; // Each lower rank costs 1/2 the cost of the previous rank
     }
     for (i = 0; i < 10; i++) {
       _mintGodTitle(msg.sender);
@@ -117,16 +117,18 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   }
 	// Withdraws the available CMD held in reserve for the user
   function withdrawCMD() public returns (uint amt) {
-    uint cmd = _addressCMDBalance[msg.sender];
+    uint amt = _addressCMDBalance[msg.sender];
+    assert(_reserveBalance >= amt);
     _addressCMDBalance[msg.sender] = 0;
-    _reserveBalance -= cmd;
-    cmd.transferFrom(address(this), msg.sender, cmd);
+    _reserveBalance -= amt;
+    cmd.transferFrom(address(this), msg.sender, amt);
+    return amt;
   }
   /* Governance */
   // Requests
   struct RankChangeRequest {
     uint8 rank;
-    uint64 val;
+    uint256 val;
     /// @dev Rename as toggle and roll the two request functions into one function.
     bool cost_children; // Whether the request is to change the cost or the max child limit. True/false=cost/children
     uint propositionID;
@@ -145,7 +147,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 
 	// Democretized Controls
   // Could roll these two into one function
-	function requestRankCostChange(uint8 rank, uint64 cost) public returns (uint requestID) {
+	function requestRankCostChange(uint8 rank, uint256 cost) public returns (uint requestID) {
     require(rank < 13, "No such rank exists.");
     require(cost > 0, "Free minting is never allowed."); // Should I set a higher floor though? 1/10^6 is still a VERY small fee!
     uint requestID = rankChangeRequestCNT;
@@ -178,7 +180,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     voting.executeProposition(request.propositionID, msg.sender);
     if (request.cost_children)
       ranks[request.rank].mintCost = request.val;
-    else ranks[request.rank].maxChildren = request.val;
+    else ranks[request.rank].maxChildren = uint64(request.val);
   }
   function executeGodMint(uint requestID) public {
     require(requestID < godMintRequestCNT, "No such request.");

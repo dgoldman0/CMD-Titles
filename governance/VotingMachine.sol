@@ -2,6 +2,7 @@ pragma solidity ^0.8.0;
 import "./VotingRights.sol";
 
 /// @dev Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.
+/// @dev Should I add the ability to rescind propositions? Probably not, since it could be abused.
 contract VotingMachine {
   VotingRights rightsContract;
   address creator;

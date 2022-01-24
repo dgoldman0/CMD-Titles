@@ -64,6 +64,68 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "resourceID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "NewResourceAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "converesionRate",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "forgeLimit",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "propID",
+						"type": "uint256"
+					}
+				],
+				"name": "NewResourceRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "",
@@ -295,6 +357,32 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeFeeChange",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeResourceAdjustment",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "requestID",
 						"type": "uint256"
 					}
@@ -445,6 +533,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "newFee_",
+						"type": "uint256"
+					}
+				],
+				"name": "requestFeeChange",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "addr_",
 						"type": "address"
@@ -465,6 +572,35 @@
 					{
 						"internalType": "uint256",
 						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "resourceID_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "toggle_",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "val_",
+						"type": "uint256"
+					}
+				],
+				"name": "requestResourceAdjustment",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requetID",
 						"type": "uint256"
 					}
 				],
@@ -704,7 +840,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"coreTokens/cmd.sol": "CmdToken"
+			"coreTokens/cmd.sol": "CMDToken"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -712,17 +848,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 100000
 		},
 		"remappings": []
 	},
 	"sources": {
 		"coreTokens/cmd.sol": {
-			"keccak256": "0x1989b349bf048fc5243a26223b7fda6dcf10909cd2184989d29031abf06e47f4",
+			"keccak256": "0x2875b0e309c5526313380f2d131d46b1e946dab201f7403ce48ba1211fb8f3ee",
 			"urls": [
-				"bzz-raw://1fcc92ebc81415e49d2872fb0fc03448e781e7d4bb312e0da1ea8a6937bbade5",
-				"dweb:/ipfs/QmUjEHGTp916M9vdAE2qS2GYNYWhSnyF8N2hw2vhTkCgHh"
+				"bzz-raw://874e42b20a8fe33777b3e5ed4d421b81de60283fc31e6a510aeccc19cf75cd23",
+				"dweb:/ipfs/QmWA3UbWcCFzfQCdzN4vysaDFVfcrpsaMq1nxcJLAwvYMM"
 			]
 		},
 		"forgable/IERC20Forgable.sol": {
@@ -733,24 +869,24 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0x3f31201c6a7d0a301386d1f6e100ad5265a209846e2188d37c45048abc05768e",
+			"keccak256": "0x223967a0bd2a7348f4424d2d7dfa524406d30f6e30d762a21a4633122b39d6cd",
 			"urls": [
-				"bzz-raw://4188b47db54f3f791d33a847cc2a0651bac14f248c0b859931a8d78e2219b80a",
-				"dweb:/ipfs/QmbyYZyybs8r3ivdAnbRhNVa5kZVDWRcautVQcghSGzWmL"
+				"bzz-raw://8a63d917d6a4789b9eb7fa4553ec9b6271e5415e8e5e61a6c4bdb860d5fd1755",
+				"dweb:/ipfs/QmUAR8XFcgMRFBjNkyziRW9oPR3aHfJu2eMzhBRC8ymuhF"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0x99e5407be5a189048dd22bf56be472559f9ebf38ff1ed0ef4483872b3fab3fa0",
+			"keccak256": "0xf5485a01c480866d1bc4560e6f781cfa06b0c5e3f4253effd74f535b65b13872",
 			"urls": [
-				"bzz-raw://46ee924a1a264f34368cec41994caa2d9f531e2a0031a9cdb0d3fe3afb3f415a",
-				"dweb:/ipfs/QmSuqWeKkBv2xMBD8jSuvt1UZkbNhFVvg3DYrfCmZtmJeR"
+				"bzz-raw://70d6021e53872178283d427e997e51402cadce49a39529826f62d1de6158c548",
+				"dweb:/ipfs/QmWowzCqEEAKzxrZbu2hdnChp4ZkqrkRFbgjxp6TENf4Xi"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x6fad18f88f618545b1d13bc603105e7fa5ce7992b3dd0a2ec31846af88c45528",
+			"keccak256": "0x8cfd6899f46d37640a18c755a078e73710274f01ecdc42a15afe0cc7ddba2692",
 			"urls": [
-				"bzz-raw://40e2f3ba81b605564b9f9f936d191a0f992d6b60736f539068ae081e6d10f3ba",
-				"dweb:/ipfs/QmVunW1Yzhc9ZWUZDy3eZLqM9KPUAop3jvi2H8tYBTzWAs"
+				"bzz-raw://113379e54671f61a8ae395b8652480a5a19f26ae8d6600cfc647c17a51abb7ce",
+				"dweb:/ipfs/QmP8FcSEUsNe8QVgoeUbPLfU7EoWtts6AZ9ySPEPS4ZGR1"
 			]
 		},
 		"governance/VotingRights.sol": {

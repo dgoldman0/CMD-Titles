@@ -424,9 +424,9 @@
 						"type": "uint8"
 					},
 					{
-						"internalType": "uint64",
+						"internalType": "uint256",
 						"name": "cost",
-						"type": "uint64"
+						"type": "uint256"
 					}
 				],
 				"name": "requestRankCostChange",
@@ -534,6 +534,19 @@
 					}
 				],
 				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr_",
+						"type": "address"
+					}
+				],
+				"name": "setCMD",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -752,31 +765,31 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 100000
 		},
 		"remappings": []
 	},
 	"sources": {
 		"governance/Democratized.sol": {
-			"keccak256": "0x99e5407be5a189048dd22bf56be472559f9ebf38ff1ed0ef4483872b3fab3fa0",
+			"keccak256": "0xf5485a01c480866d1bc4560e6f781cfa06b0c5e3f4253effd74f535b65b13872",
 			"urls": [
-				"bzz-raw://46ee924a1a264f34368cec41994caa2d9f531e2a0031a9cdb0d3fe3afb3f415a",
-				"dweb:/ipfs/QmSuqWeKkBv2xMBD8jSuvt1UZkbNhFVvg3DYrfCmZtmJeR"
+				"bzz-raw://70d6021e53872178283d427e997e51402cadce49a39529826f62d1de6158c548",
+				"dweb:/ipfs/QmWowzCqEEAKzxrZbu2hdnChp4ZkqrkRFbgjxp6TENf4Xi"
 			]
 		},
 		"governance/Titles.sol": {
-			"keccak256": "0x8b4c5bd6ee3ae960ae98899d28baf2921bfbf66ed68947406ed1a1b79986c8dd",
+			"keccak256": "0xdf2bec725a41582330d7e1d38125cd32f61e468e9df99856b5cc2a6d1ffbf1b8",
 			"urls": [
-				"bzz-raw://f2e902fd513e4854f55209f26800d35385b25522805d75d0b3579281c19098d1",
-				"dweb:/ipfs/QmPYUPwymUrBMBzXMDqT3nv94AR8Bo91kLS5XW7z3pyuJf"
+				"bzz-raw://31a8bb2a9b1a578a07cec3bc0221b187bcdcb1aeafb30b112a70e64080c2a7de",
+				"dweb:/ipfs/QmUJ6dBCtiF5jSRQNGjKsTGJ3bCbwPJ24kdnj3xiGiAEo3"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x6fad18f88f618545b1d13bc603105e7fa5ce7992b3dd0a2ec31846af88c45528",
+			"keccak256": "0x8cfd6899f46d37640a18c755a078e73710274f01ecdc42a15afe0cc7ddba2692",
 			"urls": [
-				"bzz-raw://40e2f3ba81b605564b9f9f936d191a0f992d6b60736f539068ae081e6d10f3ba",
-				"dweb:/ipfs/QmVunW1Yzhc9ZWUZDy3eZLqM9KPUAop3jvi2H8tYBTzWAs"
+				"bzz-raw://113379e54671f61a8ae395b8652480a5a19f26ae8d6600cfc647c17a51abb7ce",
+				"dweb:/ipfs/QmP8FcSEUsNe8QVgoeUbPLfU7EoWtts6AZ9ySPEPS4ZGR1"
 			]
 		},
 		"governance/VotingRights.sol": {
