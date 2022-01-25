@@ -21,3 +21,17 @@ The abstract contract Democratized is extended by all the World Builder DAOs. It
 ## Forge
 
 KEM is a resource token in the sense that it is used to "forge" additional tokens for all the projects related to our ecosystem. As a resource token, it grows in value as more child projects are added to the ecosystem. The forge consists of individual DAO contracts with a standard interface for minting new tokens. KEM is given to the DAO in return for minting the DAO's native token, which can serve a number of functions. However, the DAO itself is controlled by the Titles system. 
+
+# MultiERC20Forgable Standard
+
+Aside from a very basic shared interface, World Builder also has the MultiERC20Forgable standard. This interface includes functions to add additional resources beyond KEM, for projects that would like to accept other project tokens in return for their own. These functions can be useful for DAOs that want to accumulate tokens from projects related to their objective.
+
+## Core Projects
+
+### [Promote.Health](https://promote.health/)
+
+Promote.Health is a global health intiative seeking to improve access to health services, including prevantative/nutritional care, and promote the development of new medical treatments.
+
+### Arcadium 
+
+Arcadium is our entertainment focused branch. The goal of Arcadium is to help foster eSports on web3 platforms and overall increase access to entertainment, and make entertainment more beneficial to society. 
