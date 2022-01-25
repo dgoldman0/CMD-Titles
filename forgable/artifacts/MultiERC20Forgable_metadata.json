@@ -18,6 +18,11 @@
 						"type": "string"
 					},
 					{
+						"internalType": "uint256",
+						"name": "smithFee_",
+						"type": "uint256"
+					},
+					{
 						"internalType": "address",
 						"name": "resourceToken_",
 						"type": "address"
@@ -825,7 +830,7 @@
 			}
 		],
 		"devdoc": {
-			"details": "Since external view functions won't be altering anything, there's no need to check if a resource token is actually set.",
+			"details": "It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.",
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -836,6 +841,9 @@
 				},
 				"balanceOf(address)": {
 					"details": "See {IERC20-balanceOf}."
+				},
+				"canSmith()": {
+					"details": "Might want to have a _isRegistered function that can be overwritten"
 				},
 				"decimals()": {
 					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless this function is overridden; NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
@@ -899,24 +907,24 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0x3827afdde2814ce8a6573a7f7cea73186ac6d9d23a397ca8dd2e053b796d8395",
+			"keccak256": "0x7dc318508084952d0e19288de00182e496501e427f4c46c69ffaf4509487175f",
 			"urls": [
-				"bzz-raw://b479d805a871366f0b8f93935d88d6143af981de6b2c4991565a25596e5d88bf",
-				"dweb:/ipfs/QmNkg5YzjkAtXNJ4AhVpBne7xyUcxo4PcikQQfQhcUT92P"
+				"bzz-raw://29bd46756f6050ff49b27fb44148116caf2af47b570ae99eff23aed462e079c4",
+				"dweb:/ipfs/QmUGiQwuyTBSaJg3KngzCQ14nXAs9HvTUaQA4PjDte9t7e"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0x99e5407be5a189048dd22bf56be472559f9ebf38ff1ed0ef4483872b3fab3fa0",
+			"keccak256": "0xf5485a01c480866d1bc4560e6f781cfa06b0c5e3f4253effd74f535b65b13872",
 			"urls": [
-				"bzz-raw://46ee924a1a264f34368cec41994caa2d9f531e2a0031a9cdb0d3fe3afb3f415a",
-				"dweb:/ipfs/QmSuqWeKkBv2xMBD8jSuvt1UZkbNhFVvg3DYrfCmZtmJeR"
+				"bzz-raw://70d6021e53872178283d427e997e51402cadce49a39529826f62d1de6158c548",
+				"dweb:/ipfs/QmWowzCqEEAKzxrZbu2hdnChp4ZkqrkRFbgjxp6TENf4Xi"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x6fad18f88f618545b1d13bc603105e7fa5ce7992b3dd0a2ec31846af88c45528",
+			"keccak256": "0xb1c9dab93bf69732986c9f24e3bccf5d11e9fcf4ce773ef91f778bf20928e292",
 			"urls": [
-				"bzz-raw://40e2f3ba81b605564b9f9f936d191a0f992d6b60736f539068ae081e6d10f3ba",
-				"dweb:/ipfs/QmVunW1Yzhc9ZWUZDy3eZLqM9KPUAop3jvi2H8tYBTzWAs"
+				"bzz-raw://e30d8f0c49bff3b546975192445b54441264de24929e9b33945db6e108dbfd0b",
+				"dweb:/ipfs/QmeoCxCWk1me9i546NHHDnRJm6pPrKoyrgrKnRzgL2vU3D"
 			]
 		},
 		"governance/VotingRights.sol": {

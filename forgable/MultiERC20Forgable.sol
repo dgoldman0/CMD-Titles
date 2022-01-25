@@ -14,12 +14,12 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         uint256 totalUsed;
     }
     /// @dev We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!
-    uint256 _resourceTokenCount;
-    mapping (uint256 => ResourceToken) _resourceTokens; // The token that will be used in the forging process.
-    mapping (address => uint256) _lastMinted;
-    uint256 _smithCount;
-    uint256 _smithFee;
-    mapping (address => bool) _registered;
+    uint256 private _resourceTokenCount;
+    mapping (uint256 => ResourceToken) private _resourceTokens; // The token that will be used in the forging process.
+    mapping (address => uint256) private _lastMinted;
+    uint256 private _smithCount;
+    uint256 private _smithFee;
+    mapping (address => bool) private _registered;
     
     constructor(string memory name_, string memory symbol_, uint256 smithFee_, address resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
         _resourceTokens[0] = ResourceToken(ERC20(resourceToken_), rate_, limit_, 0);
@@ -55,6 +55,8 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     function smithFee() external view override returns (uint256 fee) {
         return _smithFee;
     }
+    /// @dev Might want to have a _isRegistered function that can be overwritten
+    // This way we can do things like allowing smithing based on whether a person has a title
     function canSmith() external view override returns (bool able) {
         return _registered[msg.sender];
     }

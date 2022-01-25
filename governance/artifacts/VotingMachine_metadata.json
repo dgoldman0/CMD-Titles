@@ -188,6 +188,19 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeLoopChange",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "propositionID",
 						"type": "uint256"
 					},
@@ -249,6 +262,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint16",
+						"name": "loops_",
+						"type": "uint16"
+					}
+				],
+				"name": "requestLoopChange",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "addr",
 						"type": "address"
@@ -280,9 +312,14 @@
 			}
 		],
 		"devdoc": {
-			"details": "Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.",
+			"details": "Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.Should I add the ability to rescind propositions? Probably not, since it could be abused.",
 			"kind": "dev",
 			"methods": {},
+			"stateVariables": {
+				"loops": {
+					"details": "Default to none because we're testing, but we'll set the initial value to something when live."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -301,17 +338,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
-			"runs": 50000
+			"enabled": false,
+			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x8cfd6899f46d37640a18c755a078e73710274f01ecdc42a15afe0cc7ddba2692",
+			"keccak256": "0xb1c9dab93bf69732986c9f24e3bccf5d11e9fcf4ce773ef91f778bf20928e292",
 			"urls": [
-				"bzz-raw://113379e54671f61a8ae395b8652480a5a19f26ae8d6600cfc647c17a51abb7ce",
-				"dweb:/ipfs/QmP8FcSEUsNe8QVgoeUbPLfU7EoWtts6AZ9ySPEPS4ZGR1"
+				"bzz-raw://e30d8f0c49bff3b546975192445b54441264de24929e9b33945db6e108dbfd0b",
+				"dweb:/ipfs/QmeoCxCWk1me9i546NHHDnRJm6pPrKoyrgrKnRzgL2vU3D"
 			]
 		},
 		"governance/VotingRights.sol": {

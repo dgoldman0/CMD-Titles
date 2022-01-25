@@ -34,7 +34,8 @@ contract VotingMachine {
   // Rolling tally
   mapping (uint => uint) votesForProp;
   mapping (uint => uint) votesAgainstProp;
-
+  mapping (uint => (uint => bool)) voted; // Stores whether a voter has voted for a given proposition.
+ 
   event NewProposition(uint id, address sender, address democratized, uint threshold, uint startTime, uint endTime);
   event PropositionExecuted(uint propositionID, address executedBy);
   event NewVote(uint id, address votingAddress, uint voterID, uint propositionID, uint propositionVoteID, bool vote, uint weight);
@@ -51,7 +52,38 @@ contract VotingMachine {
     require(address(rightsContract) == address(0), "Rights contract already set.");
     rightsContract = VotingRights(addr);
   }
+  /// @dev Default to none because we're testing, but we'll set the initial value to something when live.
+  uint16 loops = 1;  
+  struct LoopChangeRequest {
+    uint16 val;
+    uint256 propID;
+  }
+  mapping (uint => LoopChangeRequest) private _loopChangeRequests;
+  uint private _loopChangeRequestCNT;
+  function requestLoopChange (uint16 loops_) public returns (uint requestID) {
+    require(loops_ < 1000); // We don't want to go crazy with the number of loops
+    uint requestID = _loopChangeRequestCNT;
+    _loopChangeRequestCNT++;
+    uint propID = addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+    _loopChangeRequests[requestID] = LoopChangeRequest(loops_, propID);
+    return requestID;
+  }
+  function executeLoopChange(uint requestID_) public {
+    require(requestID_ < _loopChangeRequestCNT, "No such request.");
+    LoopChangeRequest memory request = _loopChangeRequests[requestID_];
+    Proposition storage prop = propositions[request.propID];
+    require(block.timestamp > prop.endTime, "Proposition voting is still ongoing.");
+    require(_checkPropositionThreshold(request.propID), "Proposition has not been approved.");
+    require(!prop.executed, "Proposition already executed.");
+    prop.executed = true;
+    emit PropositionExecuted(request.propID, msg.sender);
+    loops = request.val;
+  }
   function addProposition(address sender, uint threshold, uint startTime, uint endTime) public returns (uint propositionID) {
+    /// @dev That propositions are free to implement could be abused. This loop adds some cost.
+    /// @dev Even this value should be set by a vote. Though still with some limit to adjust cost for changing BNB.
+    /// @dev The reason to use a loop rather than cost some token is because the chain's value should benefit, not us.
+    for (uint i = 0; i < loops; i++) {}
     uint propID = propositionCount;
     propositionCount++;
     propositions[propID] = Proposition(propID, sender, msg.sender, threshold, startTime, endTime, false);
@@ -59,9 +91,11 @@ contract VotingMachine {
     return propID;
   }
   function castVote(uint propositionID, uint voterID, bool vote) public returns (uint voteID) {
+    require(!voted[propositionID][voterID], "This voter has already cast their vote for the given proposition.");
     uint weight = rightsContract.getVotingWeight(voterID);
     require(weight > 0, "This voter has no voting weight.");
     require(rightsContract.hasFiduciaryPower(msg.sender, voterID), "The sender does not have power to vote under this ID.");
+    voted[propositionID][voterID] = true;
     Proposition storage prop = propositions[propositionID];
     require(prop.startTime <= block.timestamp && block.timestamp < prop.endTime, "Inactive proposition.");
 
