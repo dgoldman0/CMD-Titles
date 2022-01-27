@@ -312,7 +312,7 @@
 			}
 		],
 		"devdoc": {
-			"details": "Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.Should I add the ability to rescind propositions? Probably not, since it could be abused.",
+			"details": "Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.Should I add the ability to rescind propositions? Probably not, since it could be abused.But it might be good for proposition execution to have an expiration time.",
 			"kind": "dev",
 			"methods": {},
 			"stateVariables": {
@@ -345,10 +345,10 @@
 	},
 	"sources": {
 		"governance/VotingMachine.sol": {
-			"keccak256": "0xb1c9dab93bf69732986c9f24e3bccf5d11e9fcf4ce773ef91f778bf20928e292",
+			"keccak256": "0x98b8c328343b171bd13e74f43ec298105a35a3456691800292591536a33f18f3",
 			"urls": [
-				"bzz-raw://e30d8f0c49bff3b546975192445b54441264de24929e9b33945db6e108dbfd0b",
-				"dweb:/ipfs/QmeoCxCWk1me9i546NHHDnRJm6pPrKoyrgrKnRzgL2vU3D"
+				"bzz-raw://aff3b50f4f4dae09b34240851ad185a3b650186d78e4770412ec7c2dbdb28711",
+				"dweb:/ipfs/QmZX4WUGCmpsaaNhz5YfZgeCdbLikNxMAWRheAFo3cRM7B"
 			]
 		},
 		"governance/VotingRights.sol": {

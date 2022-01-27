@@ -1,0 +1,93 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Implementation of the {IERC721Receiver} interface. Accepts all token transfers. Make sure the contract is able to use its token with {IERC721-safeTransferFrom}, {IERC721-approve} or {IERC721-setApprovalForAll}.",
+			"kind": "dev",
+			"methods": {
+				"onERC721Received(address,address,uint256,bytes)": {
+					"details": "See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"openZeppelin/ERC721Holder.sol": "ERC721Holder"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"openZeppelin/ERC721Holder.sol": {
+			"keccak256": "0x6971ebc7854be0b4a17ea739a117ebdb6c238ff1c025f1774ede85382f952772",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11665c6300b634b70c01b378c997812a6e28b3461cb063dbd6b17c7b44b376a0",
+				"dweb:/ipfs/QmdhraEHM65BDTqSz4PKmBWVM8SVLWVw64zXPfruyxQ8nd"
+			]
+		},
+		"openZeppelin/IERC721Receiver.sol": {
+			"keccak256": "0xd7dcb4429a3ce3e3abfd2aff9a057ce4267492b2a88730fa41d62ac43df5573b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7ac0366003a4a99a3380ce9f5f8ebd20e8b75f4c42c14d732dffad1e623634f9",
+				"dweb:/ipfs/QmXYRqc21kGRi5yhMpjwifFKdPYXR4S6xKfcyYWeEHuPPf"
+			]
+		}
+	},
+	"version": 1
+}

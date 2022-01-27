@@ -1,0 +1,420 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_machineAddr",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "executeWithdrawERC20",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "executeWithdrawERC721",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155BatchReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "requestWithdrawERC20",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "requestWithdrawERC721",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"onERC721Received(address,address,uint256,bytes)": {
+					"details": "See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"governance/Democratized.sol": "Democratized"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"governance/Democratized.sol": {
+			"keccak256": "0x93c65f90ec46a5b451d525a2f6edfea2fbf335453b9f3d85e02d23ec3184eb7d",
+			"urls": [
+				"bzz-raw://e581eb679bc69a03385b75aefdd1644307243e71a0696f89f65b0eb2c236fe8d",
+				"dweb:/ipfs/QmZx35sbC83R76MEfKM5qERnzF8mCu9kgZpqfw1bJr9wn2"
+			]
+		},
+		"governance/VotingMachine.sol": {
+			"keccak256": "0x8e0d3402a79b4c2b0a92b392f50d74129ec7152253093c8ce45e9dd609688ddb",
+			"urls": [
+				"bzz-raw://33d5fd1d17b0139b1f98c0d55e3e21eed6ede26e43f0e835d9a8f317f70c8c4a",
+				"dweb:/ipfs/QmZ3cLaNZPyCW7KMMo1u6FRy4bX9rt5kpEcPA44cB4SET3"
+			]
+		},
+		"governance/VotingRights.sol": {
+			"keccak256": "0x996ced8b064640a97fb1c7e2fb180b658d4f8aad31dda8c82d56c2f5494811d4",
+			"urls": [
+				"bzz-raw://bb3e05e38a1c11e6e422a557924c21003e0e294894a1ada55048e0c02cbf1814",
+				"dweb:/ipfs/QmUPhEaGSLPiWyk6yVziEDih9fAqJph4ohCjMXw3UijihX"
+			]
+		},
+		"openZeppelin/Address.sol": {
+			"keccak256": "0x89a7fa10e26d77e5aef678fa1cf7849e99671e5eddab4a6298f198147420ace2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a4ecb2608affd1f0c1c46539515ac00279e5148eb7ff77998a5b344b358b24c4",
+				"dweb:/ipfs/QmUA7rE3FjMsjCeqftQ36E8oTuPvNGMenwb5Cif9Qomvx9"
+			]
+		},
+		"openZeppelin/Context.sol": {
+			"keccak256": "0x81d5fc973a522c8909d60be6a201869d46aa47b030b8813f60616404628c2b94",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9755b505799e622d964a843a8ed1fd60fedffca230178e5cb95ae9280df4dcd2",
+				"dweb:/ipfs/QmRkhUYUUgRZ2QYJjmtQct2ubyYwS3bdUMhbuFYM12VfYn"
+			]
+		},
+		"openZeppelin/ERC1155Holder.sol": {
+			"keccak256": "0xda7af7b0d9ec7b90029a743761a04aad18c57570760b0b994106b5b644e719c8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://169f870f5ac39d5ebff464ab82865b76924d2b4d130e3dc99b84664cc1adb449",
+				"dweb:/ipfs/QmRa2tBA47GhcZbL3oMrJjcsrSkPm7Sz8ccLacLingHWx2"
+			]
+		},
+		"openZeppelin/ERC1155Receiver.sol": {
+			"keccak256": "0x697ecd77057ccc5509cbd921fa39e69d098212197bea2439847e0d8bf27e74df",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0f034f5b337e8a8a9640b1060b818513bccf9c70a46286a21c3cf41a289aef2b",
+				"dweb:/ipfs/QmfBNSkWvwMGvH81cwCezU6tLE11rpuZkLpUHEhggjFecS"
+			]
+		},
+		"openZeppelin/ERC165.sol": {
+			"keccak256": "0x3d3fe7b1901114d50828f5c77ba7f09a2a6a65223620c837364d31b60e5982ac",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6751cee12592cb9c33be618057660d6c84cb0594bd0afa552009438e38d3dd02",
+				"dweb:/ipfs/QmWq8SxNw4q6n1B8i9sFZVaodB6wrcyBPsKPWMsaUyCECH"
+			]
+		},
+		"openZeppelin/ERC20.sol": {
+			"keccak256": "0x5efb754c527aac1a6bfd40afee7969fdefc4044bc09d29cccd96e68a8d0ee152",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d0b46d93f8b19df03a91f693c4c3c9dd8213b28f12cc8c16f7d694cc4c461838",
+				"dweb:/ipfs/QmUifcrnv5Q4FtG2VAzCNob6KS4em4zywP3i3U4SLMDzAd"
+			]
+		},
+		"openZeppelin/ERC721.sol": {
+			"keccak256": "0x19c4b0dec3409e38920acebd59ed438eec2ac3a58565772c0831d32407e69ace",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6e920cbf0a15042c2e2dedb09a4380bc7f3bb223d49fbd023eded4b280f6c28c",
+				"dweb:/ipfs/QmYWEPwUYP7pUukRrH2SBckxxuyVSPUUKQdFTtTbZXwkNu"
+			]
+		},
+		"openZeppelin/ERC721Holder.sol": {
+			"keccak256": "0x6971ebc7854be0b4a17ea739a117ebdb6c238ff1c025f1774ede85382f952772",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11665c6300b634b70c01b378c997812a6e28b3461cb063dbd6b17c7b44b376a0",
+				"dweb:/ipfs/QmdhraEHM65BDTqSz4PKmBWVM8SVLWVw64zXPfruyxQ8nd"
+			]
+		},
+		"openZeppelin/IERC1155Receiver.sol": {
+			"keccak256": "0x57810e3435d689b3d7882480bbc2f5cbfd32f92fa93bf154a1f2f4e9bb77ac3e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a4d29fdf37d676e1bc2dee17813d9181c6870e3b22b3190f3d01bd031e2662f1",
+				"dweb:/ipfs/QmcS8Lg9iTfhETdUd69JtXZruG61wxe4W1NZy4bZSWpbwk"
+			]
+		},
+		"openZeppelin/IERC165.sol": {
+			"keccak256": "0x540685d7ece3faa56f38253270ff11b18e63949fb8659c408123b1874674492e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5474839e19e2571c52eae3aab1dc6e6edf2b20bbba9895f59db6594a2678a3d5",
+				"dweb:/ipfs/QmVHocBeANMkq4TzVM7q9At5NSg1TEpT9D9vgJ5dGcvcPN"
+			]
+		},
+		"openZeppelin/IERC20.sol": {
+			"keccak256": "0xd3498b152364c51284e38a01585debf7f69c6908fbab1da8f11a75ba5b89c251",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bb8f6252c31c2ffb1143ca2d9e89e2cf6f031f1dd2e6a9b06fd81ab3ab6cf12b",
+				"dweb:/ipfs/QmSJp6A2Ku5F1nZvRp8PnmKtCocurhVcXiZtKC7L86zY6b"
+			]
+		},
+		"openZeppelin/IERC20Metadata.sol": {
+			"keccak256": "0x94dc88716e92464d240916e16167a8a900f88a2a954fb23cd2ac7f8f96d4d1b4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ad787a2de87b357623f979896b283138de1b491859c55c03ea19e5b3f85196fc",
+				"dweb:/ipfs/QmRgyyXYMDTkwejZMpcDgmE3kgPQKkfvHGHDeunXCgTMJr"
+			]
+		},
+		"openZeppelin/IERC721.sol": {
+			"keccak256": "0x486e7ce5d4f79638a587d78af78241dd176b1ba853b0e1c2a086cccf1d13d6d1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11dbec61bab3d8876df013757ae9e54f70a4901fe8115fabff1e33c36e347b98",
+				"dweb:/ipfs/QmWRKN35GMhoVVkoSgRc2mWLXigMZNSTwJoGdD51g4H4dX"
+			]
+		},
+		"openZeppelin/IERC721Metadata.sol": {
+			"keccak256": "0xbf2e88ad5b8909524def23988a9c19dd3fc968c8dcd97e4eb1515f4b616562e2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://49139c051f825cd59cc4e8ec1bf0187498e4dbf1eac37f05d3124c2475f7eb81",
+				"dweb:/ipfs/QmNzQjsHQcn355QWrSjp4qNweGmbmWSXGobewoXspA8M8N"
+			]
+		},
+		"openZeppelin/IERC721Receiver.sol": {
+			"keccak256": "0xd7dcb4429a3ce3e3abfd2aff9a057ce4267492b2a88730fa41d62ac43df5573b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7ac0366003a4a99a3380ce9f5f8ebd20e8b75f4c42c14d732dffad1e623634f9",
+				"dweb:/ipfs/QmXYRqc21kGRi5yhMpjwifFKdPYXR4S6xKfcyYWeEHuPPf"
+			]
+		},
+		"openZeppelin/Strings.sol": {
+			"keccak256": "0x43bd1a72719f3bea01b14183c87341cc9247e9f885071a0f9792e9e50bcd1d7c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://09ed1d435bacc5c8162fecf8793613a10db9e8e680b002e276b00c74f86d10a9",
+				"dweb:/ipfs/QmXBVDNQNpkmoW8RPxZ7nSNQNcxFb2bqtVFDe2mE53RKRb"
+			]
+		}
+	},
+	"version": 1
+}

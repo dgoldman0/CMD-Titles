@@ -3,6 +3,7 @@ import "./VotingRights.sol";
 
 /// @dev Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.
 /// @dev Should I add the ability to rescind propositions? Probably not, since it could be abused.
+/// @dev But it might be good for proposition execution to have an expiration time.
 contract VotingMachine {
   VotingRights rightsContract;
   address creator;
@@ -34,7 +35,7 @@ contract VotingMachine {
   // Rolling tally
   mapping (uint => uint) votesForProp;
   mapping (uint => uint) votesAgainstProp;
-  mapping (uint => (uint => bool)) voted; // Stores whether a voter has voted for a given proposition.
+  mapping (uint => mapping (uint => bool)) voted; // Stores whether a voter has voted for a given proposition.
  
   event NewProposition(uint id, address sender, address democratized, uint threshold, uint startTime, uint endTime);
   event PropositionExecuted(uint propositionID, address executedBy);
@@ -130,6 +131,8 @@ contract VotingMachine {
   function executeProposition(uint propositionID, address executedBy) public returns (bool success) {
     Proposition storage prop = propositions[propositionID];
     require(block.timestamp > prop.endTime, "Proposition voting is still ongoing.");
+    /// @dev Limit execution to 30 days past the voting end date to prevent bots finding old propositions.
+    require(block.timestamp - prop.endTime < 30 days, "Execution of expired proposition is not allowed.");
     require(_checkPropositionThreshold(propositionID), "Proposition has not been approved.");
     require(!prop.executed, "Proposition already executed.");
 		require(prop.democratized == msg.sender, "This is not the democratized contract that initiated the proposal.");
