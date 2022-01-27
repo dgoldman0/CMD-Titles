@@ -2,6 +2,12 @@
 
 At the core of World Builder is a resource token called Kemet (KEM). This word was the ancient name of Egypt, and literally means black land, referring to the fertile soil of the Nile, which gave life to Egypt, just as KEM gives life to the World Builder project. The total supply of KEM can only be changed by a public vote and is otherwise fixed.
 
+## Contact
+
+Feel free to reach out to me if you have any questions or are looking to join this project.
+
+Email: [contact@danielgoldman.us](mailto:contact@danielgoldman.us)
+
 ## Governance
 
 Voting is done through a complex standard democratized system allowing anyone to submit a proposal and anyone with a specific voting right NFT to vote.
@@ -34,7 +40,7 @@ Promote.Health is a global health intiative seeking to improve access to health 
 
 ### [Project Curate](https://github.com/dgoldman0/CUR-NFTs#readme)
 
-Project Curate's foundation mission is to support the preservation and development of art, in all its forms, from physical to digital, as well as preserve human knowledge in general. 
+Project Curate's foundation mission is to support the preservation and development of art, in all its forms, from physical to digital, as well as preserve human knowledge in general.
 
 ### Arcadium
 
