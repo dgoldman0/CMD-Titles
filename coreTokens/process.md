@@ -8,6 +8,6 @@
 6. In cmd code, set address of resource token, currently left blank as address(0), as deployed kem contract 
 7. Deploy cmd contract.
 8. Set cmd address in titles to the deployed cmd address.
-9. Repeat steps 8 and 9 for other core tokens like PHC.
+9. Repeat steps 6 and 7 for other core tokens like PHC.
 10. In code, set appropriate details in faucet contracts.
 11. Deploy faucet contracts.

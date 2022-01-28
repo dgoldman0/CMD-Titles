@@ -6,6 +6,7 @@ import "../openZeppelin/ERC721Enumerable.sol";
 import "./VotingRights.sol";
 import "./Democratized.sol";
 
+/// @dev withdrawCMD balance (clearly not calculating right there)
 contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 	using Address for address;
   ERC20 cmd;
@@ -14,7 +15,6 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   address private _creator;
 	mapping(address => uint) private _addressCMDBalance;
   uint private _reserveBalance; // The amount of CMD reserved to pay for CMDBalance
-	uint private _reservedForExecutor; // Amount of CMD reserved for the executor
 
 	event TitleMinted(uint titleID, address minter);
 	event CMDClaim(address minter, uint amount);
@@ -115,6 +115,9 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     emit TitleMinted(id, msg.sender);
     return id;
   }
+  function availableCMD() public returns (uint available) {
+    return _addressCMDBalance[msg.sender];
+  }
 	// Withdraws the available CMD held in reserve for the user
   function withdrawCMD() public returns (uint amt) {
     uint amt = _addressCMDBalance[msg.sender];
@@ -143,6 +146,10 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
   mapping (uint => RankChangeRequest) rankChangeRequests;
   mapping (uint => GodMintRequest) godMintRequests;
 
+  function rankOf(uint tokenID_) public view returns (uint8 rank) {
+    require(tokenID_ < ERC721Enumerable.totalSupply(), "No such title!");
+    return titles[tokenID_].rank;
+  }
 	// Override ERC20 withdraw to prevent CMD from being withdrawn or otherwise ensure that the DAO is not drained of CMD needed or _reserveBalance
 
 	// Democretized Controls

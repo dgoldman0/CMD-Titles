@@ -5,8 +5,8 @@ import "../governance/Democratized.sol";
 
 contract KemToken is ERC20, DefaultDemocratized {
     constructor() ERC20("Kemet", "KEM") {
-        // Initially mint 100K kem
-        _mint(msg.sender, 100000000000000000000);
+        // Initially mint 100M kem
+        _mint(msg.sender, 100000000000000000000000000);
     }
     // Goverance
     struct MintRequest {

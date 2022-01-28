@@ -116,6 +116,10 @@ contract VotingMachine {
   function propositionOpen(uint propositionID) public view returns (bool open) {
     return block.timestamp < propositions[propositionID].endTime;
   }
+  function votingOpen(uint propositionID_) public view returns (bool open) {
+    Proposition memory prop = propositions[propositionID_];
+    return prop.startTime <= block.timestamp && block.timestamp < prop.endTime;
+  }
   function totalVotes(uint propositionID) public view returns (uint votes) {
     return propVoteCount[propositionID];
   }
@@ -132,6 +136,7 @@ contract VotingMachine {
     Proposition storage prop = propositions[propositionID];
     require(block.timestamp > prop.endTime, "Proposition voting is still ongoing.");
     /// @dev Limit execution to 30 days past the voting end date to prevent bots finding old propositions.
+    /// @dev Rather than a global 30 day limit, this feature could be specific to the proposal with 30 days as default.
     require(block.timestamp - prop.endTime < 30 days, "Execution of expired proposition is not allowed.");
     require(_checkPropositionThreshold(propositionID), "Proposition has not been approved.");
     require(!prop.executed, "Proposition already executed.");

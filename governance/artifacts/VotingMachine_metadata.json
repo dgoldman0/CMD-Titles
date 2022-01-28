@@ -309,6 +309,25 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID_",
+						"type": "uint256"
+					}
+				],
+				"name": "votingOpen",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "open",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -330,7 +349,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"governance/VotingMachine.sol": "VotingMachine"
+			"localhost/governance/VotingMachine.sol": "VotingMachine"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -344,14 +363,14 @@
 		"remappings": []
 	},
 	"sources": {
-		"governance/VotingMachine.sol": {
-			"keccak256": "0x98b8c328343b171bd13e74f43ec298105a35a3456691800292591536a33f18f3",
+		"localhost/governance/VotingMachine.sol": {
+			"keccak256": "0x7f77f1228093ae01074e5fa21eff51696bd63ccd4c5abb0fe9ed489b654971c1",
 			"urls": [
-				"bzz-raw://aff3b50f4f4dae09b34240851ad185a3b650186d78e4770412ec7c2dbdb28711",
-				"dweb:/ipfs/QmZX4WUGCmpsaaNhz5YfZgeCdbLikNxMAWRheAFo3cRM7B"
+				"bzz-raw://19df713046523932f23fd1cbf85f84098b7451602b60513753621dcde9614fa3",
+				"dweb:/ipfs/QmfWUoz5hRSdmo9G96nYznMpTWcV39pQuaBEFcsQujgq5u"
 			]
 		},
-		"governance/VotingRights.sol": {
+		"localhost/governance/VotingRights.sol": {
 			"keccak256": "0x996ced8b064640a97fb1c7e2fb180b658d4f8aad31dda8c82d56c2f5494811d4",
 			"urls": [
 				"bzz-raw://bb3e05e38a1c11e6e422a557924c21003e0e294894a1ada55048e0c02cbf1814",
