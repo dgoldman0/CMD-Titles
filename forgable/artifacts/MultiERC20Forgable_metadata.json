@@ -640,6 +640,19 @@
 						"type": "uint256"
 					}
 				],
+				"name": "executeActiveChange",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
 				"name": "executeAddResource",
 				"outputs": [
 					{
@@ -1009,6 +1022,30 @@
 					}
 				],
 				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "resourceID_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "requestActiveChange",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -1415,7 +1452,7 @@
 			}
 		],
 		"devdoc": {
-			"details": "It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.Need to add the ability to enable/disable a given resource token",
+			"details": "It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.",
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -1504,10 +1541,10 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0xd5934024066be56aae358eaa5232192430184b61764e204f313aad974962b1a3",
+			"keccak256": "0x236641deb3cac0a71f7263d364fa5e46f54a7c4c6d203e4584099eb5644a5398",
 			"urls": [
-				"bzz-raw://dd509129d742131d010c6a6c214072d9a529ca08cf69f816ad987844f35afc69",
-				"dweb:/ipfs/QmWBFUJPTAiEXYH9riNW94eeEpa1jrK6dNyLffFTrzhgZq"
+				"bzz-raw://0803f3e7f68a621b9dd06e334c3efe8e4ec16dc75fcfd6f47424f1e58a1172f8",
+				"dweb:/ipfs/QmZgmuwaHFN56hw6A7D1EWvLiPJrim16fNySgqLnmzkehq"
 			]
 		},
 		"governance/Democratized.sol": {

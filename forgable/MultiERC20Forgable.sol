@@ -6,13 +6,13 @@ import "../governance/Democratized.sol";
 
 // ERC20Forgable token that allows for additional minting resources and with built in governance control. 
 /// @dev It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.
-/// @dev Need to add the ability to enable/disable a given resource token
 contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     struct ResourceToken {
         ERC20 tokenAddress;
         uint256 conversionRate;
         uint256 forgeLimit;
         uint256 totalUsed;
+        bool active;
     }
     /// @dev We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!
     uint256 private _resourceTokenCount;
@@ -25,7 +25,7 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     mapping (address => bool) private _registered;
     
     constructor(string memory name_, string memory symbol_, uint256 smithFee_, address resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
-        _resourceTokens[0] = ResourceToken(ERC20(resourceToken_), rate_, limit_, 0);
+        _resourceTokens[0] = ResourceToken(ERC20(resourceToken_), rate_, limit_, 0, true);
         _resourceTokenCount = 1;
         _smithFee = smithFee_;
         _mint(msg.sender, initial_);
@@ -112,12 +112,19 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         uint256 newFee;
         uint256 propositionID;
     }
+    struct ActiveChangeRequest {
+        uint256 resourceID;
+        bool active;
+        uint256 propositionID;
+    }
     mapping (uint256 => NewResourceRequest) _newResourceRequests;
     mapping (uint256 => ResourceAdjustmentRequest) _resourceAdjustmentRequests;
     mapping (uint256 => FeeChangeRequest) _feeChangeRequests;
+    mapping (uint256 => ActiveChangeRequest) _activeChangeRequests;
     uint256 _newResourceRequestCNT;
     uint256 _resourceAdjustmentRequestCNT;
     uint256 _feeChangeRequestCNT;
+    uint256 _activeChangeRequestCNT;
     event NewResourceRequested(uint256 requestID, address tokenAddress, uint256 converesionRate, uint256 forgeLimit, uint256 propID);
     event NewResourceAdded(uint256 resourceID, uint256 requestID, address tokenAddress);
     function requestNewResource(address addr_, uint256 rate_, uint256 limit_) public returns (uint256 requestID) {
@@ -136,11 +143,12 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         _resourceAdjustmentRequests[requestID] = ResourceAdjustmentRequest(resourceID_, toggle_, val_, propID);
         return requestID;
     }
-    function requestFeeChange(uint256 newFee_) public returns (uint256 requestID) {
-        uint256 requestID = _feeChangeRequestCNT;
-        _feeChangeRequestCNT++;
+    function requestActiveChange(uint256 resourceID_, bool active) public returns (uint256 requestID) {
+        require(resourceID_ < _resourceTokenCount, "No such resource defined.");
+        uint256 requestID = _activeChangeRequestCNT;
+        _activeChangeRequestCNT++;
         uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
-        _feeChangeRequests[requestID] = FeeChangeRequest(newFee_, propID);
+        _activeChangeRequests[requestID] = ActiveChangeRequest(resourceID_, active, propID);
         return requestID;
     }
     function executeAddResource(uint256 requestID_) public returns (uint256 resourceID) {
@@ -150,6 +158,13 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         uint resourceID = _addResourceToken(request.tokenAddress, request.conversionRate, request.forgeLimit);
         emit NewResourceAdded(resourceID, requestID_, request.tokenAddress);
         return resourceID;
+    }
+    function requestFeeChange(uint256 newFee_) public returns (uint256 requestID) {
+        uint256 requestID = _feeChangeRequestCNT;
+        _feeChangeRequestCNT++;
+        uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+        _feeChangeRequests[requestID] = FeeChangeRequest(newFee_, propID);
+        return requestID;
     }
     function checkIfResource(address tokenAddress) public view returns (bool isResource) {
         return (_reverseLookup[tokenAddress] != 0 || address(_resourceTokens[0].tokenAddress) == tokenAddress);
@@ -162,19 +177,28 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         require(!checkIfResource(tokenAddress), "Token already has a resource!");
         uint256 resourceID = _resourceTokenCount;
         _resourceTokenCount++;
-        _resourceTokens[resourceID] = ResourceToken(ERC20(tokenAddress), conversionRate, forgeLimit, 0);
+        _resourceTokens[resourceID] = ResourceToken(ERC20(tokenAddress), conversionRate, forgeLimit, 0, true);
         return resourceID;
     }
     function executeResourceAdjustment(uint256 requestID_) public {
         require(requestID_ < _newResourceRequestCNT, "No such request.");
         ResourceAdjustmentRequest memory request = _resourceAdjustmentRequests[requestID_];
+        voting.executeProposition(request.propositionID, msg.sender);
         ResourceToken storage token = _resourceTokens[request.resourceID];
         if (request.toggle) token.conversionRate = request.val;
         else token.forgeLimit = request.val;
     }
+    function executeActiveChange(uint256 requestID_) public {
+        require(requestID_ < _activeChangeRequestCNT, "No such request.");
+        ActiveChangeRequest memory request = _activeChangeRequests[requestID_];
+        voting.executeProposition(request.propositionID, msg.sender);
+        ResourceToken storage token = _resourceTokens[request.resourceID];
+        token.active = request.active;
+    }
     function executeFeeChange(uint256 requestID_) public {
         require(requestID_ < _feeChangeRequestCNT, "No such request.");
         FeeChangeRequest memory request = _feeChangeRequests[requestID_];
-        _smithFee = request.newFee;
+        voting.executeProposition(request.propositionID, msg.sender);
+       _smithFee = request.newFee;
     }
 }
