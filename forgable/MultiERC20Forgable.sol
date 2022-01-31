@@ -180,6 +180,8 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         _resourceTokens[resourceID] = ResourceToken(ERC20(tokenAddress), conversionRate, forgeLimit, 0, true);
         return resourceID;
     }
+    /// @dev Add executeResoureAddition!
+    
     function executeResourceAdjustment(uint256 requestID_) public {
         require(requestID_ < _newResourceRequestCNT, "No such request.");
         ResourceAdjustmentRequest memory request = _resourceAdjustmentRequests[requestID_];
