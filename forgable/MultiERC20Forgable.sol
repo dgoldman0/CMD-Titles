@@ -181,7 +181,7 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         return resourceID;
     }
     /// @dev Add executeResoureAddition!
-    
+
     function executeResourceAdjustment(uint256 requestID_) public {
         require(requestID_ < _newResourceRequestCNT, "No such request.");
         ResourceAdjustmentRequest memory request = _resourceAdjustmentRequests[requestID_];
