@@ -547,6 +547,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "checkIfResource",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isResource",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "tokenID_",
 						"type": "uint256"
@@ -792,6 +811,25 @@
 					{
 						"internalType": "uint256",
 						"name": "limit",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "getResourceID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "resourceID",
 						"type": "uint256"
 					}
 				],
@@ -1398,6 +1436,9 @@
 				"decreaseAllowance(address,uint256)": {
 					"details": "Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`."
 				},
+				"getResourceID(address)": {
+					"details": "returns 0 if not set or base resource token!"
+				},
 				"increaseAllowance(address,uint256)": {
 					"details": "Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address."
 				},
@@ -1463,10 +1504,10 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0xb664d3f7b3b0ad0b57143275db58abcfd48fd698a5d3dc620c8a831063411e81",
+			"keccak256": "0xd5934024066be56aae358eaa5232192430184b61764e204f313aad974962b1a3",
 			"urls": [
-				"bzz-raw://54eed67f081eac4c1587b5136f1d54b61bf61dbf903e49054d1dde5924a14d68",
-				"dweb:/ipfs/QmcBGtiw5fqjNWYwsFMgrUpsEwe7AY2CnkXDo9zAUNYQxK"
+				"bzz-raw://dd509129d742131d010c6a6c214072d9a529ca08cf69f816ad987844f35afc69",
+				"dweb:/ipfs/QmWBFUJPTAiEXYH9riNW94eeEpa1jrK6dNyLffFTrzhgZq"
 			]
 		},
 		"governance/Democratized.sol": {

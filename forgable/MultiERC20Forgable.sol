@@ -7,7 +7,6 @@ import "../governance/Democratized.sol";
 // ERC20Forgable token that allows for additional minting resources and with built in governance control. 
 /// @dev It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.
 /// @dev Need to add the ability to enable/disable a given resource token
-/// @dev Should add a mapping (uint => address) token_resource to prevent duplicate addition of tokens
 contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     struct ResourceToken {
         ERC20 tokenAddress;
@@ -18,6 +17,8 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     /// @dev We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!
     uint256 private _resourceTokenCount;
     mapping (uint256 => ResourceToken) private _resourceTokens; // The token that will be used in the forging process.
+    mapping (address => uint256) private _reverseLookup;
+
     mapping (address => uint256) private _lastMinted;
     uint256 private _smithCount;
     uint256 private _smithFee;
@@ -150,7 +151,15 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         emit NewResourceAdded(resourceID, requestID_, request.tokenAddress);
         return resourceID;
     }
+    function checkIfResource(address tokenAddress) public view returns (bool isResource) {
+        return (_reverseLookup[tokenAddress] != 0 || address(_resourceTokens[0].tokenAddress) == tokenAddress);
+    }
+    /// @dev returns 0 if not set or base resource token!
+    function getResourceID(address tokenAddress) public view returns (uint256 resourceID) {
+        return _reverseLookup[tokenAddress];
+    }
     function _addResourceToken(address tokenAddress, uint conversionRate, uint forgeLimit) internal returns (uint resourceID) {
+        require(!checkIfResource(tokenAddress), "Token already has a resource!");
         uint256 resourceID = _resourceTokenCount;
         _resourceTokenCount++;
         _resourceTokens[resourceID] = ResourceToken(ERC20(tokenAddress), conversionRate, forgeLimit, 0);
