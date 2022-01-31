@@ -241,6 +241,38 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "ETHWithdrawRequested",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "executeETHWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -407,6 +439,30 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "requestETHWithdraw",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "token",
 						"type": "address"
@@ -551,9 +607,9 @@
 			}
 		],
 		"devdoc": {
-			"details": "Still need to implement ERC1155 functionality. ",
+			"details": "Forgot to add requests to transfer out ETH itself!",
 			"events": {
-				"ERC20WithdrawRequested(address,uint256,uint256)": {
+				"ETHWithdrawRequested(uint256,uint256)": {
 					"details": "Not sure if additional or less information should be made available. Include sender?"
 				}
 			},
@@ -561,6 +617,9 @@
 			"methods": {
 				"onERC721Received(address,address,uint256,bytes)": {
 					"details": "See {IERC721Receiver-onERC721Received}. Always returns `IERC721Receiver.onERC721Received.selector`."
+				},
+				"requestETHWithdraw(uint256,address)": {
+					"details": "External versions which default to 50% simple vote"
 				},
 				"supportsInterface(bytes4)": {
 					"details": "See {IERC165-supportsInterface}."
@@ -591,10 +650,10 @@
 	},
 	"sources": {
 		"governance/Democratized.sol": {
-			"keccak256": "0xce74a7fbf573eaa9cdec9c39c5b08173902e51af380059b304e721939627722b",
+			"keccak256": "0x5e10a35ca016c66ce4b8ab947abd72715869d932efee873ede6c7add238b6c83",
 			"urls": [
-				"bzz-raw://6cffc1dbb1e1d146f4dbb73cebfbb317a2acc86673bccfc944cc999d11194291",
-				"dweb:/ipfs/QmRveyhqvRHaXJBSVTzJgwu3E6GaT491opJ2eu54tTHnhT"
+				"bzz-raw://bd622aaffb97e3e36230f458f118bcadf6c5fcfa083efc7c74c0e83bec3754ca",
+				"dweb:/ipfs/QmYX6tnrchB3ndZb7teEonGNDvmFRjMrues9X8wfntLoYZ"
 			]
 		},
 		"governance/VotingMachine.sol": {

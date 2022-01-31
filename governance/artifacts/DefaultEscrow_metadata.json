@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "holdingPeriod_",
+						"type": "uint256"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -623,7 +629,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"governance/Democratized.sol": "DefaultDemocratized"
+			"governance/Democratized.sol": "DefaultEscrow"
 		},
 		"evmVersion": "london",
 		"libraries": {},

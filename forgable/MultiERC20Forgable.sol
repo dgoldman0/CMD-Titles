@@ -6,6 +6,8 @@ import "../governance/Democratized.sol";
 
 // ERC20Forgable token that allows for additional minting resources and with built in governance control. 
 /// @dev It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.
+/// @dev Need to add the ability to enable/disable a given resource token
+/// @dev Should add a mapping (uint => address) token_resource to prevent duplicate addition of tokens
 contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     struct ResourceToken {
         ERC20 tokenAddress;
@@ -144,11 +146,15 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
         require(requestID_ < _newResourceRequestCNT, "No such request.");
         NewResourceRequest memory request = _newResourceRequests[requestID_];
         voting.executeProposition(request.propositionID, msg.sender);
-        uint256 tokenID = _resourceTokenCount;
+        uint resourceID = _addResourceToken(request.tokenAddress, request.conversionRate, request.forgeLimit);
+        emit NewResourceAdded(resourceID, requestID_, request.tokenAddress);
+        return resourceID;
+    }
+    function _addResourceToken(address tokenAddress, uint conversionRate, uint forgeLimit) internal returns (uint resourceID) {
+        uint256 resourceID = _resourceTokenCount;
         _resourceTokenCount++;
-        _resourceTokens[tokenID] = ResourceToken(ERC20(request.tokenAddress), request.conversionRate, request.conversionRate, 0);
-        emit NewResourceAdded(tokenID, requestID_, request.tokenAddress);
-        return tokenID;
+        _resourceTokens[resourceID] = ResourceToken(ERC20(tokenAddress), conversionRate, forgeLimit, 0);
+        return resourceID;
     }
     function executeResourceAdjustment(uint256 requestID_) public {
         require(requestID_ < _newResourceRequestCNT, "No such request.");

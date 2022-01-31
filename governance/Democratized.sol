@@ -9,13 +9,16 @@ import "../openZeppelin/ERC1155Holder.sol";
 
 /// @dev At some point we'll add Democratized systems that will allow easy voting on whether to add or remove liquidity in pools.
 
+/// @dev Forgot to add requests to transfer out ETH itself!
+
 contract Democratized is ERC721Holder, ERC1155Holder {
   VotingMachine voting;
-  uint erc20RequestCount;
-  uint erc721RequestCount;
-  uint erc1155RequestCount;
-  uint erc1155BatchRequestCount;
 
+  struct ETHRequest {
+    uint amt;
+    address payable receiver;
+    uint propositionID;
+  }
   struct ERC20Request {
     address token;
     uint amt;
@@ -43,12 +46,21 @@ contract Democratized is ERC721Holder, ERC1155Holder {
     uint propositionID;
   }
 
+  mapping (uint => ETHRequest) ethRequests;
   mapping (uint => ERC20Request) erc20Requests;
   mapping (uint => ERC721Request) erc721Requests;
   mapping (uint => ERC1155Request) erc1155Requests;
   mapping (uint => ERC1155BatchRequest) erc1155BatchRequests;
 
+  uint ethRequestCount;
+  uint erc20RequestCount;
+  uint erc721RequestCount;
+  uint erc1155RequestCount;
+  uint erc1155BatchRequestCount;
+
+
   /// @dev Not sure if additional or less information should be made available. Include sender?
+  event ETHWithdrawRequested(uint amt, uint requestID);
   event ERC20WithdrawRequested(address token, uint amt, uint requestID);
   event ERC721WithdrawRequested(address token, uint tokeNID, uint requestID);
   event ERC1155WithdrawRequested(address token, uint tokenID, uint amt, uint requestID);
@@ -62,6 +74,14 @@ contract Democratized is ERC721Holder, ERC1155Holder {
     voting = VotingMachine(_machineAddr);
   }
   
+  function _requestETHWithdraw(uint amt, uint threshold, address payable receiver, uint startTime, uint endTime) internal returns (uint propositionID) {
+    uint requestID = ethRequestCount;
+    ethRequestCount++;
+    uint propID = voting.addProposition(msg.sender, threshold, startTime, endTime);
+    ethRequests[requestID] = ETHRequest(amt, receiver, propID);
+    emit ETHWithdrawRequested(amt, requestID);
+    return propID;
+  }
   function _requestWithdraw20(address token, uint amt, uint threshold, address receiver, uint startTime, uint endTime) internal returns (uint propositionID) {
     uint requestID = erc20RequestCount;
     erc20RequestCount++;
@@ -92,22 +112,31 @@ contract Democratized is ERC721Holder, ERC1155Holder {
     return propID;
   }
   /// @dev External versions which default to 50% simple vote
-  function requestWithdrawERC20(address token, uint amt, address receiver) public returns (uint propositionID) {
+  function requestETHWithdraw(uint amt, address payable receiver) public virtual returns (uint propositionID) {
+    return _requestETHWithdraw(amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
+  }
+  function requestWithdrawERC20(address token, uint amt, address receiver) public virtual returns (uint propositionID) {
     return _requestWithdraw20(token, amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
   }
-  function requestWithdrawERC721(address token, uint tokenID, address receiver) public returns (uint propositionID) {
+  function requestWithdrawERC721(address token, uint tokenID, address receiver) public virtual returns (uint propositionID) {
     return _requestWithdraw721(token, tokenID, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
   }
-  function requestWithdrawERC1155(address token, uint tokenID, uint amt, address receiver) public returns (uint propositionID) {
+  function requestWithdrawERC1155(address token, uint tokenID, uint amt, address receiver) public virtual returns (uint propositionID) {
     return _requestWithdraw1155(token, tokenID, amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
   }
-  function requestWithdrawERC1155(address token, uint[] memory tokenIDs, uint[] memory amts, address receiver) public returns (uint propositionID) {
+  function requestWithdrawERC1155(address token, uint[] memory tokenIDs, uint[] memory amts, address receiver) public virtual returns (uint propositionID) {
     return _requestWithdraw1155(token, tokenIDs, amts, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
+  }
+  function executeETHWithdraw(uint requestID) public {
+    require(requestID < ethRequestCount, "No such request.");
+    ETHRequest memory request = ethRequests[requestID];
+    /// @dev Make sure proposition is set to executed FIRST
+    voting.executeProposition(request.propositionID, msg.sender);
+    request.receiver.transfer(request.amt);
   }
   function executeWithdrawERC20(uint requestID) public {
     require(requestID < erc20RequestCount, "No such request.");
     ERC20Request memory request = erc20Requests[requestID];
-    /// @dev Make sure proposition is set to executed FIRST
     voting.executeProposition(request.propositionID, msg.sender);
     ERC20 token = ERC20(request.token);
     token.transferFrom(address(this), request.receiver, request.amt);
@@ -134,6 +163,8 @@ contract Democratized is ERC721Holder, ERC1155Holder {
     ERC1155 token = ERC1155(request.token);
     token.safeBatchTransferFrom(address(this), request.receiver, request.tokenIDs, request.amts, "");
   }  
+
+  /// @dev Don't forget to add fallback functions to allow ETH
 }
 
 // Will preset Voting Machine address but should I allow change of voting machine by vote too?
@@ -141,5 +172,32 @@ contract Democratized is ERC721Holder, ERC1155Holder {
 contract DefaultDemocratized is Democratized {
   constructor() Democratized(address(0x76C55cE393dbeBe2d2BD531892a586ed628A196B)) {
 
+  }
+}
+
+contract DefaultEscrow is DefaultDemocratized {
+  uint lockedUntil;
+  constructor(uint holdingPeriod_) DefaultDemocratized() {
+    lockedUntil = block.timestamp + holdingPeriod_;
+  }
+  function requestETHWithdraw(uint amt, address payable receiver) public override returns (uint propositionID) {
+    require(lockedUntil < block.timestamp, "Lockout period not finished.");
+    return _requestETHWithdraw(amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
+  }
+  function requestWithdrawERC20(address token, uint amt, address receiver) public override returns (uint propositionID) {
+    require(lockedUntil < block.timestamp, "Lockout period not finished.");
+    return _requestWithdraw20(token, amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
+  }
+  function requestWithdrawERC721(address token, uint tokenID, address receiver) public override returns (uint propositionID) {
+    require(lockedUntil < block.timestamp, "Lockout period not finished.");
+    return _requestWithdraw721(token, tokenID, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
+  }
+  function requestWithdrawERC1155(address token, uint tokenID, uint amt, address receiver) public override returns (uint propositionID) {
+    require(lockedUntil < block.timestamp, "Lockout period not finished.");
+    return _requestWithdraw1155(token, tokenID, amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
+  }
+  function requestWithdrawERC1155(address token, uint[] memory tokenIDs, uint[] memory amts, address receiver) public override returns (uint propositionID) {
+    require(lockedUntil < block.timestamp, "Lockout period not finished.");
+    return _requestWithdraw1155(token, tokenIDs, amts, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
   }
 }
