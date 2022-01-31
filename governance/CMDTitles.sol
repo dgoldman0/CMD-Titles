@@ -49,7 +49,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
       ranks[i] = Rank(cost, maxChildren);
       cost = cost / 2; // Each lower rank costs 1/2 the cost of the previous rank
     }
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 50; i++) {
       _mintGodTitle(msg.sender);
     }
   }
@@ -71,7 +71,9 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
     require(rank < 13, "No such rank!");
     return ranks[rank].mintCost;
   }
-
+  function _baseURI() internal view override virtual returns (string memory) {
+    return "https://titles.wrldcoin.io/";
+  }
   function mintTitle(uint _parentID) public returns (uint id) {
     // Mint the title
     Title storage parent = titles[_parentID];
@@ -197,4 +199,12 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
       _mintGodTitle(request.receiver);
     }
   }
+  /// @dev I need to figure out how to ensure that it works with either 721 or 1155
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155Receiver, ERC721Enumerable) returns (bool) {
+      return interfaceId == type(IERC721).interfaceId
+          || interfaceId == type(IERC721Metadata).interfaceId
+          || interfaceId == type(IERC721Enumerable).interfaceId
+          || interfaceId == type(IERC1155).interfaceId
+          || super.supportsInterface(interfaceId);
+    }
 }

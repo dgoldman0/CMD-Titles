@@ -7,7 +7,8 @@ import "../openZeppelin/ERC1155.sol";
 import "../openZeppelin/ERC721Holder.sol";
 import "../openZeppelin/ERC1155Holder.sol";
 
-/// @dev Still need to implement ERC1155 functionality. 
+/// @dev At some point we'll add Democratized systems that will allow easy voting on whether to add or remove liquidity in pools.
+
 contract Democratized is ERC721Holder, ERC1155Holder {
   VotingMachine voting;
   uint erc20RequestCount;
@@ -90,7 +91,7 @@ contract Democratized is ERC721Holder, ERC1155Holder {
     erc1155BatchRequests[requestID] = ERC1155BatchRequest(token, tokenIDs, amts, receiver, propID);
     return propID;
   }
-  // External versions which default to 50% simple vote
+  /// @dev External versions which default to 50% simple vote
   function requestWithdrawERC20(address token, uint amt, address receiver) public returns (uint propositionID) {
     return _requestWithdraw20(token, amt, 5000000, receiver, block.timestamp + 24 hours , block.timestamp + 48 hours);
   }
@@ -106,7 +107,7 @@ contract Democratized is ERC721Holder, ERC1155Holder {
   function executeWithdrawERC20(uint requestID) public {
     require(requestID < erc20RequestCount, "No such request.");
     ERC20Request memory request = erc20Requests[requestID];
-    // Make sure proposition is set to executed FIRST
+    /// @dev Make sure proposition is set to executed FIRST
     voting.executeProposition(request.propositionID, msg.sender);
     ERC20 token = ERC20(request.token);
     token.transferFrom(address(this), request.receiver, request.amt);
@@ -114,7 +115,6 @@ contract Democratized is ERC721Holder, ERC1155Holder {
   function executeWithdrawERC721(uint requestID) public {
     require(requestID < erc721RequestCount, "No such request.");
     ERC721Request memory request = erc721Requests[requestID];
-    // Make sure proposition is set to executed FIRST
     voting.executeProposition(request.propositionID, msg.sender);
     ERC721 token = ERC721(request.token);
     token.safeTransferFrom(address(this), request.receiver, request.tokenID);
@@ -122,7 +122,6 @@ contract Democratized is ERC721Holder, ERC1155Holder {
   function executeWithdrawERC1155(uint requestID) public {
     require(requestID < erc1155RequestCount, "No such request.");
     ERC1155Request memory request = erc1155Requests[requestID];
-    // Make sure proposition is set to executed FIRST
     voting.executeProposition(request.propositionID, msg.sender);
     ERC1155 token = ERC1155(request.token);
     /// @dev I'm not sure if I should include the data parameter or not.
@@ -131,10 +130,8 @@ contract Democratized is ERC721Holder, ERC1155Holder {
   function executeWithdrawERC1155Batch(uint requestID) public {
     require(requestID < erc1155BatchRequestCount, "No such request.");
     ERC1155BatchRequest memory request = erc1155BatchRequests[requestID];
-    // Make sure proposition is set to executed FIRST
     voting.executeProposition(request.propositionID, msg.sender);
     ERC1155 token = ERC1155(request.token);
-    /// @dev I'm not sure if I should include the data parameter or not.
     token.safeBatchTransferFrom(address(this), request.receiver, request.tokenIDs, request.amts, "");
   }  
 }

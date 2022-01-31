@@ -91,6 +91,130 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
+						"name": "tokenID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC1155WithdrawExecuted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "tokenIDs",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "amts",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC1155WithdrawExecuted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC1155WithdrawRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "tokenIDs",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "amts",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC1155WithdrawRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
 						"name": "amt",
 						"type": "uint256"
 					},
@@ -141,7 +265,7 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "tokeNID",
+						"name": "tokenID",
 						"type": "uint256"
 					},
 					{
@@ -308,6 +432,32 @@
 					}
 				],
 				"name": "executeRankChange",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "executeWithdrawERC1155",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "executeWithdrawERC1155Batch",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -488,6 +638,84 @@
 						"type": "address"
 					},
 					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155BatchReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
@@ -613,6 +841,74 @@
 					{
 						"internalType": "uint256",
 						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "tokenIDs",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "amts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "requestWithdrawERC1155",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "requestWithdrawERC1155",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
 						"type": "uint256"
 					}
 				],
@@ -938,7 +1234,7 @@
 					"details": "See {IERC721-setApprovalForAll}."
 				},
 				"supportsInterface(bytes4)": {
-					"details": "See {IERC165-supportsInterface}."
+					"details": "I need to figure out how to ensure that it works with either 721 or 1155"
 				},
 				"symbol()": {
 					"details": "See {IERC721Metadata-symbol}."
@@ -984,17 +1280,17 @@
 	},
 	"sources": {
 		"governance/CMDTitles.sol": {
-			"keccak256": "0x0df7c3d5ac05ada419c25ba13b89dcce74ec7a662c29a38616a4f2476f2dc53a",
+			"keccak256": "0xc3b4dd483343913f81f049a5faa2161f984005d9734282f644222e24dbb7ce43",
 			"urls": [
-				"bzz-raw://38e9d74ed25056573e402ab511a4af1b0f561a2adf9b22ec9a87e461942171da",
-				"dweb:/ipfs/QmWEUSm12XVjRiwgT69t3urojfZRyhY2Na5XKJV5QvvSPT"
+				"bzz-raw://e0aac9e9dbef167bdafebcde6b9fd66c9eb9ec202938079e220067b0143fa230",
+				"dweb:/ipfs/QmPE9b7UAGV1mSW4YFxEjuEvwE17EfqMXu1k8ZEXQzxPiU"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0xe48faeae5464290524012493373a7e8f793cdcda48e8d290add7111da64b89e5",
+			"keccak256": "0xce74a7fbf573eaa9cdec9c39c5b08173902e51af380059b304e721939627722b",
 			"urls": [
-				"bzz-raw://39a1ae944a763ab62beafd0ab622244e75640dad22bd5e1464030bc50a5ca8a5",
-				"dweb:/ipfs/QmYfqkMKo8fafAVMTHghrCDhtiRzKu5q91t6q5RTsJbc4A"
+				"bzz-raw://6cffc1dbb1e1d146f4dbb73cebfbb317a2acc86673bccfc944cc999d11194291",
+				"dweb:/ipfs/QmRveyhqvRHaXJBSVTzJgwu3E6GaT491opJ2eu54tTHnhT"
 			]
 		},
 		"governance/VotingMachine.sol": {
@@ -1025,6 +1321,14 @@
 			"urls": [
 				"bzz-raw://9755b505799e622d964a843a8ed1fd60fedffca230178e5cb95ae9280df4dcd2",
 				"dweb:/ipfs/QmRkhUYUUgRZ2QYJjmtQct2ubyYwS3bdUMhbuFYM12VfYn"
+			]
+		},
+		"openZeppelin/ERC1155.sol": {
+			"keccak256": "0x90336546e999d85bafa0c5c28ae66feb6c00dac75b5a2524e7fe62c04a66ef2a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7186af30a700445da48fcc8cecfc69cd5a7fe7387eca75ac7198bf9330a086b5",
+				"dweb:/ipfs/QmSY2i57jwnH8UAc5Sa86hCoKASHpvA9gnSDzpqmBCoKMc"
 			]
 		},
 		"openZeppelin/ERC1155Holder.sol": {
@@ -1081,6 +1385,22 @@
 			"urls": [
 				"bzz-raw://11665c6300b634b70c01b378c997812a6e28b3461cb063dbd6b17c7b44b376a0",
 				"dweb:/ipfs/QmdhraEHM65BDTqSz4PKmBWVM8SVLWVw64zXPfruyxQ8nd"
+			]
+		},
+		"openZeppelin/IERC1155.sol": {
+			"keccak256": "0xdd69e7c1eb73db9a452d43839a84ff5e077b863829925911467475a1f6084431",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://592212e0d251c60d23a3f008e368ff3fd9e9566c6132f32693883308146bc7e7",
+				"dweb:/ipfs/QmVCxuqkd5TsXjttf9RLjPwrVEeYDn6V6g2Y9exhjRmKtL"
+			]
+		},
+		"openZeppelin/IERC1155MetadataURI.sol": {
+			"keccak256": "0x36908d39ba8e1287b70c7c1b59e9c63196b08521652cb3bd6bddff49dab40a80",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://754807b9c2e6599f98c8b95e759b11c4ad29b6160d7c075bba62484dbbca7671",
+				"dweb:/ipfs/QmWGgEbTd4gE6DtWHSCxm4wpZyAxe3g3QiXXuXuzXGugBi"
 			]
 		},
 		"openZeppelin/IERC1155Receiver.sol": {

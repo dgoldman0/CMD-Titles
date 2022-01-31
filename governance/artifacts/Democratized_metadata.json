@@ -552,6 +552,11 @@
 		],
 		"devdoc": {
 			"details": "Still need to implement ERC1155 functionality. ",
+			"events": {
+				"ERC20WithdrawRequested(address,uint256,uint256)": {
+					"details": "Not sure if additional or less information should be made available. Include sender?"
+				}
+			},
 			"kind": "dev",
 			"methods": {
 				"onERC721Received(address,address,uint256,bytes)": {
@@ -586,10 +591,10 @@
 	},
 	"sources": {
 		"governance/Democratized.sol": {
-			"keccak256": "0x55cab59d149edcf64abc87fcea510b71bec45f0c2ba22941e01fcc0f43c74c11",
+			"keccak256": "0xce74a7fbf573eaa9cdec9c39c5b08173902e51af380059b304e721939627722b",
 			"urls": [
-				"bzz-raw://60d1dc63e2d662aeece6245c7dd1ddb0d89663faa75149bf204e08272c9bd62b",
-				"dweb:/ipfs/Qmaf18chtU1LbDqyDC8mC1NKLzNzuj3H141Zmkkrscy4r7"
+				"bzz-raw://6cffc1dbb1e1d146f4dbb73cebfbb317a2acc86673bccfc944cc999d11194291",
+				"dweb:/ipfs/QmRveyhqvRHaXJBSVTzJgwu3E6GaT491opJ2eu54tTHnhT"
 			]
 		},
 		"governance/VotingMachine.sol": {
