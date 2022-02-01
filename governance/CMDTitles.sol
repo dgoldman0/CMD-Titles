@@ -40,7 +40,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
 
   mapping (uint8 => Rank) ranks;
 
-  constructor() ERC721("CMD Title", "TTL") Democratized(address(this)) public {
+  constructor() ERC721("CMD Title", "TTL") Democratized(this) VotingMachine(this) public {
     // Initial settings for ranks
     _creator = msg.sender;
     uint8 i;
@@ -72,6 +72,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     require(rank < 13, "No such rank!");
     return ranks[rank].mintCost;
   }
+  /// @dev Should even this be changable by vote? Maybe.
   function _baseURI() internal view override virtual returns (string memory) {
     return "https://titles.wrldcoin.io/";
   }
@@ -200,12 +201,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
       _mintGodTitle(request.receiver);
     }
   }
-  /// @dev I need to figure out how to ensure that it works with either 721 or 1155
-  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155Receiver, ERC721Enumerable) returns (bool) {
-      return interfaceId == type(IERC721).interfaceId
-          || interfaceId == type(IERC721Metadata).interfaceId
-          || interfaceId == type(IERC721Enumerable).interfaceId
-          || interfaceId == type(IERC1155).interfaceId
-          || super.supportsInterface(interfaceId);
-    }
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Enumerable, Democratized) returns (bool) {
+    return Democratized.supportsInterface(interfaceId);
+  }
 }

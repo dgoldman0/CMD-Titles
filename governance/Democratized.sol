@@ -3,6 +3,8 @@ pragma solidity ^0.8.0;
 import "./VotingMachine.sol";
 import "../openZeppelin/ERC20.sol";
 import "../openZeppelin/ERC721.sol";
+import "../openZeppelin/IERC721Enumerable.sol";
+import "../openZeppelin/IERC721Metadata.sol";
 import "../openZeppelin/ERC1155.sol";
 import "../openZeppelin/ERC721Holder.sol";
 import "../openZeppelin/ERC1155Holder.sol";
@@ -70,8 +72,8 @@ contract Democratized is ERC721Holder, ERC1155Holder {
   event ERC1155WithdrawExecuted(address token, uint tokenID, uint amt, uint requestID);
   event ERC1155WithdrawExecuted(address token, uint[] tokenIDs, uint[] amts, uint requestID);
 
-  constructor(address _machineAddr) {
-    voting = VotingMachine(_machineAddr);
+  constructor(VotingMachine _machineAddr) {
+    voting = _machineAddr;
   }
   
   function _requestETHWithdraw(uint amt, uint threshold, address payable receiver, uint startTime, uint endTime) internal returns (uint propositionID) {
@@ -163,6 +165,14 @@ contract Democratized is ERC721Holder, ERC1155Holder {
     ERC1155 token = ERC1155(request.token);
     token.safeBatchTransferFrom(address(this), request.receiver, request.tokenIDs, request.amts, "");
   }  
+  /// @dev I need to figure out how to ensure that it works with either 721 or 1155
+  function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+    return interfaceId == type(IERC721).interfaceId
+      || interfaceId == type(IERC721Metadata).interfaceId
+      || interfaceId == type(IERC721Enumerable).interfaceId
+      || interfaceId == type(IERC1155).interfaceId
+      || super.supportsInterface(interfaceId);
+  }
 
   /// @dev Don't forget to add fallback functions to allow ETH
 }
@@ -170,7 +180,7 @@ contract Democratized is ERC721Holder, ERC1155Holder {
 // Will preset Voting Machine address but should I allow change of voting machine by vote too?
 // Note: Until final testing is done, the addresses will be the contracts on TESTNET!
 contract DefaultDemocratized is Democratized {
-  constructor() Democratized(address(0x76C55cE393dbeBe2d2BD531892a586ed628A196B)) {
+  constructor() Democratized(VotingMachine(0x76C55cE393dbeBe2d2BD531892a586ed628A196B)) {
 
   }
 }

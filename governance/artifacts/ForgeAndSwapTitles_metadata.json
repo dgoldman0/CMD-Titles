@@ -6,7 +6,18 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name_",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "symbol_",
+						"type": "string"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -58,25 +69,6 @@
 					}
 				],
 				"name": "ApprovalForAll",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "minter",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "CMDClaim",
 				"type": "event"
 			},
 			{
@@ -437,25 +429,6 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "titleID",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "minter",
-						"type": "address"
-					}
-				],
-				"name": "TitleMinted",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "from",
@@ -526,19 +499,6 @@
 				],
 				"name": "approve",
 				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "availableCMD",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "available",
-						"type": "uint256"
-					}
-				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -649,19 +609,6 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "requestID",
-						"type": "uint256"
-					}
-				],
-				"name": "executeGodMint",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
 						"name": "requestID_",
 						"type": "uint256"
 					}
@@ -692,19 +639,6 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "requestID",
-						"type": "uint256"
-					}
-				],
-				"name": "executeRankChange",
-				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -847,29 +781,23 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint8",
-						"name": "rank",
-						"type": "uint8"
-					}
-				],
-				"name": "mintCost",
+				"inputs": [],
+				"name": "mintTitle",
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "cost",
+						"name": "titleID",
 						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_parentID",
+						"name": "_originalID",
 						"type": "uint256"
 					}
 				],
@@ -877,7 +805,7 @@
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "id",
+						"name": "titleID",
 						"type": "uint256"
 					}
 				],
@@ -1070,25 +998,6 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "tokenID_",
-						"type": "uint256"
-					}
-				],
-				"name": "rankOf",
-				"outputs": [
-					{
-						"internalType": "uint8",
-						"name": "rank",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
 						"name": "amt",
 						"type": "uint256"
 					},
@@ -1112,84 +1021,12 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint8",
-						"name": "amt",
-						"type": "uint8"
-					},
-					{
-						"internalType": "address",
-						"name": "receiver",
-						"type": "address"
-					}
-				],
-				"name": "requestGodMint",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "requestID",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint16",
 						"name": "loops_",
 						"type": "uint16"
 					}
 				],
 				"name": "requestLoopChange",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "requestID",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint8",
-						"name": "rank",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint64",
-						"name": "limit",
-						"type": "uint64"
-					}
-				],
-				"name": "requestMintLimitChange",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "propositionID",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint8",
-						"name": "rank",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint256",
-						"name": "cost",
-						"type": "uint256"
-					}
-				],
-				"name": "requestRankCostChange",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -1399,19 +1236,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "addr_",
-						"type": "address"
-					}
-				],
-				"name": "setCMD",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "addr",
 						"type": "address"
 					}
@@ -1588,23 +1412,9 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "withdrawCMD",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amt",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
-			"details": "withdrawCMD balance (clearly not calculating right there)",
 			"kind": "dev",
 			"methods": {
 				"approve(address,uint256)": {
@@ -1659,6 +1469,7 @@
 					"details": "See {IERC721-transferFrom}."
 				}
 			},
+			"title": "A contract to allow using CMD Titles to mint local control titles as an alternative to needing standard governance.",
 			"version": 1
 		},
 		"userdoc": {
@@ -1669,7 +1480,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"governance/CMDTitles.sol": "CMDTitles"
+			"governance/ForgeAndSwapTitles.sol": "ForgeAndSwapTitles"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -1683,18 +1494,18 @@
 		"remappings": []
 	},
 	"sources": {
-		"governance/CMDTitles.sol": {
-			"keccak256": "0xbd7eb4ae5d2ed89f84a2e0affff5bc976bf010e6da1843ba1dc9962ca76e175c",
-			"urls": [
-				"bzz-raw://3384fc588e5f1f9a21ef9008b1f86ef13bbe8a37951bc2f69d012529d4c59efb",
-				"dweb:/ipfs/QmbfdCnx1Esaa1Xmw9Lyh99xieXTRMiDk1JFUezugMPoBT"
-			]
-		},
 		"governance/Democratized.sol": {
 			"keccak256": "0x2831425b9b771858ec725c6ff7822c9a0cb74fbebf14bca92b0e76d56831c669",
 			"urls": [
 				"bzz-raw://46dbecd8a2ecd9e357101295271415ea1fb939a33b877fb89d8db1ff652bd1f5",
 				"dweb:/ipfs/QmQEJ9Va5bL4Hq6WLGy5TRTUeFNsMQLdW2SfUaBHVpCiQw"
+			]
+		},
+		"governance/ForgeAndSwapTitles.sol": {
+			"keccak256": "0x685869bea7e1b5ffd2a0e8e1737c49d5a4f767ac9542e3d6c54641797f324e62",
+			"urls": [
+				"bzz-raw://665513622a084ab98ee2f80e01954d8b44674d8767d122ca58feff7d787343bb",
+				"dweb:/ipfs/Qmea8V8naMYCYTAyLpBeJHg8yA73sMxsBoFtAPQan4gAKq"
 			]
 		},
 		"governance/VotingMachine.sol": {

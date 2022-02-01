@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "votingRights_",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -360,7 +366,6 @@
 			}
 		],
 		"devdoc": {
-			"details": "Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.Should I add the ability to rescind propositions? Probably not, since it could be abused.But it might be good for proposition execution to have an expiration time.",
 			"kind": "dev",
 			"methods": {},
 			"stateVariables": {
@@ -393,10 +398,10 @@
 	},
 	"sources": {
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x89edb38ad22588d1b985b5f3d14cbe0194f5231a7851cc092c4c26307224ab6c",
+			"keccak256": "0x8af23aa187786c96bfed26e24689ddec0252e61e81336d998b6c83a6d9403362",
 			"urls": [
-				"bzz-raw://a3e4621809285831593745d122a677456ddad7fad9aa2e9caf22b8ca53a318d9",
-				"dweb:/ipfs/QmSuoXhryLL1ey2BeqbRhftuRSy5PCYzVytNuhSQBjiAwR"
+				"bzz-raw://dc6e021bb6e542da022280c89b7a095190a0a277735201b27fb6868af66ae19e",
+				"dweb:/ipfs/QmXvgh4SXFs5btyv75K2i3g1sjh26x2qE7UW5Qnw3nL2Ma"
 			]
 		},
 		"governance/VotingRights.sol": {

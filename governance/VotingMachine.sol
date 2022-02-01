@@ -43,7 +43,8 @@ contract VotingMachine {
       }
       _; // continue executing rest of method body
   }
-  constructor() {
+  constructor(VotingRights votingRights_) {
+    rightsContract = votingRights_;
     creator = msg.sender;
   }
   function setVotingRightsContract(address addr) public isCreator {

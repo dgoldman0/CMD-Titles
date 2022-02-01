@@ -610,7 +610,7 @@
 					"details": "External versions which default to 50% simple vote"
 				},
 				"supportsInterface(bytes4)": {
-					"details": "See {IERC165-supportsInterface}."
+					"details": "I need to figure out how to ensure that it works with either 721 or 1155"
 				}
 			},
 			"version": 1
@@ -638,17 +638,17 @@
 	},
 	"sources": {
 		"governance/Democratized.sol": {
-			"keccak256": "0x5e10a35ca016c66ce4b8ab947abd72715869d932efee873ede6c7add238b6c83",
+			"keccak256": "0x2831425b9b771858ec725c6ff7822c9a0cb74fbebf14bca92b0e76d56831c669",
 			"urls": [
-				"bzz-raw://bd622aaffb97e3e36230f458f118bcadf6c5fcfa083efc7c74c0e83bec3754ca",
-				"dweb:/ipfs/QmYX6tnrchB3ndZb7teEonGNDvmFRjMrues9X8wfntLoYZ"
+				"bzz-raw://46dbecd8a2ecd9e357101295271415ea1fb939a33b877fb89d8db1ff652bd1f5",
+				"dweb:/ipfs/QmQEJ9Va5bL4Hq6WLGy5TRTUeFNsMQLdW2SfUaBHVpCiQw"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x7f77f1228093ae01074e5fa21eff51696bd63ccd4c5abb0fe9ed489b654971c1",
+			"keccak256": "0xc7697ed3e410bd493dee9c7fba0af3adee66e240a2aec908e79dcbe00e5e7f5e",
 			"urls": [
-				"bzz-raw://19df713046523932f23fd1cbf85f84098b7451602b60513753621dcde9614fa3",
-				"dweb:/ipfs/QmfWUoz5hRSdmo9G96nYznMpTWcV39pQuaBEFcsQujgq5u"
+				"bzz-raw://32890f110a2b16a504eab3b39c1ade64372da5892c3abd609b31eb6fd09327d3",
+				"dweb:/ipfs/QmWjzppZQEwSv7jMHmYwuKaeFCNg7wFhUEmLReNZSTUosJ"
 			]
 		},
 		"governance/VotingRights.sol": {
@@ -784,6 +784,14 @@
 			"urls": [
 				"bzz-raw://11dbec61bab3d8876df013757ae9e54f70a4901fe8115fabff1e33c36e347b98",
 				"dweb:/ipfs/QmWRKN35GMhoVVkoSgRc2mWLXigMZNSTwJoGdD51g4H4dX"
+			]
+		},
+		"openZeppelin/IERC721Enumerable.sol": {
+			"keccak256": "0x07bcd7917a575fa06ac898cb62356f1eddd103d126dacfdfe8627999ea519ae7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://52daa483b024547d8acf7c86c6dba82fe5e10701a8afd8f875a14d8acfae5b65",
+				"dweb:/ipfs/QmUUFUDP2tdyWkSGdW37daWdhSWZWjrz1HPBgseES5aHi7"
 			]
 		},
 		"openZeppelin/IERC721Metadata.sol": {
