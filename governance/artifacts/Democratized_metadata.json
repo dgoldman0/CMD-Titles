@@ -325,6 +325,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getVotingMachine",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "machine",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -643,17 +656,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 2000000
 		},
 		"remappings": []
 	},
 	"sources": {
 		"governance/Democratized.sol": {
-			"keccak256": "0xe4e875ea2735fa8c81b2f4437c5bf6b97be380a16126ad4143fb54356f0c9ebc",
+			"keccak256": "0x3de22e1b47bc55e9d727c01783a4d7f7504b52a4e59cfe2ffa70b8c35c026324",
 			"urls": [
-				"bzz-raw://5ab07cb9630c658ce02360213612860d53ef9acaaaac9d085923d578bf1d23a9",
-				"dweb:/ipfs/QmYLzjsmuzcgrW47xn1RnhGSmSw769kWz7pyHxMdSENji3"
+				"bzz-raw://595451d52632aa02667bb4eca7e67b177b3846802888cc922ad788524eadbaaf",
+				"dweb:/ipfs/QmSdfnUXjrV9xqTBrgaKn5q4NhAvTPLjSHti7BfnjCXoWS"
 			]
 		},
 		"governance/VotingMachine.sol": {

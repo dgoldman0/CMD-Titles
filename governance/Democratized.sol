@@ -75,6 +75,9 @@ contract Democratized is ERC721Holder, ERC1155Holder {
   constructor(VotingMachine machine_) {
     voting = machine_;
   }
+  function getVotingMachine() public view returns (address machine) {
+    return address(voting);
+  }
   function _requestETHWithdraw(uint amt, uint threshold, address payable receiver, uint startTime, uint endTime) internal returns (uint propositionID) {
     uint requestID = ethRequestCount;
     ethRequestCount++;
