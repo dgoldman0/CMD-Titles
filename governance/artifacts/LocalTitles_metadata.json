@@ -1495,7 +1495,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"governance/ForgeAndSwapTitles.sol": "ForgeAndSwapTitles"
+			"governance/ForgeAndSwapTitles.sol": "LocalTitles"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -1524,10 +1524,10 @@
 			]
 		},
 		"governance/ForgeAndSwapTitles.sol": {
-			"keccak256": "0x26caa98c9d97c375e2947d68c1b21e7eb810e215c02aa7da7a1d15bac1e067fb",
+			"keccak256": "0x8dd0b4fdec352f4f63b6029ef6c9761018e344c382eb3f21d91b74eb7136f6ff",
 			"urls": [
-				"bzz-raw://76dc33b81102d7a016e41dbd2c4cecc4963a80ef2c111e185f5daa69e95fe7c4",
-				"dweb:/ipfs/QmPQN3QZzpTfs7JYLVXzbqqXk1PZSZ4HxWTUW81ZB9tH74"
+				"bzz-raw://beaedb50c98ec5fdf9014843e01303e655f25c0f1cb07fe17fa03e571e01769e",
+				"dweb:/ipfs/QmZFTtRqGEJ33VfhoGSBVKXeJqwMUWx6AWn2Rc5LUFFuZ6"
 			]
 		},
 		"governance/VotingMachine.sol": {

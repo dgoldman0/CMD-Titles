@@ -1,22 +1,25 @@
 pragma solidity ^0.8.0;
 import "../openZeppelin/Address.sol";
 import "../openZeppelin/ERC721Enumerable.sol";
+import "./CMDTitles.sol";
 import "./Democratized.sol";
 import "./VotingRights.sol";
 import "./VotingMachine.sol";
 
 /// @title A contract to allow using CMD Titles to mint local control titles as an alternative to needing standard governance.
-contract ForgeAndSwapTitles is ERC721Enumerable, VotingRights, Democratized, VotingMachine {
+contract LocalTitles is ERC721Enumerable, VotingRights, Democratized, VotingMachine {
 	using Address for address;
   uint _titleCount; 
-  ERC721 _baseTitles; // The address of the base titles (CMDTitles)
+  CMDTitles _baseTitles; // The address of the base titles (CMDTitles)
   ERC20 _mintResource;
   uint _mintPrice;
   mapping (uint => bool) _titleUsed; // To check whether the CMD title was already used to mint a local title.
   mapping (uint => uint) _titleMintedBy; // To check which CMD title minted the local title. Will be 0 if minted using resource.
 
-  constructor(string memory name_, string memory symbol_) ERC721(name_, symbol_) Democratized(this) VotingMachine(this) {
-
+  constructor(string memory name_, string memory symbol_, CMDTitles cmd_, ERC20 resource_, uint price_) ERC721(name_, symbol_) Democratized(this) VotingMachine(this) {
+    _baseTitles = cmd_;
+    _mintResource = resource_;
+    _mintPrice = price_;
   }
   function getVotingWeight(uint titleID) external view override returns (uint weight) {
     return 1;
