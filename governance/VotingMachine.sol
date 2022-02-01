@@ -1,9 +1,6 @@
 pragma solidity ^0.8.0;
 import "./VotingRights.sol";
 
-/// @dev Should add the ability to set what percentage of the electorate is needed, and maybe even have a complex voting scheme.
-/// @dev Should I add the ability to rescind propositions? Probably not, since it could be abused.
-/// @dev But it might be good for proposition execution to have an expiration time.
 contract VotingMachine {
   VotingRights rightsContract;
   address creator;
@@ -54,7 +51,7 @@ contract VotingMachine {
     rightsContract = VotingRights(addr);
   }
   /// @dev Default to none because we're testing, but we'll set the initial value to something when live.
-  uint16 loops = 1;
+  uint16 loops = 0;
   struct LoopChangeRequest {
     uint16 val;
     uint256 propID;
@@ -81,8 +78,6 @@ contract VotingMachine {
     loops = request.val;
   }
   function addProposition(address sender, uint threshold, uint startTime, uint endTime) public returns (uint propositionID) {
-    /// @dev That propositions are free to implement could be abused. This loop adds some cost.
-    /// @dev Even this value should be set by a vote. Though still with some limit to adjust cost for changing BNB.
     /// @dev The reason to use a loop rather than cost some token is because the chain's value should benefit, not us.
     for (uint i = 0; i < loops; i++) {}
     uint propID = propositionCount;
