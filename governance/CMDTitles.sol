@@ -6,9 +6,6 @@ import "../openZeppelin/ERC721Enumerable.sol";
 import "./VotingRights.sol";
 import "./Democratized.sol";
 
-/// @dev Might be interesting to create a secondary system that allows swapping provincial titles from CMD Titles for a more local voting title so that the local titles can be minted with a different asset OR through swapping. Essentially, it's like token forge only forging through swapping titles.
-/// @dev This approach might be nice if a project wants to interface with the global democratized system but also have its own voting titles.
-/// @dev Might take this apporach for each of the forgable tokens actually so that there's some disconnect but some overlap too.
 
 /// @dev withdrawCMD balance (clearly not calculating right there)
 contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {

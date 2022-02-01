@@ -4,7 +4,8 @@ import "./IERC20Forgable.sol";
 import "../openZeppelin/Address.sol";
 import "../governance/Democratized.sol";
 
-// ERC20Forgable token that allows for additional minting resources and with built in governance control. 
+/// @title An ERC20 token standard that allows minting the token upon receiving ERC20 resource tokens
+
 /// @dev It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.
 contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     struct ResourceToken {
