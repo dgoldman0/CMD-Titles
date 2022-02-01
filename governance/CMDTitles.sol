@@ -54,9 +54,9 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
       _mintGodTitle(msg.sender);
     }
   }
-  function setCMD(address addr_) external {
+  function setCMD(ERC20 cmd_) external {
     require(msg.sender == _creator, "Not creator!");
-    if (address(cmd) == address(0)) cmd = ERC20(addr_);
+    if (address(cmd) == address(0)) cmd = cmd_;
   }
   function getVotingWeight(uint titleID) external view override returns (uint weight) {
     if (titles[titleID].rank == 12) return 1;

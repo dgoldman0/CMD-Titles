@@ -14,6 +14,7 @@ contract KemToken is ERC20, Democratized {
         CMDTitles titles = new CMDTitles();
         CMDToken cmd = new CMDToken(titles, this);
         titles.setCMD(cmd);
+        voting = titles;
         _mint(msg.sender, 100000000000000000000000000);
     }
     // Goverance

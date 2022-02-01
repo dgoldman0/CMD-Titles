@@ -1398,8 +1398,8 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "addr_",
+						"internalType": "contract ERC20",
+						"name": "cmd_",
 						"type": "address"
 					}
 				],
@@ -1684,17 +1684,17 @@
 	},
 	"sources": {
 		"governance/CMDTitles.sol": {
-			"keccak256": "0xbd7eb4ae5d2ed89f84a2e0affff5bc976bf010e6da1843ba1dc9962ca76e175c",
+			"keccak256": "0x6bf05c36a347e45c3ee498bdea27765e23949e8ae7cd4484af87fa0458e278ec",
 			"urls": [
-				"bzz-raw://3384fc588e5f1f9a21ef9008b1f86ef13bbe8a37951bc2f69d012529d4c59efb",
-				"dweb:/ipfs/QmbfdCnx1Esaa1Xmw9Lyh99xieXTRMiDk1JFUezugMPoBT"
+				"bzz-raw://670097862b748918e2884d3f8650ddf5457a920750d54396174820ab1d45ceae",
+				"dweb:/ipfs/QmT57PudzuYuyJrerT1zqGweS1xkZZgyHkzTwiEVuwJQwG"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0x2831425b9b771858ec725c6ff7822c9a0cb74fbebf14bca92b0e76d56831c669",
+			"keccak256": "0xe4e875ea2735fa8c81b2f4437c5bf6b97be380a16126ad4143fb54356f0c9ebc",
 			"urls": [
-				"bzz-raw://46dbecd8a2ecd9e357101295271415ea1fb939a33b877fb89d8db1ff652bd1f5",
-				"dweb:/ipfs/QmQEJ9Va5bL4Hq6WLGy5TRTUeFNsMQLdW2SfUaBHVpCiQw"
+				"bzz-raw://5ab07cb9630c658ce02360213612860d53ef9acaaaac9d085923d578bf1d23a9",
+				"dweb:/ipfs/QmYLzjsmuzcgrW47xn1RnhGSmSw769kWz7pyHxMdSENji3"
 			]
 		},
 		"governance/VotingMachine.sol": {
