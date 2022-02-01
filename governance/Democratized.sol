@@ -71,11 +71,10 @@ contract Democratized is ERC721Holder, ERC1155Holder {
   event ERC721WithdrawExecuted(address token, uint tokenID, uint requestID);
   event ERC1155WithdrawExecuted(address token, uint tokenID, uint amt, uint requestID);
   event ERC1155WithdrawExecuted(address token, uint[] tokenIDs, uint[] amts, uint requestID);
-
-  constructor(VotingMachine _machineAddr) {
-    voting = _machineAddr;
-  }
   
+  constructor(VotingMachine machine_) {
+    voting = machine_;
+  }
   function _requestETHWithdraw(uint amt, uint threshold, address payable receiver, uint startTime, uint endTime) internal returns (uint propositionID) {
     uint requestID = ethRequestCount;
     ethRequestCount++;
@@ -180,8 +179,7 @@ contract Democratized is ERC721Holder, ERC1155Holder {
 // Will preset Voting Machine address but should I allow change of voting machine by vote too?
 // Note: Until final testing is done, the addresses will be the contracts on TESTNET!
 contract DefaultDemocratized is Democratized {
-  constructor() Democratized(VotingMachine(0x76C55cE393dbeBe2d2BD531892a586ed628A196B)) {
-
+  constructor() Democratized(VotingMachine(address(0))) {
   }
 }
 

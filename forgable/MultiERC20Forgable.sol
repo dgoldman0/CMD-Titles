@@ -7,7 +7,7 @@ import "../governance/Democratized.sol";
 /// @title An ERC20 token standard that allows minting the token upon receiving ERC20 resource tokens
 
 /// @dev It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.
-contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
+abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
     struct ResourceToken {
         ERC20 tokenAddress;
         uint256 conversionRate;
@@ -25,8 +25,8 @@ contract MultiERC20Forgable is ERC20, IERC20Forgable, DefaultDemocratized {
     uint256 private _smithFee;
     mapping (address => bool) private _registered;
     
-    constructor(string memory name_, string memory symbol_, uint256 smithFee_, address resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
-        _resourceTokens[0] = ResourceToken(ERC20(resourceToken_), rate_, limit_, 0, true);
+    constructor(string memory name_, string memory symbol_, uint256 smithFee_, ERC20 resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
+        _resourceTokens[0] = ResourceToken(resourceToken_, rate_, limit_, 0, true);
         _resourceTokenCount = 1;
         _smithFee = smithFee_;
         _mint(msg.sender, initial_);

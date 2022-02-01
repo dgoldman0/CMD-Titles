@@ -2,10 +2,18 @@ pragma solidity ^0.8.0;
 
 import "../openZeppelin/ERC20.sol";
 import "../governance/Democratized.sol";
+import "../governance/CMDTitles.sol";
+import "./CMDToken.sol";
 
-contract KemToken is ERC20, DefaultDemocratized {
-    constructor() ERC20("Kemet", "KEM") {
+// I want to change the construction paradigm and get rid of DefaultDemocratized and when I launch KemToken it will 
+// initialize CMDTitles, etc. 
+
+contract KemToken is ERC20, Democratized {
+    constructor() ERC20("Kemet", "KEM") Democratized(VotingMachine(address(0))) {
         // Initially mint 100M kem
+        CMDTitles titles = new CMDTitles();
+        CMDToken cmd = new CMDToken(titles, this);
+        titles.setCMD(cmd);
         _mint(msg.sender, 100000000000000000000000000);
     }
     // Goverance

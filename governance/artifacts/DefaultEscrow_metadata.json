@@ -644,10 +644,10 @@
 	},
 	"sources": {
 		"governance/Democratized.sol": {
-			"keccak256": "0x2831425b9b771858ec725c6ff7822c9a0cb74fbebf14bca92b0e76d56831c669",
+			"keccak256": "0xe4e875ea2735fa8c81b2f4437c5bf6b97be380a16126ad4143fb54356f0c9ebc",
 			"urls": [
-				"bzz-raw://46dbecd8a2ecd9e357101295271415ea1fb939a33b877fb89d8db1ff652bd1f5",
-				"dweb:/ipfs/QmQEJ9Va5bL4Hq6WLGy5TRTUeFNsMQLdW2SfUaBHVpCiQw"
+				"bzz-raw://5ab07cb9630c658ce02360213612860d53ef9acaaaac9d085923d578bf1d23a9",
+				"dweb:/ipfs/QmYLzjsmuzcgrW47xn1RnhGSmSw769kWz7pyHxMdSENji3"
 			]
 		},
 		"governance/VotingMachine.sol": {

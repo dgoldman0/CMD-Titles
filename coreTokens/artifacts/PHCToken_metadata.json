@@ -6,6 +6,17 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [
+					{
+						"internalType": "contract CMDTitles",
+						"name": "cmd_",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -1411,7 +1422,6 @@
 			}
 		],
 		"devdoc": {
-			"details": "It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.",
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -1466,11 +1476,6 @@
 					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`."
 				}
 			},
-			"stateVariables": {
-				"_resourceTokenCount": {
-					"details": "We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!"
-				}
-			},
 			"version": 1
 		},
 		"userdoc": {
@@ -1481,7 +1486,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"forgable/MultiERC20Forgable.sol": "MultiERC20Forgable"
+			"coreTokens/phc.sol": "PHCToken"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -1495,6 +1500,13 @@
 		"remappings": []
 	},
 	"sources": {
+		"coreTokens/phc.sol": {
+			"keccak256": "0x0d9835e3b597bad3459e1d05527e0c7bd20b232b103e6f28fde6b89daf4fc878",
+			"urls": [
+				"bzz-raw://0eebb5e626b42266123058fbc60b7ef4773bb381fd342aca5ed7147f0fe4b24d",
+				"dweb:/ipfs/QmVmVBxRocd4qfMMj5dwVNRBgSTQZ36uaESc6huRTMEzvs"
+			]
+		},
 		"forgable/IERC20Forgable.sol": {
 			"keccak256": "0x95761765ffe2750d01c29b7dc8f31e52b4f429ca302ce0c1aaf12d6d84829565",
 			"urls": [
@@ -1503,10 +1515,17 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0xc21c13f7981204c08c833cc6b1720a9b519597f72154c0421ab4caa438f11b86",
+			"keccak256": "0x9d419cdc8a077509983e1e07cac05cbfd7a9ea295deaffbcbfadf792f8ad7a6e",
 			"urls": [
-				"bzz-raw://5273c86a04b81e3bbf1500d109fb50e0a39c82181ab1d27723d0ae760bd35085",
-				"dweb:/ipfs/Qmekht9PKtWU4cLN4uNsB4MqmxPqnGYTy5nKtuhi7CrGPg"
+				"bzz-raw://e8ba50dcbd3daa166404883eb017a5ad918c4965c7f21fbc8ceecc2a729f6a8b",
+				"dweb:/ipfs/Qmbm3JL8CAi1yaFDpTwr9byMvDkqnbCxXnEZR3c6kfFSqL"
+			]
+		},
+		"governance/CMDTitles.sol": {
+			"keccak256": "0xbd7eb4ae5d2ed89f84a2e0affff5bc976bf010e6da1843ba1dc9962ca76e175c",
+			"urls": [
+				"bzz-raw://3384fc588e5f1f9a21ef9008b1f86ef13bbe8a37951bc2f69d012529d4c59efb",
+				"dweb:/ipfs/QmbfdCnx1Esaa1Xmw9Lyh99xieXTRMiDk1JFUezugMPoBT"
 			]
 		},
 		"governance/Democratized.sol": {
@@ -1514,6 +1533,13 @@
 			"urls": [
 				"bzz-raw://46dbecd8a2ecd9e357101295271415ea1fb939a33b877fb89d8db1ff652bd1f5",
 				"dweb:/ipfs/QmQEJ9Va5bL4Hq6WLGy5TRTUeFNsMQLdW2SfUaBHVpCiQw"
+			]
+		},
+		"governance/LocalTitles.sol": {
+			"keccak256": "0x8dd0b4fdec352f4f63b6029ef6c9761018e344c382eb3f21d91b74eb7136f6ff",
+			"urls": [
+				"bzz-raw://beaedb50c98ec5fdf9014843e01303e655f25c0f1cb07fe17fa03e571e01769e",
+				"dweb:/ipfs/QmZFTtRqGEJ33VfhoGSBVKXeJqwMUWx6AWn2Rc5LUFFuZ6"
 			]
 		},
 		"governance/VotingMachine.sol": {
@@ -1592,6 +1618,14 @@
 			"urls": [
 				"bzz-raw://6e920cbf0a15042c2e2dedb09a4380bc7f3bb223d49fbd023eded4b280f6c28c",
 				"dweb:/ipfs/QmYWEPwUYP7pUukRrH2SBckxxuyVSPUUKQdFTtTbZXwkNu"
+			]
+		},
+		"openZeppelin/ERC721Enumerable.sol": {
+			"keccak256": "0xad1c4813442542df96c51c15a1a58c88016ca3fcd7d9e80d9c0c66e3a9d21391",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9e6f8cab8df218a3acce0c85be7e6c35f4dd826fa7bd6ac02e4c1a0abfe7d779",
+				"dweb:/ipfs/QmczsdBCG3zSwcmMKY5LXktuQKgYj96xpZH16bubRoFmCn"
 			]
 		},
 		"openZeppelin/ERC721Holder.sol": {
