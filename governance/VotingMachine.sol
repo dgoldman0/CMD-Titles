@@ -36,7 +36,7 @@ contract VotingMachine {
   mapping (uint => uint) votesForProp;
   mapping (uint => uint) votesAgainstProp;
   mapping (uint => mapping (uint => bool)) voted; // Stores whether a voter has voted for a given proposition.
- 
+
   event NewProposition(uint id, address sender, address democratized, uint threshold, uint startTime, uint endTime);
   event PropositionExecuted(uint propositionID, address executedBy);
   event NewVote(uint id, address votingAddress, uint voterID, uint propositionID, uint propositionVoteID, bool vote, uint weight);
@@ -54,7 +54,7 @@ contract VotingMachine {
     rightsContract = VotingRights(addr);
   }
   /// @dev Default to none because we're testing, but we'll set the initial value to something when live.
-  uint16 loops = 1;  
+  uint16 loops = 1;
   struct LoopChangeRequest {
     uint16 val;
     uint256 propID;
@@ -112,7 +112,40 @@ contract VotingMachine {
     } else votesAgainstProp[propositionID] += weight;
 
     emit NewVote(voteID, msg.sender, voterID, propositionID, propVoteID, vote, weight);
+    return voteID;
   }
+
+  // Probably absurdly expensive!
+  function batchCastVotes(uint propositionID, uint[] memory voterIDs, bool vote) public returns (uint[] memory voteIDs) {
+    uint[] memory voteIDs = new uint[](voterIDs.length);
+    for (uint i = 0; i < voterIDs.length; i++) {
+      uint voterID = voterIDs[i];
+      require(!voted[propositionID][voterID], "This voter has already cast their vote for the given proposition.");
+      uint weight = rightsContract.getVotingWeight(voterID);
+      require(weight > 0, "This voter has no voting weight.");
+      require(rightsContract.hasFiduciaryPower(msg.sender, voterID), "The sender does not have power to vote under this ID.");
+      voted[propositionID][voterID] = true;
+      Proposition storage prop = propositions[propositionID];
+      require(prop.startTime <= block.timestamp && block.timestamp < prop.endTime, "Inactive proposition.");
+
+      uint voteID = voteCount;
+      voteCount++;
+      uint propVoteID = propVoteCount[propositionID];
+      propVoteCount[propositionID]++;
+      votes[voteID] = Vote(voteID, msg.sender, voterID, propositionID, propVoteID, vote, weight);
+      propVotes[propositionID][propVoteID] = votes[voteID];
+
+      if (vote) {
+        votesForProp[propositionID] += weight;
+      } else votesAgainstProp[propositionID] += weight;
+
+      emit NewVote(voteID, msg.sender, voterID, propositionID, propVoteID, vote, weight);
+
+      voteIDs[i] = voteID;
+    }
+    return voteIDs;
+  }
+
   function propositionOpen(uint propositionID) public view returns (bool open) {
     return block.timestamp < propositions[propositionID].endTime;
   }
