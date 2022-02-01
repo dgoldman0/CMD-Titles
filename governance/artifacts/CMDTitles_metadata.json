@@ -309,6 +309,136 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"name": "ETHWithdrawRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "democratized",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "threshold",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "startTime",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "endTime",
+						"type": "uint256"
+					}
+				],
+				"name": "NewProposition",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "votingAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "voterID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "propositionVoteID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "vote",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "weight",
+						"type": "uint256"
+					}
+				],
+				"name": "NewVote",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "executedBy",
+						"type": "address"
+					}
+				],
+				"name": "PropositionExecuted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
 						"name": "titleID",
 						"type": "uint256"
 					},
@@ -346,6 +476,40 @@
 				],
 				"name": "Transfer",
 				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "threshold",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endTime",
+						"type": "uint256"
+					}
+				],
+				"name": "addProposition",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -398,6 +562,64 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "voterIDs",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "vote",
+						"type": "bool"
+					}
+				],
+				"name": "batchCastVotes",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "voteIDs",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "voterID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "vote",
+						"type": "bool"
+					}
+				],
+				"name": "castVote",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "voteID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "electorateSize",
 				"outputs": [
@@ -418,8 +640,58 @@
 						"type": "uint256"
 					}
 				],
+				"name": "executeETHWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
 				"name": "executeGodMint",
 				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeLoopChange",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "executedBy",
+						"type": "address"
+					}
+				],
+				"name": "executeProposition",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -760,6 +1032,44 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"name": "propositionApproved",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "approval",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"name": "propositionOpen",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "open",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "tokenID_",
 						"type": "uint256"
 					}
@@ -778,6 +1088,30 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "amt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "requestETHWithdraw",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint8",
 						"name": "amt",
 						"type": "uint8"
@@ -789,6 +1123,25 @@
 					}
 				],
 				"name": "requestGodMint",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint16",
+						"name": "loops_",
+						"type": "uint16"
+					}
+				],
+				"name": "requestLoopChange",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -1058,6 +1411,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "setVotingRightsContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -1165,6 +1531,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"name": "totalVotes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "votes",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "from",
 						"type": "address"
@@ -1183,6 +1568,25 @@
 				"name": "transferFrom",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propositionID_",
+						"type": "uint256"
+					}
+				],
+				"name": "votingOpen",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "open",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -1223,6 +1627,9 @@
 				},
 				"ownerOf(uint256)": {
 					"details": "See {IERC721-ownerOf}."
+				},
+				"requestETHWithdraw(uint256,address)": {
+					"details": "External versions which default to 50% simple vote"
 				},
 				"safeTransferFrom(address,address,uint256)": {
 					"details": "See {IERC721-safeTransferFrom}."
@@ -1280,24 +1687,24 @@
 	},
 	"sources": {
 		"governance/CMDTitles.sol": {
-			"keccak256": "0xc3b4dd483343913f81f049a5faa2161f984005d9734282f644222e24dbb7ce43",
+			"keccak256": "0x3883d667e12387c6344cf6711e6564819471f4bfeaeef54a9efc48fd8e098c6e",
 			"urls": [
-				"bzz-raw://e0aac9e9dbef167bdafebcde6b9fd66c9eb9ec202938079e220067b0143fa230",
-				"dweb:/ipfs/QmPE9b7UAGV1mSW4YFxEjuEvwE17EfqMXu1k8ZEXQzxPiU"
+				"bzz-raw://3d7480025e1a357b24db8344f10ae573e573d098f80a0317278eb277b9e06a05",
+				"dweb:/ipfs/QmdBdhM9A4GDpy1ktmjNDQsw3ZdM524VBaG8h276YPai9T"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0xce74a7fbf573eaa9cdec9c39c5b08173902e51af380059b304e721939627722b",
+			"keccak256": "0x5e10a35ca016c66ce4b8ab947abd72715869d932efee873ede6c7add238b6c83",
 			"urls": [
-				"bzz-raw://6cffc1dbb1e1d146f4dbb73cebfbb317a2acc86673bccfc944cc999d11194291",
-				"dweb:/ipfs/QmRveyhqvRHaXJBSVTzJgwu3E6GaT491opJ2eu54tTHnhT"
+				"bzz-raw://bd622aaffb97e3e36230f458f118bcadf6c5fcfa083efc7c74c0e83bec3754ca",
+				"dweb:/ipfs/QmYX6tnrchB3ndZb7teEonGNDvmFRjMrues9X8wfntLoYZ"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x7f77f1228093ae01074e5fa21eff51696bd63ccd4c5abb0fe9ed489b654971c1",
+			"keccak256": "0x374118e688298b5391d5a8cd823645ed4a10b5cc4885328d1467eb7ceec8c5be",
 			"urls": [
-				"bzz-raw://19df713046523932f23fd1cbf85f84098b7451602b60513753621dcde9614fa3",
-				"dweb:/ipfs/QmfWUoz5hRSdmo9G96nYznMpTWcV39pQuaBEFcsQujgq5u"
+				"bzz-raw://e3e53189313cde0e130919da894c743c6a1a017152bd0f7b413a908dfdd155a3",
+				"dweb:/ipfs/Qmaza1onYAbcGicsEzzBpkrWLgrKLU93uQbNh3fAgr5yRY"
 			]
 		},
 		"governance/VotingRights.sol": {

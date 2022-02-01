@@ -8,7 +8,7 @@ import "./Democratized.sol";
 
 
 /// @dev withdrawCMD balance (clearly not calculating right there)
-contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
+contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratized {
 	using Address for address;
   ERC20 cmd;
   uint64 titleCount;
@@ -40,7 +40,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, DefaultDemocratized {
 
   mapping (uint8 => Rank) ranks;
 
-  constructor() ERC721("CMD Title", "TTL") public {
+  constructor() ERC721("CMD Title", "TTL") Democratized(address(this)) public {
     // Initial settings for ranks
     _creator = msg.sender;
     uint8 i;
