@@ -334,6 +334,56 @@
 				"inputs": [
 					{
 						"indexed": false,
+						"internalType": "address",
+						"name": "requestedBy",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "MintPriceChangeRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "executedBy",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "MintPriceChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
 						"internalType": "uint256",
 						"name": "id",
 						"type": "uint256"
@@ -637,6 +687,19 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "requestID_",
+						"type": "uint256"
+					}
+				],
+				"name": "executeMintChangeRequest",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "propositionID",
 						"type": "uint256"
 					},
@@ -722,6 +785,19 @@
 					{
 						"internalType": "address",
 						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getVotingMachine",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "machine",
 						"type": "address"
 					}
 				],
@@ -1042,6 +1118,25 @@
 					}
 				],
 				"name": "requestLoopChange",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newPrice_",
+						"type": "uint256"
+					}
+				],
+				"name": "requestMintPriceChange",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -1495,7 +1590,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"governance/ForgeAndSwapTitles.sol": "LocalTitles"
+			"governance/LocalTitles.sol": "LocalTitles"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -1503,38 +1598,38 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 2000000
 		},
 		"remappings": []
 	},
 	"sources": {
 		"governance/CMDTitles.sol": {
-			"keccak256": "0xbd7eb4ae5d2ed89f84a2e0affff5bc976bf010e6da1843ba1dc9962ca76e175c",
+			"keccak256": "0x6bf05c36a347e45c3ee498bdea27765e23949e8ae7cd4484af87fa0458e278ec",
 			"urls": [
-				"bzz-raw://3384fc588e5f1f9a21ef9008b1f86ef13bbe8a37951bc2f69d012529d4c59efb",
-				"dweb:/ipfs/QmbfdCnx1Esaa1Xmw9Lyh99xieXTRMiDk1JFUezugMPoBT"
+				"bzz-raw://670097862b748918e2884d3f8650ddf5457a920750d54396174820ab1d45ceae",
+				"dweb:/ipfs/QmT57PudzuYuyJrerT1zqGweS1xkZZgyHkzTwiEVuwJQwG"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0x2831425b9b771858ec725c6ff7822c9a0cb74fbebf14bca92b0e76d56831c669",
+			"keccak256": "0x4402a7eb95de22596a745d5c06b3e6c32b8057d5f77e45f64db64183aa6b67e6",
 			"urls": [
-				"bzz-raw://46dbecd8a2ecd9e357101295271415ea1fb939a33b877fb89d8db1ff652bd1f5",
-				"dweb:/ipfs/QmQEJ9Va5bL4Hq6WLGy5TRTUeFNsMQLdW2SfUaBHVpCiQw"
+				"bzz-raw://1fd3c78f36a3e60ec44fa61126a4d6226f946c7cd086e275962b0af3fcd0e734",
+				"dweb:/ipfs/QmVkXReCmh1NjQvKg14875e7DCVW8pWsD4rP4GyxvSwkHH"
 			]
 		},
-		"governance/ForgeAndSwapTitles.sol": {
-			"keccak256": "0x8dd0b4fdec352f4f63b6029ef6c9761018e344c382eb3f21d91b74eb7136f6ff",
+		"governance/LocalTitles.sol": {
+			"keccak256": "0xd7c644f8f0038d9d4a7d274afdf95bc569e9c5a9ef97cca377d52c42c6bd1b68",
 			"urls": [
-				"bzz-raw://beaedb50c98ec5fdf9014843e01303e655f25c0f1cb07fe17fa03e571e01769e",
-				"dweb:/ipfs/QmZFTtRqGEJ33VfhoGSBVKXeJqwMUWx6AWn2Rc5LUFFuZ6"
+				"bzz-raw://cb784cfd595f4405b0df0c45c8512b221e79cd6ae7d2ba2ac67edf7c7f1b9e7a",
+				"dweb:/ipfs/QmNymYj83frn7b4MMTKhhMpmw9Nfwb7ZT4y9NAiMywCFk4"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0xc7697ed3e410bd493dee9c7fba0af3adee66e240a2aec908e79dcbe00e5e7f5e",
+			"keccak256": "0x8e750760b00805aab3a4f321a8a1985ab9869b686b9c1d800728cd6caed58ec3",
 			"urls": [
-				"bzz-raw://32890f110a2b16a504eab3b39c1ade64372da5892c3abd609b31eb6fd09327d3",
-				"dweb:/ipfs/QmWjzppZQEwSv7jMHmYwuKaeFCNg7wFhUEmLReNZSTUosJ"
+				"bzz-raw://de983837f5ae15e390b588952f9a30af7dcb218297f759721b4a6c78262994ba",
+				"dweb:/ipfs/QmUyaodD8J1RC2gSRoy9NRH1NGYDhLZ2DJUEhJoHEue8sY"
 			]
 		},
 		"governance/VotingRights.sol": {

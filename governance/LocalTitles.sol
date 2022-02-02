@@ -16,11 +16,23 @@ contract LocalTitles is ERC721Enumerable, VotingRights, Democratized, VotingMach
   mapping (uint => bool) _titleUsed; // To check whether the CMD title was already used to mint a local title.
   mapping (uint => uint) _titleMintedBy; // To check which CMD title minted the local title. Will be 0 if minted using resource.
 
+  struct MintPriceChangeRequest {
+    uint newPrice;
+    uint propositionID;
+  }
+
+  mapping (uint => MintPriceChangeRequest) _mintPriceChangeRequests;
+  uint _mintPriceChangeRequestCNT;
+
+  event MintPriceChangeRequested(address requestedBy, uint requestID, uint price);
+  event MintPriceChanged(address executedBy, uint requestID, uint price);
+
   constructor(string memory name_, string memory symbol_, CMDTitles cmd_, ERC20 resource_, uint price_) ERC721(name_, symbol_) Democratized(this) VotingMachine(this) {
     _baseTitles = cmd_;
     _mintResource = resource_;
     _mintPrice = price_;
   }
+
   function getVotingWeight(uint titleID) external view override returns (uint weight) {
     return 1;
   }
@@ -29,6 +41,21 @@ contract LocalTitles is ERC721Enumerable, VotingRights, Democratized, VotingMach
   }
   function electorateSize() external view override returns (uint size) {
     return _titleCount;
+  }
+  function requestMintPriceChange(uint newPrice_) public returns (uint requestID) {
+    uint requestID = _mintPriceChangeRequestCNT;
+    uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+    _mintPriceChangeRequestCNT++;
+    _mintPriceChangeRequests[requestID] = MintPriceChangeRequest(newPrice_, propID);
+    emit MintPriceChangeRequested(msg.sender, propID, newPrice_);
+    return requestID;
+  }
+  function executeMintChangeRequest(uint requestID_) public {
+    require(requestID_ < _mintPriceChangeRequestCNT, "No such request.");
+    MintPriceChangeRequest memory request = _mintPriceChangeRequests[requestID_];
+    voting.executeProposition(request.propositionID, msg.sender);
+    _mintPrice = request.newPrice;
+    emit MintPriceChanged(msg.sender, requestID_, request.newPrice);
   }
   function mintTitle() public returns (uint titleID) {
     require(_mintResource.balanceOf(msg.sender) >= _mintPrice, "Insufficient funds for minting.");

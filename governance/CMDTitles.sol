@@ -10,6 +10,7 @@ import "./Democratized.sol";
 /// @dev withdrawCMD balance (clearly not calculating right there)
 contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratized {
 	using Address for address;
+
   ERC20 cmd;
   uint64 titleCount;
   mapping (uint8 => uint64) rankTitleCount;
@@ -40,12 +41,16 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
 
   mapping (uint8 => Rank) ranks;
 
+  string _currentURI;
+
   constructor() ERC721("CMD Title", "TTL") Democratized(this) VotingMachine(this) public {
     // Initial settings for ranks
     _creator = msg.sender;
     uint8 i;
     uint256 cost = 40960000000000000000000; // Cost of god title is 40960 CMD
     uint64 maxChildren = 10; // Only ten children titles per title
+    _currentURI = "https://titles.wrldcoin.io/";
+
     for (i = 0; i < 13; i++) {
       ranks[i] = Rank(cost, maxChildren);
       cost = cost / 2; // Each lower rank costs 1/2 the cost of the previous rank
@@ -68,13 +73,17 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
   function electorateSize() external view override returns (uint size) {
     return rankTitleCount[12];
   }
+  function totalSupplyByRank(uint8 rank_) public view returns (uint supply) {
+    require(rank_ < 13, "No such rank!");
+    return rankTitleCount[rank_];
+  }
   function mintCost(uint8 rank) public view returns (uint cost) {
     require(rank < 13, "No such rank!");
     return ranks[rank].mintCost;
   }
   /// @dev Should even this be changable by vote? Maybe.
   function _baseURI() internal view override virtual returns (string memory) {
-    return "https://titles.wrldcoin.io/";
+    return _currentURI;
   }
   function mintTitle(uint _parentID) public returns (uint id) {
     // Mint the title
@@ -131,6 +140,10 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     cmd.transferFrom(address(this), msg.sender, amt);
     return amt;
   }
+  function rankOf(uint tokenID_) public view returns (uint8 rank) {
+    require(tokenID_ < ERC721Enumerable.totalSupply(), "No such title!");
+    return titles[tokenID_].rank;
+  }
   /* Governance */
   // Requests
   struct RankChangeRequest {
@@ -145,15 +158,18 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     address receiver;
     uint propositionID;
   }
+  struct URIChangeRequest {
+    string newURI;
+    uint propositionID;
+  }
   uint rankChangeRequestCNT;
   uint godMintRequestCNT;
+  uint uriChangeRequestCNT;
+
   mapping (uint => RankChangeRequest) rankChangeRequests;
   mapping (uint => GodMintRequest) godMintRequests;
+  mapping (uint => URIChangeRequest) uriChangeRequests;
 
-  function rankOf(uint tokenID_) public view returns (uint8 rank) {
-    require(tokenID_ < ERC721Enumerable.totalSupply(), "No such title!");
-    return titles[tokenID_].rank;
-  }
 	// Override ERC20 withdraw to prevent CMD from being withdrawn or otherwise ensure that the DAO is not drained of CMD needed or _reserveBalance
 
 	// Democretized Controls
@@ -185,6 +201,13 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     godMintRequests[requestID] = GodMintRequest(amt, receiver, propID);
     return requestID;
 	}
+  function requestURIChange(string memory newURI_) public returns (uint requestID) {
+    uint requestID = uriChangeRequestCNT;
+    uriChangeRequestCNT++;
+    uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+    uriChangeRequests[requestID] = URIChangeRequest(newURI_, propID);
+    return requestID;
+  }
   function executeRankChange(uint requestID) public {
     require(requestID < rankChangeRequestCNT, "No such request.");
     RankChangeRequest memory request = rankChangeRequests[requestID];
@@ -200,6 +223,12 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     for (uint8 i = 0; i < request.amt; i++) {
       _mintGodTitle(request.receiver);
     }
+  }
+  function executeURIChange(uint requestID) public {
+    require(requestID < uriChangeRequestCNT, "No such request.");
+    URIChangeRequest memory request = uriChangeRequests[requestID];
+    voting.executeProposition(request.propositionID, msg.sender);
+    _currentURI = request.newURI;
   }
   function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Enumerable, Democratized) returns (bool) {
     return Democratized.supportsInterface(interfaceId);

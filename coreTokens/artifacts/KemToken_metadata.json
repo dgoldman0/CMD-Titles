@@ -998,10 +998,10 @@
 			]
 		},
 		"coreTokens/kem.sol": {
-			"keccak256": "0xe008f5bcfe2021526a963b615f2a2f6c8a67945fe79cf28915a77474d57856bd",
+			"keccak256": "0x10902cc0f38d53f5095c17ff80d821394f22006b61a88a03e7d7118b16c1ef44",
 			"urls": [
-				"bzz-raw://f2613292abcc626e13b9529330919c0066fc1e4d52fafc1ce7e329fc134a4aa2",
-				"dweb:/ipfs/QmNTiuKDXHcLu3qq4iyFMLGPBPf6vosB6bXPt1mijvS5fz"
+				"bzz-raw://2344044a7f095e2142c439bf38b282299dbb52a0d754ced7cc70551125108aaa",
+				"dweb:/ipfs/QmcJDWzh5yM2o8cQnENbTwniuRwpsnk1h5ug2oM4uEiGBg"
 			]
 		},
 		"forgable/IERC20Forgable.sol": {
@@ -1033,17 +1033,17 @@
 			]
 		},
 		"governance/LocalTitles.sol": {
-			"keccak256": "0x8dd0b4fdec352f4f63b6029ef6c9761018e344c382eb3f21d91b74eb7136f6ff",
+			"keccak256": "0x3703c34aa1ef758b2276500779daac26c6107a6248f1decce67e71b6279e8854",
 			"urls": [
-				"bzz-raw://beaedb50c98ec5fdf9014843e01303e655f25c0f1cb07fe17fa03e571e01769e",
-				"dweb:/ipfs/QmZFTtRqGEJ33VfhoGSBVKXeJqwMUWx6AWn2Rc5LUFFuZ6"
+				"bzz-raw://76fa54f3d41886e0f9255aaf5f729cd9ba886168c17609608a33c28cacfb7396",
+				"dweb:/ipfs/QmejFt4z4k3FTfL4phCWVMMixWX2tuhxT7Gf7D7Y7sRn9v"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0xc7697ed3e410bd493dee9c7fba0af3adee66e240a2aec908e79dcbe00e5e7f5e",
+			"keccak256": "0x8e750760b00805aab3a4f321a8a1985ab9869b686b9c1d800728cd6caed58ec3",
 			"urls": [
-				"bzz-raw://32890f110a2b16a504eab3b39c1ade64372da5892c3abd609b31eb6fd09327d3",
-				"dweb:/ipfs/QmWjzppZQEwSv7jMHmYwuKaeFCNg7wFhUEmLReNZSTUosJ"
+				"bzz-raw://de983837f5ae15e390b588952f9a30af7dcb218297f759721b4a6c78262994ba",
+				"dweb:/ipfs/QmUyaodD8J1RC2gSRoy9NRH1NGYDhLZ2DJUEhJoHEue8sY"
 			]
 		},
 		"governance/VotingRights.sol": {

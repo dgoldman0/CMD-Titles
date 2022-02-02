@@ -6,6 +6,8 @@ contract VotingMachine {
   address creator;
   uint propositionCount;
   uint voteCount;
+  
+  /// @dev I really want to add some more complexity here. I want it to be able to handle things like minimum number of votes, etc.
   struct Proposition {
     uint id;
     address sender;
@@ -14,6 +16,13 @@ contract VotingMachine {
     uint startTime;
     uint endTime;
     bool executed;
+  }
+  /// @dev I could have a PropositionDetails struct separate from the Propositoin Struct and I could pass that as a parameter.
+  /// @dev Not in use yet!
+  struct PropositionDetails {
+    uint threshold;
+    uint minimumVoteABS; // Absolute minimum number of votes
+    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass
   }
   struct Vote {
     uint id;
@@ -25,10 +34,10 @@ contract VotingMachine {
     uint weight;
   }
   mapping (uint => Proposition) propositions;
-  mapping (uint => uint) propVoteCount;
   mapping (uint => mapping (uint => Vote)) propVotes;
   mapping (uint => Vote) votes;
 
+  mapping (uint => uint) propVoteCount;
   // Rolling tally
   mapping (uint => uint) votesForProp;
   mapping (uint => uint) votesAgainstProp;

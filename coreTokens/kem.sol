@@ -35,6 +35,7 @@ contract KemToken is ERC20, Democratized {
     function executeMint(uint256 requestID_) public {
         require(requestID_ < _mintRequestCNT, "No such request.");
         MintRequest memory request = _mintRequests[requestID_];
+        voting.executeProposition(request.propID, msg.sender);
         _mint(request.receiver, request.amt);
     }
 }
