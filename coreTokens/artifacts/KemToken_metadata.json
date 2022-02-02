@@ -1019,10 +1019,10 @@
 			]
 		},
 		"governance/CMDTitles.sol": {
-			"keccak256": "0x6bf05c36a347e45c3ee498bdea27765e23949e8ae7cd4484af87fa0458e278ec",
+			"keccak256": "0xc816ef8b690bc9c7b2c394029c643fb452f44c7d0ff23bb668f9677a36406c73",
 			"urls": [
-				"bzz-raw://670097862b748918e2884d3f8650ddf5457a920750d54396174820ab1d45ceae",
-				"dweb:/ipfs/QmT57PudzuYuyJrerT1zqGweS1xkZZgyHkzTwiEVuwJQwG"
+				"bzz-raw://0cf5f0b84f79224c1805aecd1f6b11eec02cde0481afceda743c50f9a4e0b109",
+				"dweb:/ipfs/QmUMBKdw5GL23EL94LxH9qa4umzJAniZz3fCLaobJRLBYQ"
 			]
 		},
 		"governance/Democratized.sol": {
