@@ -13,16 +13,19 @@ contract VotingMachine {
     address sender;
     address democratized;
     uint threshold; // vote threshold for confirmation in increments of 0.00001
+    uint minimumVoteABS; // Absolute minimum number of votes
+    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass (increments of 0.00001)
     uint startTime;
     uint endTime;
     bool executed;
   }
-  /// @dev I could have a PropositionDetails struct separate from the Propositoin Struct and I could pass that as a parameter.
   /// @dev Not in use yet!
   struct PropositionRequirements {
-    uint threshold;
+    uint startTime;
+    uint endTime;
+    uint threshold; // vote threshold for confirmation in increments of 0.00001
     uint minimumVoteABS; // Absolute minimum number of votes
-    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass
+    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass (increments of 0.00001)
   }
   struct Vote {
     uint id;
@@ -88,11 +91,15 @@ contract VotingMachine {
     loops = request.val;
   }
   function addProposition(address sender, uint threshold, uint startTime, uint endTime) public returns (uint propositionID) {
+    addProposition(sender, threshold, 0, 0, startTime, endTime);
+  }
+  function addProposition(address sender, PropositionRequirements memory requirements) public returns (uint voteID)
+  {
     /// @dev The reason to use a loop rather than cost some token is because the chain's value should benefit, not us.
     for (uint i = 0; i < loops; i++) {}
     uint propID = propositionCount;
     propositionCount++;
-    propositions[propID] = Proposition(propID, sender, msg.sender, threshold, startTime, endTime, false);
+    propositions[propID] = Proposition(propID, sender, msg.sender, threshold, 0, 0, startTime, endTime, false);
     emit NewProposition(propID, sender, msg.sender, threshold, startTime, endTime);
     return propID;
   }

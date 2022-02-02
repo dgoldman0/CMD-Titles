@@ -8,7 +8,7 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
+						"internalType": "contract VotingRights",
 						"name": "votingRights_",
 						"type": "address"
 					}
@@ -155,6 +155,57 @@
 					{
 						"internalType": "uint256",
 						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "endTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "threshold",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "minimumVoteABS",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "minimumVoteREL",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct VotingMachine.PropositionRequirements",
+						"name": "requirements",
+						"type": "tuple"
+					}
+				],
+				"name": "addProposition",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "voteID",
 						"type": "uint256"
 					}
 				],
@@ -391,17 +442,17 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 2000000
 		},
 		"remappings": []
 	},
 	"sources": {
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x8af23aa187786c96bfed26e24689ddec0252e61e81336d998b6c83a6d9403362",
+			"keccak256": "0xecc17b93e54ae8ebddb62b7b7283d58de4eca41c280e1733b999c9f0cce46a0f",
 			"urls": [
-				"bzz-raw://dc6e021bb6e542da022280c89b7a095190a0a277735201b27fb6868af66ae19e",
-				"dweb:/ipfs/QmXvgh4SXFs5btyv75K2i3g1sjh26x2qE7UW5Qnw3nL2Ma"
+				"bzz-raw://c0e58c7b451a2d6c1fad70300446c6259bd423ec2eafa891879bd9dd000b3566",
+				"dweb:/ipfs/QmVRwHosfwUQfN9UWsXt82bV6C4SGKSGGueBMnNaggqXHK"
 			]
 		},
 		"governance/VotingRights.sol": {
