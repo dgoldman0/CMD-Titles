@@ -12,18 +12,25 @@ Email: [contact@danielgoldman.us](mailto:contact@danielgoldman.us)
 
 Voting is done through a complex standard democratized system allowing anyone to submit a proposal and anyone with a specific voting right NFT to vote.
 
+### Democratized Contract
+
+The base contract that gives a level of governance functionality to our contracts. It includes a number of built in functions, including the ability to request a withdraw of ETH, ERC20, ERC721, or ERC1155 tokens.
+
 ### Titles
 
 Titles act as the voting rights sytsem for the democratized interface that all World Builder DAOs utilize. There are different tiers of titles, with the lowest being the provincial title. Each title rank can have multiple functions, but the privincial title is the title which allows a user to cast one individual vote per proposition.
 
 ### VotingMachine
 
-The VotingMachine base contract can be extended to create different functionality for new projects. Users vote for propositions through the Voting Machine.
-
-## Democratized Contract
+The VotingMachine base contract can be extended to create different functionality for new projects. 
 
 The abstract contract Democratized is extended by all the World Builder DAOs. It can use an alternative voting system if desired. The DefaultDemocratized contract includes a link to the common VotingMachine which is connected to the Titles system. All Democratized systems, by default, allow for voting on withdrawing ERC20, ERC721, and ERC1155 assets.
 
+#### Propositions
+
+Voting occurs through propositions. Democratized contracts each have their own options for initiating a request to do something, which generates a proposition in the voting machine. Whether the proposition passes or not depends on a number of conditions that can be sent by the Democratized contract.
+
+- threshold: The percentage of yes votes necessary for the proposition to pass (usually 500000)
 ## Forge
 
 KEM is a resource token in the sense that it is used to "forge" additional tokens for all the projects related to our ecosystem. As a resource token, it grows in value as more child projects are added to the ecosystem. The forge consists of individual DAO contracts with a standard interface for minting new tokens. KEM is given to the DAO in return for minting the DAO's native token, which can serve a number of functions. However, the DAO itself is controlled by the Titles system.

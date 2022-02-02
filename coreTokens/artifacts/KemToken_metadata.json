@@ -1040,10 +1040,10 @@
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x8e750760b00805aab3a4f321a8a1985ab9869b686b9c1d800728cd6caed58ec3",
+			"keccak256": "0x9848c2b7bf3ad47c2979e20a758a481609ad9b85f432640e10c7b89395d78895",
 			"urls": [
-				"bzz-raw://de983837f5ae15e390b588952f9a30af7dcb218297f759721b4a6c78262994ba",
-				"dweb:/ipfs/QmUyaodD8J1RC2gSRoy9NRH1NGYDhLZ2DJUEhJoHEue8sY"
+				"bzz-raw://5d18edb3eacd254e2bb68e75aab56d01aec0755747f4fa8cee38a1835dc2b2d5",
+				"dweb:/ipfs/QmUWpYd3SZWxXDSotMr41w964WA53PjsgALpuCHjtR1cuF"
 			]
 		},
 		"governance/VotingRights.sol": {

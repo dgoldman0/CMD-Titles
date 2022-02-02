@@ -36,24 +36,6 @@
 						"internalType": "address",
 						"name": "democratized",
 						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "threshold",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "startTime",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "endTime",
-						"type": "uint256"
 					}
 				],
 				"name": "NewProposition",
@@ -172,16 +154,6 @@
 						"components": [
 							{
 								"internalType": "uint256",
-								"name": "startTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "endTime",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
 								"name": "threshold",
 								"type": "uint256"
 							},
@@ -193,6 +165,16 @@
 							{
 								"internalType": "uint256",
 								"name": "minimumVoteREL",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "endTime",
 								"type": "uint256"
 							}
 						],
@@ -449,10 +431,10 @@
 	},
 	"sources": {
 		"governance/VotingMachine.sol": {
-			"keccak256": "0xecc17b93e54ae8ebddb62b7b7283d58de4eca41c280e1733b999c9f0cce46a0f",
+			"keccak256": "0x67b37955c6f10b8d3cce1283aefabc8340599379cf54ca96136b4f76b1e020fd",
 			"urls": [
-				"bzz-raw://c0e58c7b451a2d6c1fad70300446c6259bd423ec2eafa891879bd9dd000b3566",
-				"dweb:/ipfs/QmVRwHosfwUQfN9UWsXt82bV6C4SGKSGGueBMnNaggqXHK"
+				"bzz-raw://2315caae79cd94b2092e4dd7728b99ddce1665845064320d3252cc311f2eba24",
+				"dweb:/ipfs/QmUsDZFNvmVR1x19Sj2wwMSgoSiQ8ySrUk5t4oyvk9yJH9"
 			]
 		},
 		"governance/VotingRights.sol": {

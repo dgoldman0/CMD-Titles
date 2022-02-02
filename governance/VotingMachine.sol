@@ -7,25 +7,24 @@ contract VotingMachine {
   uint propositionCount;
   uint voteCount;
   
+  struct PropositionRequirements {
+    uint threshold; // vote threshold for confirmation in increments of 0.0000001
+    uint minimumVoteABS; // Absolute minimum number of votes
+    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass (increments of 0.0000001)
+    uint startTime;
+    uint endTime;
+  }
   /// @dev I really want to add some more complexity here. I want it to be able to handle things like minimum number of votes, etc.
   struct Proposition {
     uint id;
     address sender;
     address democratized;
-    uint threshold; // vote threshold for confirmation in increments of 0.00001
+    uint threshold; // vote threshold for confirmation in increments of 0.0000001
     uint minimumVoteABS; // Absolute minimum number of votes
-    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass (increments of 0.00001)
+    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass (increments of 0.0000001)
     uint startTime;
     uint endTime;
     bool executed;
-  }
-  /// @dev Not in use yet!
-  struct PropositionRequirements {
-    uint startTime;
-    uint endTime;
-    uint threshold; // vote threshold for confirmation in increments of 0.00001
-    uint minimumVoteABS; // Absolute minimum number of votes
-    uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass (increments of 0.00001)
   }
   struct Vote {
     uint id;
@@ -46,7 +45,7 @@ contract VotingMachine {
   mapping (uint => uint) votesAgainstProp;
   mapping (uint => mapping (uint => bool)) voted; // Stores whether a voter has voted for a given proposition.
 
-  event NewProposition(uint id, address sender, address democratized, uint threshold, uint startTime, uint endTime);
+  event NewProposition(uint id, address sender, address democratized);
   event PropositionExecuted(uint propositionID, address executedBy);
   event NewVote(uint id, address votingAddress, uint voterID, uint propositionID, uint propositionVoteID, bool vote, uint weight);
   modifier isCreator() {
@@ -91,7 +90,7 @@ contract VotingMachine {
     loops = request.val;
   }
   function addProposition(address sender, uint threshold, uint startTime, uint endTime) public returns (uint propositionID) {
-    addProposition(sender, threshold, 0, 0, startTime, endTime);
+    addProposition(sender, PropositionRequirements(threshold, 0, 0, startTime, endTime));
   }
   function addProposition(address sender, PropositionRequirements memory requirements) public returns (uint voteID)
   {
@@ -99,8 +98,8 @@ contract VotingMachine {
     for (uint i = 0; i < loops; i++) {}
     uint propID = propositionCount;
     propositionCount++;
-    propositions[propID] = Proposition(propID, sender, msg.sender, threshold, 0, 0, startTime, endTime, false);
-    emit NewProposition(propID, sender, msg.sender, threshold, startTime, endTime);
+    propositions[propID] = Proposition(propID, sender, msg.sender, requirements.threshold, requirements.minimumVoteABS, requirements.minimumVoteREL, requirements.startTime, requirements.endTime, false);
+    emit NewProposition(propID, sender, msg.sender);
     return propID;
   }
   function castVote(uint propositionID, uint voterID, bool vote) public returns (uint voteID) {
@@ -175,7 +174,12 @@ contract VotingMachine {
   }
   function _checkPropositionThreshold(uint propositionID) private view returns (bool reached) {
     // Need to be careful to make sure that I'm calculating the threshold properly since floating point arithemtic is not allowed
-    return votesForProp[propositionID] * 100000 / votesAgainstProp[propositionID] >= propositions[propositionID].threshold;
+    Proposition memory prop = propositions[propositionID];
+    uint totalVotes = votesForProp[propositionID] + votesAgainstProp[propositionID];
+    return votesForProp[propositionID] * 10000000 / votesAgainstProp[propositionID] >= prop.threshold
+      && totalVotes >= prop.minimumVoteABS
+      /// @dev Will hang on zero electorate size, which honestly makes sense. 
+      && totalVotes * 10000000 / rightsContract.electorateSize() >= prop.minimumVoteREL;
   }
   function executeProposition(uint propositionID, address executedBy) public returns (bool success) {
     Proposition storage prop = propositions[propositionID];
