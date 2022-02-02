@@ -19,7 +19,7 @@ contract VotingMachine {
   }
   /// @dev I could have a PropositionDetails struct separate from the Propositoin Struct and I could pass that as a parameter.
   /// @dev Not in use yet!
-  struct PropositionDetails {
+  struct PropositionRequirements {
     uint threshold;
     uint minimumVoteABS; // Absolute minimum number of votes
     uint minimumVoteREL; // Minimum percentage of the electorate that must vote in order for the proposition to pass

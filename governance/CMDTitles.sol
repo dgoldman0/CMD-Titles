@@ -106,9 +106,10 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
 
     // Distribute CMD
     cmd.transferFrom(msg.sender, address(this), cost);
+
     // Automatically reserve 1/3 for the DAO: uses 1/3 rather than 2/3 because I divide yield by 2 AFTER distributing
     uint yield = cost / 3;
-    Title storage curtitle = parent;
+    Title memory curtitle = parent;
     do {
       _reserveBalance += yield;
       address owner = ownerOf(curtitle.titleID);
