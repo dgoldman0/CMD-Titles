@@ -14,8 +14,8 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
   ERC20 cmd;
 
   uint64 titleCount;
-  mapping (uint8 => uint64) rankTitleCount;
   address private _creator;
+  mapping (uint8 => uint64) rankTitleCount;
 	mapping(address => uint) private _addressCMDBalance;
   uint private _reserveBalance; // The amount of CMD reserved to pay for CMDBalance
 
@@ -24,13 +24,13 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
 
   // Gives details about how many children a title of a given rank can mint and how much it costs to mint
   struct Rank {
-    uint64 mintCost; // The cost to mint a new title of the given rank
+    uint128 mintCost; // The cost to mint a new title of the given rank
     uint32 maxChildren; // The maximum number of child titles the rank can have
   }
 
-	//Tight packing would allow for multiple attributes to be stored in a single uint256 slot in evm.
+	// Tight packing would allow for multiple attributes to be stored in a single uint256 slot in evm.
 	struct Title {
-		uint64 titleID; // Global ID of this token
+		uint64 titleID; // Global ID of this token: Do I really need more than 2^64 potential IDs? 
 		uint64 parentTitleID; // Global ID of parent token
 		uint8 rank;
 		uint64 localID; // (parentTitleId, localId) rather than single global mint ID
@@ -48,7 +48,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     // Initial settings for ranks
     _creator = msg.sender;
     uint8 i;
-    uint64 cost = 40960000000000000000000; // Cost of god title is 40960 CMD
+    uint128 cost = uint128(40960000000000000000000); // Cost of god title is 40960 CMD
     uint32 maxChildren = 10; // Only ten children titles per title
     _currentURI = "https://titles.wrldcoin.io/";
 
@@ -86,20 +86,20 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
   function _baseURI() internal view override virtual returns (string memory) {
     return _currentURI;
   }
-  function mintTitle(uint _parentID) public returns (uint id) {
+  function mintTitle(uint64 _parentID) public returns (uint64 id) {
     // Mint the title
     Title storage parent = titles[_parentID];
     require(ownerOf(_parentID) == msg.sender, "User does not own this title.");
     uint8 rank = parent.rank + 1;
     require(rank > 0, "God titles must be minted through vote.");
     require(rank < 12, "Provincial titles cannot mint lower tier titles.");
-    uint cost = ranks[rank].mintCost;
+    uint128 cost = ranks[rank].mintCost;
     require(cmd.balanceOf(msg.sender) >= cost, "Insufficient Funds");
     require(cmd.allowance(msg.sender, address(this)) >= cost, "Insufficient Approval");
     uint64 lid = parent.childCount;
     require(lid < ranks[rank].maxChildren, "This title has reached its maximum mint count.");
     parent.childCount++;
-    uint id = titleCount;
+    uint64 id = titleCount;
     titleCount++;
     titles[id] = Title(id, _parentID, rank, lid, 0, msg.sender);
     _safeMint(msg.sender, id);
@@ -150,7 +150,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
   // Requests
   struct RankChangeRequest {
     uint8 rank;
-    uint256 val;
+    uint128 val;
     /// @dev Rename as toggle and roll the two request functions into one function.
     bool cost_children; // Whether the request is to change the cost or the max child limit. True/false=cost/children
     uint propositionID;
@@ -177,7 +177,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
 
 	// Democretized Controls
   // Could roll these two into one function
-	function requestRankCostChange(uint8 rank, uint256 cost) public returns (uint requestID) {
+	function requestRankCostChange(uint8 rank, uint128 cost) public returns (uint requestID) {
     require(rank < 13, "No such rank exists.");
     require(cost > 0, "Free minting is never allowed."); // Should I set a higher floor though? 1/10^6 is still a VERY small fee!
     uint requestID = rankChangeRequestCNT;
@@ -217,7 +217,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     voting.executeProposition(request.propositionID, msg.sender);
     if (request.cost_children)
       ranks[request.rank].mintCost = request.val;
-    else ranks[request.rank].maxChildren = uint64(request.val);
+    else ranks[request.rank].maxChildren = uint32(request.val);
   }
   function executeGodMint(uint requestID) public {
     require(requestID < godMintRequestCNT, "No such request.");

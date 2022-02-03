@@ -927,17 +927,17 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint64",
 						"name": "_parentID",
-						"type": "uint256"
+						"type": "uint64"
 					}
 				],
 				"name": "mintTitle",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint64",
 						"name": "id",
-						"type": "uint256"
+						"type": "uint64"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -1243,9 +1243,9 @@
 						"type": "uint8"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "uint128",
 						"name": "cost",
-						"type": "uint256"
+						"type": "uint128"
 					}
 				],
 				"name": "requestRankCostChange",
@@ -1775,16 +1775,16 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 200
+			"runs": 100
 		},
 		"remappings": []
 	},
 	"sources": {
 		"governance/CMDTitles.sol": {
-			"keccak256": "0xc4d904883a8e89bc6843668c5ab48334cca565774735dd8453460f946858cf57",
+			"keccak256": "0xe068c933ca7f24fe2d1d481d019db3036cc4901819da42f64166004e96c624a4",
 			"urls": [
-				"bzz-raw://20163ee6608ad10dcd13726997a292c02eb89b98bbba95aad8deb0d03654f98d",
-				"dweb:/ipfs/QmUHCrnChc1a3TFgkf63JuZeAomwLRMsVrtexyAkKM8Ux4"
+				"bzz-raw://3bb96cebcf5648162c2bec61c1bc134fce5cdfcc74deeeb13af6400e17fe9e47",
+				"dweb:/ipfs/QmRmu2qyaieCfEDvSak9FWcFRChUHswy1AR6LAxF95Bcis"
 			]
 		},
 		"governance/Democratized.sol": {
