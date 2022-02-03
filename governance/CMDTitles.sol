@@ -55,7 +55,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
       ranks[i] = Rank(cost, maxChildren);
       cost = cost / 2; // Each lower rank costs 1/2 the cost of the previous rank
     }
-    for (i = 0; i < 50; i++) {
+    for (i = 0; i < 5; i++) {
       _mintGodTitle(msg.sender);
     }
   }
