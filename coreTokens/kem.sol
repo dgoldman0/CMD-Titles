@@ -9,20 +9,17 @@ import "./CMDToken.sol";
 // initialize CMDTitles, etc. 
 
 contract KemToken is ERC20, Democratized {
+    bool initialized;
     constructor() ERC20("Kemet", "KEM") Democratized(VotingMachine(address(0))) {
-        // Initially mint 100M kem
-        _mint(msg.sender, 100000000000000000000000000);
-    }
-    /*
-    function init() public {
         require(!initialized, "Already initialized!");
         initialized = true;
         CMDTitles titles = new CMDTitles();
         CMDToken cmd = new CMDToken(titles, this);
         titles.setCMD(cmd);
         voting = titles;
-    } 
-    */
+        // Initially mint 100M kem
+        _mint(msg.sender, 100000000000000000000000000);
+    }
     // Goverance
     struct MintRequest {
         address receiver;

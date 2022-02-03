@@ -984,8 +984,8 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
-			"runs": 200
+			"enabled": true,
+			"runs": 100
 		},
 		"remappings": []
 	},
@@ -998,10 +998,10 @@
 			]
 		},
 		"coreTokens/kem.sol": {
-			"keccak256": "0xba30ed9643f590138bb325f7f8f02e141f7a122e0228d46ea61ddbb632cb256f",
+			"keccak256": "0x46be46f43b24e567314e258cb69ae280471bdc793ebd82b4b13a725e6df768b5",
 			"urls": [
-				"bzz-raw://a298b433479d46ab7d541b76677e7c1a366ec95509e00ee9c29a794613938f83",
-				"dweb:/ipfs/QmXBHgRC2M5zEkJ1fgSDoEVF5X6eb2nHoCn94zCLyXuBsM"
+				"bzz-raw://1ede303efa9be5ceb44ca888dd014190700da66ddd2b5f03dc22880506b6fd74",
+				"dweb:/ipfs/QmVRhEWb6V3pmRBr6EAQsjyHVYxkv4VqfDgG8g5svnmNQr"
 			]
 		},
 		"forgable/IERC20Forgable.sol": {
@@ -1019,10 +1019,10 @@
 			]
 		},
 		"governance/CMDTitles.sol": {
-			"keccak256": "0x6c895b6d25f8d7143d2475acc4a0b5ca37d476c9de70528c6bd8bfb1b695251c",
+			"keccak256": "0xc4d904883a8e89bc6843668c5ab48334cca565774735dd8453460f946858cf57",
 			"urls": [
-				"bzz-raw://84a6c9b15e5964e8af0d9c8723e81b5a1391d39b977d9e9235d149b422a8b7b8",
-				"dweb:/ipfs/QmTPdcGxfva1zd7CRrBSBdQLhMGEYhFshNgQi37mzvjito"
+				"bzz-raw://20163ee6608ad10dcd13726997a292c02eb89b98bbba95aad8deb0d03654f98d",
+				"dweb:/ipfs/QmUHCrnChc1a3TFgkf63JuZeAomwLRMsVrtexyAkKM8Ux4"
 			]
 		},
 		"governance/Democratized.sol": {

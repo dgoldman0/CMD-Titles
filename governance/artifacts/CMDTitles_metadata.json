@@ -342,24 +342,6 @@
 						"internalType": "address",
 						"name": "democratized",
 						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "threshold",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "startTime",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "endTime",
-						"type": "uint256"
 					}
 				],
 				"name": "NewProposition",
@@ -505,6 +487,57 @@
 					{
 						"internalType": "uint256",
 						"name": "propositionID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "threshold",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "minimumVoteABS",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "minimumVoteREL",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "endTime",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct VotingMachine.PropositionRequirements",
+						"name": "requirements",
+						"type": "tuple"
+					}
+				],
+				"name": "addProposition",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "voteID",
 						"type": "uint256"
 					}
 				],
@@ -1742,16 +1775,16 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 2000000
+			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"governance/CMDTitles.sol": {
-			"keccak256": "0xc816ef8b690bc9c7b2c394029c643fb452f44c7d0ff23bb668f9677a36406c73",
+			"keccak256": "0xc4d904883a8e89bc6843668c5ab48334cca565774735dd8453460f946858cf57",
 			"urls": [
-				"bzz-raw://0cf5f0b84f79224c1805aecd1f6b11eec02cde0481afceda743c50f9a4e0b109",
-				"dweb:/ipfs/QmUMBKdw5GL23EL94LxH9qa4umzJAniZz3fCLaobJRLBYQ"
+				"bzz-raw://20163ee6608ad10dcd13726997a292c02eb89b98bbba95aad8deb0d03654f98d",
+				"dweb:/ipfs/QmUHCrnChc1a3TFgkf63JuZeAomwLRMsVrtexyAkKM8Ux4"
 			]
 		},
 		"governance/Democratized.sol": {
@@ -1762,10 +1795,10 @@
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x8e750760b00805aab3a4f321a8a1985ab9869b686b9c1d800728cd6caed58ec3",
+			"keccak256": "0x3191cc4c31fbe13783f8111ee36dc56e4d711763c88d349e8e78342dc0295f05",
 			"urls": [
-				"bzz-raw://de983837f5ae15e390b588952f9a30af7dcb218297f759721b4a6c78262994ba",
-				"dweb:/ipfs/QmUyaodD8J1RC2gSRoy9NRH1NGYDhLZ2DJUEhJoHEue8sY"
+				"bzz-raw://275b6330b5811d551334537b45c9438e7f451b4efe7557a2b01fd0bb70e26038",
+				"dweb:/ipfs/QmSDNF5Qt6V2mgGmNkKDVo2mgqUtCrnCndfAmzcAkJghR5"
 			]
 		},
 		"governance/VotingRights.sol": {

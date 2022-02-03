@@ -12,6 +12,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
 	using Address for address;
 
   ERC20 cmd;
+
   uint64 titleCount;
   mapping (uint8 => uint64) rankTitleCount;
   address private _creator;
@@ -21,23 +22,23 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
 	event TitleMinted(uint titleID, address minter);
 	event CMDClaim(address minter, uint amount);
 
+  // Gives details about how many children a title of a given rank can mint and how much it costs to mint
+  struct Rank {
+    uint64 mintCost; // The cost to mint a new title of the given rank
+    uint32 maxChildren; // The maximum number of child titles the rank can have
+  }
+
 	//Tight packing would allow for multiple attributes to be stored in a single uint256 slot in evm.
 	struct Title {
+		uint64 titleID; // Global ID of this token
+		uint64 parentTitleID; // Global ID of parent token
 		uint8 rank;
-		uint titleID; // Global ID of this token
-		uint parentTitleID; // Global ID of parent token
 		uint64 localID; // (parentTitleId, localId) rather than single global mint ID
-    uint64 childCount; // Number of children currently minted by this title
+    uint32 childCount; // Number of children currently minted by this title
 		address minterAddress;
 	}
 
   mapping(uint => Title) titles;
-
-  // Gives details about how many children a title of a given rank can mint and how much it costs to mint
-  struct Rank {
-    uint256 mintCost; // The cost to mint a new title of the given rank
-    uint64 maxChildren; // The maximum number of child titles the rank can have
-  }
 
   mapping (uint8 => Rank) ranks;
 
@@ -47,8 +48,8 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     // Initial settings for ranks
     _creator = msg.sender;
     uint8 i;
-    uint256 cost = 40960000000000000000000; // Cost of god title is 40960 CMD
-    uint64 maxChildren = 10; // Only ten children titles per title
+    uint64 cost = 40960000000000000000000; // Cost of god title is 40960 CMD
+    uint32 maxChildren = 10; // Only ten children titles per title
     _currentURI = "https://titles.wrldcoin.io/";
 
     for (i = 0; i < 13; i++) {
@@ -100,7 +101,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     parent.childCount++;
     uint id = titleCount;
     titleCount++;
-    titles[id] = Title(rank, id, _parentID, lid, 0, msg.sender);
+    titles[id] = Title(id, _parentID, rank, lid, 0, msg.sender);
     _safeMint(msg.sender, id);
     rankTitleCount[rank]++;
 
@@ -120,10 +121,10 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     emit TitleMinted(id, msg.sender); 
     return id;
   }
-  function _mintGodTitle(address receiver) private returns (uint tokenID) {
-    uint id = titleCount;
+  function _mintGodTitle(address receiver) private returns (uint64 tokenID) {
+    uint64 id = titleCount;
     titleCount++;
-    titles[id] = Title(0, id, 0, rankTitleCount[0], 0, msg.sender);
+    titles[id] = Title(id, 0, 0, rankTitleCount[0], 0, msg.sender);
     rankTitleCount[0]++;
     _safeMint(receiver, id);
     emit TitleMinted(id, msg.sender);
@@ -163,6 +164,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     string newURI;
     uint propositionID;
   }
+
   uint rankChangeRequestCNT;
   uint godMintRequestCNT;
   uint uriChangeRequestCNT;
