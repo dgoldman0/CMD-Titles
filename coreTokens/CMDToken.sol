@@ -4,6 +4,7 @@ import "../openZeppelin/ERC20.sol";
 import "../governance/CMDTitles.sol";
 import "../governance/LocalTitles.sol";
 import "../forgable/MultiERC20Forgable.sol";
+
 /// @dev Might be interesting to have an alternative for "canSmith" 
 contract CMDToken is MultiERC20Forgable {
     // Smith fee 0.1BNB, 100 KEM per 1 CMD, 10K KEM limit per forge, initial 1000,000 CMD

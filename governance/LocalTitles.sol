@@ -1,14 +1,12 @@
 pragma solidity ^0.8.0;
-import "../openZeppelin/Address.sol";
-import "../openZeppelin/ERC721Enumerable.sol";
+import "../openZeppelin/ERC721.sol";
 import "./CMDTitles.sol";
 import "./Democratized.sol";
 import "./VotingRights.sol";
 import "./VotingMachine.sol";
 
 /// @title A contract to allow using CMD Titles to mint local control titles as an alternative to needing standard governance.
-contract LocalTitles is ERC721Enumerable, VotingRights, Democratized, VotingMachine {
-	using Address for address;
+contract LocalTitles is ERC721, VotingRights, Democratized, VotingMachine {
   uint _titleCount; 
   CMDTitles _baseTitles; // The address of the base titles (CMDTitles)
   ERC20 _mintResource;
@@ -75,7 +73,7 @@ contract LocalTitles is ERC721Enumerable, VotingRights, Democratized, VotingMach
     _titleCount++;
     _mint(msg.sender, titleID);
   }
-  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Enumerable, Democratized) returns (bool) {
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, Democratized) returns (bool) {
     return Democratized.supportsInterface(interfaceId);
   }
 }

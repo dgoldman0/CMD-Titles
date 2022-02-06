@@ -9,10 +9,7 @@ import "./CMDToken.sol";
 // initialize CMDTitles, etc. 
 
 contract KemToken is ERC20, Democratized {
-    bool initialized;
     constructor() ERC20("Kemet", "KEM") Democratized(VotingMachine(address(0))) {
-        require(!initialized, "Already initialized!");
-        initialized = true;
         CMDTitles titles = new CMDTitles();
         CMDToken cmd = new CMDToken(titles, this);
         titles.setCMD(cmd);

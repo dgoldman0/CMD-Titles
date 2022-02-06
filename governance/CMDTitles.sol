@@ -1,18 +1,15 @@
 pragma solidity ^0.8.0;
 import "../openZeppelin/ERC20.sol";
-import "../openZeppelin/Address.sol";
 import "../openZeppelin/ERC721.sol";
-import "../openZeppelin/ERC721Enumerable.sol";
 import "./VotingRights.sol";
 import "./Democratized.sol";
 
 
 /// @dev withdrawCMD balance (clearly not calculating right there)
-contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratized {
-	using Address for address;
+contract CMDTitles is ERC721, VotingRights, VotingMachine, Democratized {
+  ERC20 private cmd;
 
-  ERC20 cmd;
-
+  /// @dev We really don't need more than 2^32 titles, so this should be fine. It's not like a FT w/ tiny fractions.
   uint64 titleCount;
   address private _creator;
   mapping (uint8 => uint64) rankTitleCount;
@@ -56,13 +53,15 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
       ranks[i] = Rank(cost, maxChildren);
       cost = cost / 2; // Each lower rank costs 1/2 the cost of the previous rank
     }
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 25; i++) {
       _mintGodTitle(msg.sender);
     }
   }
   function setCMD(ERC20 cmd_) external {
     require(msg.sender == _creator, "Not creator!");
-    if (address(cmd) == address(0)) cmd = cmd_;
+    require(address(cmd) == address(0), "CMD already set.");
+    
+    cmd = cmd_;
   }
   function getVotingWeight(uint titleID) external view override returns (uint weight) {
     if (titles[titleID].rank == 12) return 1;
@@ -85,6 +84,9 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
   /// @dev Should even this be changable by vote? Maybe.
   function _baseURI() internal view override virtual returns (string memory) {
     return _currentURI;
+  }
+  function cmdAddress() public view returns (address cmd) {
+    return address(cmd);
   }
   function mintTitle(uint64 _parentID) public returns (uint64 id) {
     // Mint the title
@@ -130,7 +132,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     emit TitleMinted(id, msg.sender);
     return id;
   }
-  function availableCMD() public returns (uint available) {
+  function availableCMD() public view returns (uint available) {
     return _addressCMDBalance[msg.sender];
   }
 	// Withdraws the available CMD held in reserve for the user
@@ -143,7 +145,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     return amt;
   }
   function rankOf(uint tokenID_) public view returns (uint8 rank) {
-    require(tokenID_ < ERC721Enumerable.totalSupply(), "No such title!");
+    require(tokenID_ < titleCount, "No such title!");
     return titles[tokenID_].rank;
   }
   /* Governance */
@@ -233,7 +235,7 @@ contract CMDTitles is ERC721Enumerable, VotingRights, VotingMachine, Democratize
     voting.executeProposition(request.propositionID, msg.sender);
     _currentURI = request.newURI;
   }
-  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Enumerable, Democratized) returns (bool) {
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, Democratized) returns (bool) {
     return Democratized.supportsInterface(interfaceId);
   }
 }

@@ -985,23 +985,23 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 100
+			"runs": 278
 		},
 		"remappings": []
 	},
 	"sources": {
 		"coreTokens/CMDToken.sol": {
-			"keccak256": "0x80c4f69355b6a1ba65b9005e0772b84401d09ebd06ae1b315bfba825d56e3c1a",
+			"keccak256": "0x8e8d24957a7d6bcffd597a3b0c1106d75c9f76bab404ec3524706313ad197bbe",
 			"urls": [
-				"bzz-raw://2f203469c6574c5df85589cb6f6c81d4076def81b7f6cef739045ee6c5061601",
-				"dweb:/ipfs/QmWBY5Cgcu7sTZfLaCFpbwfS31EQU55GwBcVqpW9fe1UkM"
+				"bzz-raw://f79c941b62491198c44045bd9c973b93eec4472d2908210a6e5a20ab98d5c1b8",
+				"dweb:/ipfs/QmS6NH5setnnYhDvsPckHLFR4YtBypagpckJc2eU5BVpYz"
 			]
 		},
 		"coreTokens/kem.sol": {
-			"keccak256": "0x46be46f43b24e567314e258cb69ae280471bdc793ebd82b4b13a725e6df768b5",
+			"keccak256": "0xa494130e52081807ccd3ff7b05c29f08f9f3e8423a3f69f35dccf739e7e31ac8",
 			"urls": [
-				"bzz-raw://1ede303efa9be5ceb44ca888dd014190700da66ddd2b5f03dc22880506b6fd74",
-				"dweb:/ipfs/QmVRhEWb6V3pmRBr6EAQsjyHVYxkv4VqfDgG8g5svnmNQr"
+				"bzz-raw://d6ebe5d6f33a9bf6cfb7484bae9b54c41a40c0b408fba247c52fcae618fb8a8d",
+				"dweb:/ipfs/QmSFe31frEfvs6RNET2B7ZbHNtiQThBwvjL11Wey3b4ZhA"
 			]
 		},
 		"forgable/IERC20Forgable.sol": {
@@ -1019,10 +1019,10 @@
 			]
 		},
 		"governance/CMDTitles.sol": {
-			"keccak256": "0x190fbc90596a0aea378a712f17733c3ef442fd5e493efb3ad19b96b9ffd2d15f",
+			"keccak256": "0xc5799e9e66c664e2fbec111f29759d4bf42c24fe098638f35dfd3a9086a48e5f",
 			"urls": [
-				"bzz-raw://2b0947eaf6d87719b7ef8d1e6b85c77bcb606e5dd3968c43e24f8d2339dbf5d6",
-				"dweb:/ipfs/Qmdr9idmwTP4oFiNCJPooHokN7L2rSXjGszFbsjdTanjoK"
+				"bzz-raw://dc5f3b601724da952d02027d66910a017765d4e06466a4061fb1fa15c0dbaca3",
+				"dweb:/ipfs/QmagXfeM7ARtqAQjvkA5p9DUiwok4K2pTN225h91DJmUUz"
 			]
 		},
 		"governance/Democratized.sol": {
@@ -1033,17 +1033,17 @@
 			]
 		},
 		"governance/LocalTitles.sol": {
-			"keccak256": "0x3703c34aa1ef758b2276500779daac26c6107a6248f1decce67e71b6279e8854",
+			"keccak256": "0x7aea731f1972901aac37d355bb572a5ea3eff5035627cbda5e181fe127866130",
 			"urls": [
-				"bzz-raw://76fa54f3d41886e0f9255aaf5f729cd9ba886168c17609608a33c28cacfb7396",
-				"dweb:/ipfs/QmejFt4z4k3FTfL4phCWVMMixWX2tuhxT7Gf7D7Y7sRn9v"
+				"bzz-raw://561ee509edd2f60fbae4803c70615fda7157a8f7e30ebbb9bfaa62c9992a1fbb",
+				"dweb:/ipfs/QmfQi1xe1HfGYM4SFUfXj5SHW2H8cbsVNKzBFNRxGsL5Us"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0x3191cc4c31fbe13783f8111ee36dc56e4d711763c88d349e8e78342dc0295f05",
+			"keccak256": "0xc22c9865a959c559ecf60ed2201ead12e26620a7f1c5dc172400f8f4261ea3c2",
 			"urls": [
-				"bzz-raw://275b6330b5811d551334537b45c9438e7f451b4efe7557a2b01fd0bb70e26038",
-				"dweb:/ipfs/QmSDNF5Qt6V2mgGmNkKDVo2mgqUtCrnCndfAmzcAkJghR5"
+				"bzz-raw://a9de880ce66b6e5585e5111c7f3c8eb0d080270b2f270d17c131018c6c707053",
+				"dweb:/ipfs/QmbS5j2RHthAVAnfwVXnryp8qYXugguT1mA9KNi5JJQDxM"
 			]
 		},
 		"governance/VotingRights.sol": {
@@ -1115,14 +1115,6 @@
 			"urls": [
 				"bzz-raw://6e920cbf0a15042c2e2dedb09a4380bc7f3bb223d49fbd023eded4b280f6c28c",
 				"dweb:/ipfs/QmYWEPwUYP7pUukRrH2SBckxxuyVSPUUKQdFTtTbZXwkNu"
-			]
-		},
-		"openZeppelin/ERC721Enumerable.sol": {
-			"keccak256": "0xad1c4813442542df96c51c15a1a58c88016ca3fcd7d9e80d9c0c66e3a9d21391",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://9e6f8cab8df218a3acce0c85be7e6c35f4dd826fa7bd6ac02e4c1a0abfe7d779",
-				"dweb:/ipfs/QmczsdBCG3zSwcmMKY5LXktuQKgYj96xpZH16bubRoFmCn"
 			]
 		},
 		"openZeppelin/ERC721Holder.sol": {

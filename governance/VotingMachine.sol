@@ -1,4 +1,5 @@
 pragma solidity ^0.8.0;
+
 import "./VotingRights.sol";
 
 contract VotingMachine {
@@ -95,7 +96,7 @@ contract VotingMachine {
   function addProposition(address sender, PropositionRequirements memory requirements) public returns (uint voteID)
   {
     /// @dev The reason to use a loop rather than cost some token is because the chain's value should benefit, not us.
-    for (uint i = 0; i < loops; i++) {}
+    for (uint16 i = 0; i < loops; i++) {}
     uint propID = propositionCount;
     propositionCount++;
     propositions[propID] = Proposition(propID, sender, msg.sender, requirements.threshold, requirements.minimumVoteABS, requirements.minimumVoteREL, requirements.startTime, requirements.endTime, false);
