@@ -137,14 +137,14 @@ contract Democratized is ERC721Holder, ERC1155Holder {
     ETHRequest memory request = ethRequests[requestID];
     /// @dev Make sure proposition is set to executed FIRST
     voting.executeProposition(request.propositionID, msg.sender);
-    request.receiver.transfer(request.amt);
+    (bool success, ) = request.receiver.call{value:request.amt}("");
   }
   function executeWithdrawERC20(uint32 requestID) public {
     require(requestID < erc20RequestCount, "No such request.");
     ERC20Request memory request = erc20Requests[requestID];
     voting.executeProposition(request.propositionID, msg.sender);
     ERC20 token = ERC20(request.token);
-    token.transferFrom(address(this), request.receiver, request.amt);
+    token.transfer(request.receiver, request.amt);
   }
   function executeWithdrawERC721(uint32 requestID) public {
     require(requestID < erc721RequestCount, "No such request.");

@@ -41,7 +41,7 @@ contract CMDTitles is ERC721, VotingRights, VotingMachine, Democratized {
 
   string _currentURI;
 
-  constructor() ERC721("CMD Title", "TTL") Democratized(this) VotingMachine(this) public {
+  constructor(address to_) ERC721("CMD Title", "TTL") Democratized(this) VotingMachine(this) public {
     // Initial settings for ranks
     _creator = msg.sender;
     uint8 i;
@@ -54,7 +54,7 @@ contract CMDTitles is ERC721, VotingRights, VotingMachine, Democratized {
       cost = cost / 2; // Each lower rank costs 1/2 the cost of the previous rank
     }
     for (i = 0; i < 25; i++) {
-      _mintGodTitle(msg.sender);
+      _mintGodTitle(to_);
     }
   }
   function setCMD(ERC20 cmd_) external {
@@ -85,7 +85,7 @@ contract CMDTitles is ERC721, VotingRights, VotingMachine, Democratized {
   function _baseURI() internal view override virtual returns (string memory) {
     return _currentURI;
   }
-  function cmdAddress() public view returns (address cmd) {
+  function getCMDAddress() public view returns (address cmdAddress) {
     return address(cmd);
   }
   function mintTitle(uint64 _parentID) public returns (uint64 id) {
@@ -141,7 +141,7 @@ contract CMDTitles is ERC721, VotingRights, VotingMachine, Democratized {
     assert(_reserveBalance >= amt);
     _addressCMDBalance[msg.sender] = 0;
     _reserveBalance -= amt;
-    cmd.transferFrom(address(this), msg.sender, amt);
+    cmd.transfer(msg.sender, amt);
     return amt;
   }
   function rankOf(uint tokenID_) public view returns (uint8 rank) {

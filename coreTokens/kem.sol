@@ -10,8 +10,8 @@ import "./CMDToken.sol";
 
 contract KemToken is ERC20, Democratized {
     constructor() ERC20("Kemet", "KEM") Democratized(VotingMachine(address(0))) {
-        CMDTitles titles = new CMDTitles();
-        CMDToken cmd = new CMDToken(titles, this);
+        CMDTitles titles = new CMDTitles(msg.sender);
+        CMDToken cmd = new CMDToken(titles, this, msg.sender);
         titles.setCMD(cmd);
         voting = titles;
         // Initially mint 100M kem

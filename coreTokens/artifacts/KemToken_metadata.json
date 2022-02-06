@@ -991,17 +991,17 @@
 	},
 	"sources": {
 		"coreTokens/CMDToken.sol": {
-			"keccak256": "0x8e8d24957a7d6bcffd597a3b0c1106d75c9f76bab404ec3524706313ad197bbe",
+			"keccak256": "0x78081398d4207e50bca7c23a7e7f22e50401dab240ec6430f6067c167793f752",
 			"urls": [
-				"bzz-raw://f79c941b62491198c44045bd9c973b93eec4472d2908210a6e5a20ab98d5c1b8",
-				"dweb:/ipfs/QmS6NH5setnnYhDvsPckHLFR4YtBypagpckJc2eU5BVpYz"
+				"bzz-raw://da2489a112aa454d2b5772c160553bc67bfea068affaeaba0f89cc29455ce782",
+				"dweb:/ipfs/QmSevwK1344Mfv2TWjbHDaCQPWws4Zur1bwZgqewovxkvv"
 			]
 		},
 		"coreTokens/kem.sol": {
-			"keccak256": "0xa494130e52081807ccd3ff7b05c29f08f9f3e8423a3f69f35dccf739e7e31ac8",
+			"keccak256": "0x6755380a8d90e0034eaeb054c9b5590c25dc18de771398f16b4f3768f85671f4",
 			"urls": [
-				"bzz-raw://d6ebe5d6f33a9bf6cfb7484bae9b54c41a40c0b408fba247c52fcae618fb8a8d",
-				"dweb:/ipfs/QmSFe31frEfvs6RNET2B7ZbHNtiQThBwvjL11Wey3b4ZhA"
+				"bzz-raw://e7441b53521e9f499ea30cb3dde2c9ea495f50ac11ac9be8bcf2b2bb23978b54",
+				"dweb:/ipfs/QmQXxacz4KdfUH7Cnjq8o42HZLe8FwzV3mgs8VACVHGJ5a"
 			]
 		},
 		"forgable/IERC20Forgable.sol": {
@@ -1019,17 +1019,17 @@
 			]
 		},
 		"governance/CMDTitles.sol": {
-			"keccak256": "0xc5799e9e66c664e2fbec111f29759d4bf42c24fe098638f35dfd3a9086a48e5f",
+			"keccak256": "0x00295920e5a07272c51b798586629c0bb09bdffe1ab21ac77df2524ca57806d0",
 			"urls": [
-				"bzz-raw://dc5f3b601724da952d02027d66910a017765d4e06466a4061fb1fa15c0dbaca3",
-				"dweb:/ipfs/QmagXfeM7ARtqAQjvkA5p9DUiwok4K2pTN225h91DJmUUz"
+				"bzz-raw://da3ea4b80f72a24ec351daab07ef7c779564ad8a728e8cbf8274a46ae1ce5237",
+				"dweb:/ipfs/QmfPFTSP12PXH1NqombdBUbPFvXD7pi2t6Ep4NpiqfzRMn"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0x64b814518b25470cb5917d7fa3229abb57668ab55ad63d71f836bc17d39629da",
+			"keccak256": "0x4a65a955b2781a91856cf1c2a5daf9a2c2dae8d2a69e224b119f3ce6cbf777ac",
 			"urls": [
-				"bzz-raw://46b9f23b7c247b2b4753f60f929fad649b4bf67d29a319b3135f411f1811544e",
-				"dweb:/ipfs/QmWTxCq93zRRmU85wbwQij89WFaYGwk7BsJ3UqEHCTQvJt"
+				"bzz-raw://784c46a3e911a89496622f9a030813112cabeda679db3ecefc70202a79ad2ce8",
+				"dweb:/ipfs/QmWfyHZpYoNMcrvaXPSoo1YzaRHgB8LeF8WvJabNYKvtH6"
 			]
 		},
 		"governance/LocalTitles.sol": {
