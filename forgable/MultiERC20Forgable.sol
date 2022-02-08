@@ -24,7 +24,10 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
     uint256 private _smithCount;
     uint256 private _smithFee;
     mapping (address => bool) private _registered;
-    
+
+    /// @dev Need to set request to change the lock time
+    uint _forgeLockTime = 3600 seconds;
+
     constructor(string memory name_, string memory symbol_, uint256 smithFee_, ERC20 resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
         _resourceTokens[0] = ResourceToken(resourceToken_, rate_, limit_, 0, true);
         _resourceTokenCount = 1;
@@ -51,8 +54,8 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
     }
     function timeToForge(address addr) external view override returns (uint256 time) {
         uint256 dif = (block.timestamp - _lastMinted[addr]);
-        if (dif > 3600) return 0;
-        return 3600 - dif;
+        if (dif > _forgeLockTime) return 0;
+        return _forgeLockTime - dif;
     }
     function smithCount() external view override returns (uint256 count) {
         return _smithCount;
@@ -84,6 +87,8 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         return true;
     }
     function _forge(uint256 tokenID_, uint256 amt_) internal returns (uint256 amt) {
+        require(block.timestamp >  _lastMinted[msg.sender], "Last mint was too recent.");
+        _lastMinted[msg.sender] = block.timestamp;
         require(tokenID_ < _resourceTokenCount, "No such resource token.");
         ResourceToken memory token = _resourceTokens[tokenID_];
         require(amt_ <= token.forgeLimit, "The forge is too small to fit the amount of material requested.");
@@ -93,7 +98,7 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         rt.transferFrom(msg.sender, address(this), amt_);
         uint256 amt = amt_ / token.conversionRate;
         emit Forged(msg.sender, amt_, amt);
-        _mint(msg.sender, amt);        
+        _mint(msg.sender, amt);
         return amt;
     }
     /* Goverance */
