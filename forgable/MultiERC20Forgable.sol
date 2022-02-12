@@ -7,13 +7,16 @@ import "../governance/Democratized.sol";
 /// @title An ERC20 token standard that allows minting the token upon receiving ERC20 resource tokens
 
 /// @dev It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.
+/// @dev Adding activeFrom and activeUntil and removing bool active, allowing, without further voting, temporary use of resources
 abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
+    uint256 UINT_MAX = 2**256 - 1;
     struct ResourceToken {
         ERC20 tokenAddress;
         uint256 conversionRate;
         uint256 forgeLimit;
         uint256 totalUsed;
-        bool active;
+        uint256 activeFrom;
+        uint256 activeUntil;
     }
     /// @dev We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!
     uint256 private _resourceTokenCount;
@@ -91,6 +94,7 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         _lastMinted[msg.sender] = block.timestamp;
         require(tokenID_ < _resourceTokenCount, "No such resource token.");
         ResourceToken memory token = _resourceTokens[tokenID_];
+        require(block.timestamp > token.activeFrom && time.activeUntil > block.timestamp, "Resource not active.");
         require(amt_ <= token.forgeLimit, "The forge is too small to fit the amount of material requested.");
         ERC20 rt = token.tokenAddress;
         require(rt.balanceOf(msg.sender) >= amt_, "Insufficient funds to mint.");
@@ -106,6 +110,8 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         address tokenAddress;
         uint256 conversionRate;
         uint256 forgeLimit;
+        uint256 activeFrom;
+        uint256 activeUntil;
         uint256 propositionID;
     }
     struct ResourceAdjustmentRequest {
@@ -120,7 +126,8 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
     }
     struct ActiveChangeRequest {
         uint256 resourceID;
-        bool active;
+        uint256 activeFrom;
+        uint256 activeUntil;
         uint256 propositionID;
     }
     mapping (uint256 => NewResourceRequest) _newResourceRequests;
@@ -138,7 +145,15 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         _newResourceRequestCNT++;
         uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
         _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, propID);
-        emit NewResourceRequested(requestID, addr_, rate_, limit_, propID);
+        emit NewResourceRequested(requestID, addr_, rate_, limit_, 0, UINT_MAX, propID);
+        return requestID;
+    }
+    function requestNewResource(address addr_, uint256 rate_, uint256 limit_, uint256 activeFrom_, uint256 activeUntil_) public returns (uint256 requestID) {
+        uint256 requestID = _newResourceRequestCNT;
+        _newResourceRequestCNT++;
+        uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
+        _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, propID);
+        emit NewResourceRequested(requestID, addr_, rate_, limit_, activeFrom_, activeUntil_, propID);
         return requestID;
     }
     function requestResourceAdjustment(uint256 resourceID_, bool toggle_, uint256 val_) public returns (uint256 requetID) {
@@ -149,19 +164,19 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         _resourceAdjustmentRequests[requestID] = ResourceAdjustmentRequest(resourceID_, toggle_, val_, propID);
         return requestID;
     }
-    function requestActiveChange(uint256 resourceID_, bool active) public returns (uint256 requestID) {
+    function requestActiveChange(uint256 resourceID_, uint256 activeFrom_, uint256 activeUntil_) public returns (uint256 requestID) {
         require(resourceID_ < _resourceTokenCount, "No such resource defined.");
         uint256 requestID = _activeChangeRequestCNT;
         _activeChangeRequestCNT++;
         uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
-        _activeChangeRequests[requestID] = ActiveChangeRequest(resourceID_, active, propID);
+        _activeChangeRequests[requestID] = ActiveChangeRequest(resourceID_, activeFrom_, activeUntil_, propID);
         return requestID;
     }
     function executeAddResource(uint256 requestID_) public returns (uint256 resourceID) {
         require(requestID_ < _newResourceRequestCNT, "No such request.");
         NewResourceRequest memory request = _newResourceRequests[requestID_];
         voting.executeProposition(request.propositionID, msg.sender);
-        uint resourceID = _addResourceToken(request.tokenAddress, request.conversionRate, request.forgeLimit);
+        uint resourceID = _addResourceToken(request.tokenAddress, request.conversionRate, request.forgeLimit, request.activeFrom, request.activeUntil);
         emit NewResourceAdded(resourceID, requestID_, request.tokenAddress);
         return resourceID;
     }
@@ -179,11 +194,11 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
     function getResourceID(address tokenAddress) public view returns (uint256 resourceID) {
         return _reverseLookup[tokenAddress];
     }
-    function _addResourceToken(address tokenAddress, uint conversionRate, uint forgeLimit) internal returns (uint resourceID) {
+    function _addResourceToken(address tokenAddress, uint conversionRate, uint forgeLimit, uint activeFrom_, uint activeUntil_) internal returns (uint resourceID) {
         require(!checkIfResource(tokenAddress), "Token already has a resource!");
         uint256 resourceID = _resourceTokenCount;
         _resourceTokenCount++;
-        _resourceTokens[resourceID] = ResourceToken(ERC20(tokenAddress), conversionRate, forgeLimit, 0, true);
+        _resourceTokens[resourceID] = ResourceToken(ERC20(tokenAddress), conversionRate, forgeLimit, 0, activeFrom_, activeUntil_);
         return resourceID;
     }
     /// @dev Add executeResoureAddition!
@@ -201,7 +216,8 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         ActiveChangeRequest memory request = _activeChangeRequests[requestID_];
         voting.executeProposition(request.propositionID, msg.sender);
         ResourceToken storage token = _resourceTokens[request.resourceID];
-        token.active = request.active;
+        token.activeFrom = request.activeFrom;
+        token.activeUntil = request.activeUntil;
     }
     function executeFeeChange(uint256 requestID_) public {
         require(requestID_ < _feeChangeRequestCNT, "No such request.");
