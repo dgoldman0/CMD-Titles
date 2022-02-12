@@ -61,18 +61,19 @@
 			"decreaseAllowance(address,uint256)": "a457c2d7",
 			"executeActiveChange(uint256)": "d3df2b61",
 			"executeAddResource(uint256)": "6f95f2c3",
-			"executeETHWithdraw(uint256)": "fc04e65d",
+			"executeETHWithdraw(uint32)": "969b2157",
 			"executeFeeChange(uint256)": "d3aab25c",
 			"executeResourceAdjustment(uint256)": "c24bf5b8",
-			"executeWithdrawERC1155(uint256)": "be5baceb",
-			"executeWithdrawERC1155Batch(uint256)": "5eb3009c",
-			"executeWithdrawERC20(uint256)": "f3a0ae2c",
-			"executeWithdrawERC721(uint256)": "fc185b83",
+			"executeWithdrawERC1155(uint32)": "0a712f9a",
+			"executeWithdrawERC1155Batch(uint32)": "a2faca75",
+			"executeWithdrawERC20(uint32)": "e8d5d833",
+			"executeWithdrawERC721(uint32)": "3c821a67",
 			"forge(uint256)": "a94e834b",
 			"forge(uint256,uint256)": "ef0b8784",
 			"forgeLimit()": "0a36495e",
 			"forgeLimit(uint256)": "1d55513b",
 			"getResourceID(address)": "91250900",
+			"getVotingMachine()": "dfe5576b",
 			"increaseAllowance(address,uint256)": "39509351",
 			"lastMint()": "586fc5b5",
 			"name()": "06fdde03",
@@ -80,10 +81,11 @@
 			"onERC1155Received(address,address,uint256,uint256,bytes)": "f23a6e61",
 			"onERC721Received(address,address,uint256,bytes)": "150b7a02",
 			"paySmithingFee()": "81989415",
-			"requestActiveChange(uint256,bool)": "ceb2c006",
+			"requestActiveChange(uint256,uint256,uint256)": "4db8fff0",
 			"requestETHWithdraw(uint256,address)": "8b07af2b",
 			"requestFeeChange(uint256)": "72f4d88a",
 			"requestNewResource(address,uint256,uint256)": "26140d16",
+			"requestNewResource(address,uint256,uint256,uint256,uint256)": "8d419406",
 			"requestResourceAdjustment(uint256,bool,uint256)": "cd992eec",
 			"requestWithdrawERC1155(address,uint256,uint256,address)": "a1f4225b",
 			"requestWithdrawERC1155(address,uint256[],uint256[],address)": "62dfcc07",
@@ -150,9 +152,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "ERC1155WithdrawExecuted",
@@ -181,9 +183,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "ERC1155WithdrawExecuted",
@@ -212,9 +214,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "ERC1155WithdrawRequested",
@@ -243,9 +245,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "ERC1155WithdrawRequested",
@@ -268,9 +270,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint64",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint64"
 				}
 			],
 			"name": "ERC20WithdrawExecuted",
@@ -293,9 +295,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "ERC20WithdrawRequested",
@@ -318,9 +320,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "ERC721WithdrawExecuted",
@@ -343,9 +345,9 @@
 				},
 				{
 					"indexed": false,
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "ERC721WithdrawRequested",
@@ -445,6 +447,18 @@
 					"indexed": false,
 					"internalType": "uint256",
 					"name": "forgeLimit",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "activeFrom",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "activeUntil",
 					"type": "uint256"
 				},
 				{
@@ -723,9 +737,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "executeETHWithdraw",
@@ -762,9 +776,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "executeWithdrawERC1155",
@@ -775,9 +789,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "executeWithdrawERC1155Batch",
@@ -788,9 +802,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "executeWithdrawERC20",
@@ -801,9 +815,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
+					"internalType": "uint32",
 					"name": "requestID",
-					"type": "uint256"
+					"type": "uint32"
 				}
 			],
 			"name": "executeWithdrawERC721",
@@ -900,6 +914,19 @@
 					"internalType": "uint256",
 					"name": "resourceID",
 					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getVotingMachine",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "machine",
+					"type": "address"
 				}
 			],
 			"stateMutability": "view",
@@ -1088,9 +1115,14 @@
 					"type": "uint256"
 				},
 				{
-					"internalType": "bool",
-					"name": "active",
-					"type": "bool"
+					"internalType": "uint256",
+					"name": "activeFrom_",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "activeUntil_",
+					"type": "uint256"
 				}
 			],
 			"name": "requestActiveChange",
@@ -1162,6 +1194,45 @@
 				{
 					"internalType": "uint256",
 					"name": "limit_",
+					"type": "uint256"
+				}
+			],
+			"name": "requestNewResource",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "requestID",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "addr_",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "rate_",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "limit_",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "activeFrom_",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "activeUntil_",
 					"type": "uint256"
 				}
 			],

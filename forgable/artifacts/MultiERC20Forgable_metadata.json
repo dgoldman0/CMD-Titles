@@ -53,9 +53,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "ERC1155WithdrawExecuted",
@@ -84,9 +84,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "ERC1155WithdrawExecuted",
@@ -115,9 +115,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "ERC1155WithdrawRequested",
@@ -146,9 +146,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "ERC1155WithdrawRequested",
@@ -171,9 +171,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint64",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint64"
 					}
 				],
 				"name": "ERC20WithdrawExecuted",
@@ -196,9 +196,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "ERC20WithdrawRequested",
@@ -221,9 +221,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "ERC721WithdrawExecuted",
@@ -246,9 +246,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "ERC721WithdrawRequested",
@@ -348,6 +348,18 @@
 						"indexed": false,
 						"internalType": "uint256",
 						"name": "forgeLimit",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "activeFrom",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "activeUntil",
 						"type": "uint256"
 					},
 					{
@@ -626,9 +638,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "executeETHWithdraw",
@@ -665,9 +677,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "executeWithdrawERC1155",
@@ -678,9 +690,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "executeWithdrawERC1155Batch",
@@ -691,9 +703,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "executeWithdrawERC20",
@@ -704,9 +716,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "requestID",
-						"type": "uint256"
+						"type": "uint32"
 					}
 				],
 				"name": "executeWithdrawERC721",
@@ -803,6 +815,19 @@
 						"internalType": "uint256",
 						"name": "resourceID",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getVotingMachine",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "machine",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -991,9 +1016,14 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "bool",
-						"name": "active",
-						"type": "bool"
+						"internalType": "uint256",
+						"name": "activeFrom_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "activeUntil_",
+						"type": "uint256"
 					}
 				],
 				"name": "requestActiveChange",
@@ -1065,6 +1095,45 @@
 					{
 						"internalType": "uint256",
 						"name": "limit_",
+						"type": "uint256"
+					}
+				],
+				"name": "requestNewResource",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "requestID",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr_",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rate_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "limit_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "activeFrom_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "activeUntil_",
 						"type": "uint256"
 					}
 				],
@@ -1411,7 +1480,7 @@
 			}
 		],
 		"devdoc": {
-			"details": "It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.",
+			"details": "It would be useful to add preForge and postForge hooks to allow additional functionality. This feature will be important with CUR token as additional tokens will be minted after the forge process.Adding activeFrom and activeUntil and removing bool active, allowing, without further voting, temporary use of resources",
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -1467,6 +1536,9 @@
 				}
 			},
 			"stateVariables": {
+				"_forgeLockTime": {
+					"details": "Need to set request to change the lock time"
+				},
 				"_resourceTokenCount": {
 					"details": "We really don't need 2^256 possible resource tokens! Change to uint8 or uint16 at most!"
 				}
@@ -1503,24 +1575,24 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0xc21c13f7981204c08c833cc6b1720a9b519597f72154c0421ab4caa438f11b86",
+			"keccak256": "0xa1193ca47a25a2925bbe829b1aa5808f13f27d3fda3e4d338b1ab8455b76d4fd",
 			"urls": [
-				"bzz-raw://5273c86a04b81e3bbf1500d109fb50e0a39c82181ab1d27723d0ae760bd35085",
-				"dweb:/ipfs/Qmekht9PKtWU4cLN4uNsB4MqmxPqnGYTy5nKtuhi7CrGPg"
+				"bzz-raw://44608354e9513fa24d038f12cc26e3a8ef38170bc579bca2afd7d6334a7a6861",
+				"dweb:/ipfs/Qmdc4xT8bDXYGAWCteBnLHrqB4Qeoge5uAR3iQTZDaXMvB"
 			]
 		},
 		"governance/Democratized.sol": {
-			"keccak256": "0x2831425b9b771858ec725c6ff7822c9a0cb74fbebf14bca92b0e76d56831c669",
+			"keccak256": "0x4a65a955b2781a91856cf1c2a5daf9a2c2dae8d2a69e224b119f3ce6cbf777ac",
 			"urls": [
-				"bzz-raw://46dbecd8a2ecd9e357101295271415ea1fb939a33b877fb89d8db1ff652bd1f5",
-				"dweb:/ipfs/QmQEJ9Va5bL4Hq6WLGy5TRTUeFNsMQLdW2SfUaBHVpCiQw"
+				"bzz-raw://784c46a3e911a89496622f9a030813112cabeda679db3ecefc70202a79ad2ce8",
+				"dweb:/ipfs/QmWfyHZpYoNMcrvaXPSoo1YzaRHgB8LeF8WvJabNYKvtH6"
 			]
 		},
 		"governance/VotingMachine.sol": {
-			"keccak256": "0xc7697ed3e410bd493dee9c7fba0af3adee66e240a2aec908e79dcbe00e5e7f5e",
+			"keccak256": "0xc22c9865a959c559ecf60ed2201ead12e26620a7f1c5dc172400f8f4261ea3c2",
 			"urls": [
-				"bzz-raw://32890f110a2b16a504eab3b39c1ade64372da5892c3abd609b31eb6fd09327d3",
-				"dweb:/ipfs/QmWjzppZQEwSv7jMHmYwuKaeFCNg7wFhUEmLReNZSTUosJ"
+				"bzz-raw://a9de880ce66b6e5585e5111c7f3c8eb0d080270b2f270d17c131018c6c707053",
+				"dweb:/ipfs/QmbS5j2RHthAVAnfwVXnryp8qYXugguT1mA9KNi5JJQDxM"
 			]
 		},
 		"governance/VotingRights.sol": {

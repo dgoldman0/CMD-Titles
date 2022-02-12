@@ -32,7 +32,7 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
     uint _forgeLockTime = 3600 seconds;
 
     constructor(string memory name_, string memory symbol_, uint256 smithFee_, ERC20 resourceToken_, uint256 rate_, uint256 limit_, uint256 initial_) ERC20(name_, symbol_) {
-        _resourceTokens[0] = ResourceToken(resourceToken_, rate_, limit_, 0, true);
+        _resourceTokens[0] = ResourceToken(resourceToken_, rate_, limit_, 0, 0, UINT_MAX);
         _resourceTokenCount = 1;
         _smithFee = smithFee_;
         _mint(msg.sender, initial_);
@@ -94,7 +94,7 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         _lastMinted[msg.sender] = block.timestamp;
         require(tokenID_ < _resourceTokenCount, "No such resource token.");
         ResourceToken memory token = _resourceTokens[tokenID_];
-        require(block.timestamp > token.activeFrom && time.activeUntil > block.timestamp, "Resource not active.");
+        require(block.timestamp > token.activeFrom && token.activeUntil > block.timestamp, "Resource not active.");
         require(amt_ <= token.forgeLimit, "The forge is too small to fit the amount of material requested.");
         ERC20 rt = token.tokenAddress;
         require(rt.balanceOf(msg.sender) >= amt_, "Insufficient funds to mint.");
@@ -138,13 +138,13 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
     uint256 _resourceAdjustmentRequestCNT;
     uint256 _feeChangeRequestCNT;
     uint256 _activeChangeRequestCNT;
-    event NewResourceRequested(uint256 requestID, address tokenAddress, uint256 converesionRate, uint256 forgeLimit, uint256 propID);
+    event NewResourceRequested(uint256 requestID, address tokenAddress, uint256 converesionRate, uint256 forgeLimit, uint256 activeFrom, uint256 activeUntil, uint256 propID);
     event NewResourceAdded(uint256 resourceID, uint256 requestID, address tokenAddress);
     function requestNewResource(address addr_, uint256 rate_, uint256 limit_) public returns (uint256 requestID) {
         uint256 requestID = _newResourceRequestCNT;
         _newResourceRequestCNT++;
         uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
-        _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, propID);
+        _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, 0, UINT_MAX, propID);
         emit NewResourceRequested(requestID, addr_, rate_, limit_, 0, UINT_MAX, propID);
         return requestID;
     }
@@ -152,7 +152,7 @@ abstract contract MultiERC20Forgable is ERC20, IERC20Forgable, Democratized {
         uint256 requestID = _newResourceRequestCNT;
         _newResourceRequestCNT++;
         uint propID = voting.addProposition(msg.sender, 5000000, block.timestamp + 1 days, block.timestamp + 8 days);
-        _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, propID);
+        _newResourceRequests[requestID] = NewResourceRequest(addr_, rate_, limit_, activeFrom_, activeUntil_, propID);
         emit NewResourceRequested(requestID, addr_, rate_, limit_, activeFrom_, activeUntil_, propID);
         return requestID;
     }

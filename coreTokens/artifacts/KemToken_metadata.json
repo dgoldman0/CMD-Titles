@@ -985,7 +985,7 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 278
+			"runs": 200
 		},
 		"remappings": []
 	},
@@ -1012,10 +1012,10 @@
 			]
 		},
 		"forgable/MultiERC20Forgable.sol": {
-			"keccak256": "0xc21c13f7981204c08c833cc6b1720a9b519597f72154c0421ab4caa438f11b86",
+			"keccak256": "0xa1193ca47a25a2925bbe829b1aa5808f13f27d3fda3e4d338b1ab8455b76d4fd",
 			"urls": [
-				"bzz-raw://5273c86a04b81e3bbf1500d109fb50e0a39c82181ab1d27723d0ae760bd35085",
-				"dweb:/ipfs/Qmekht9PKtWU4cLN4uNsB4MqmxPqnGYTy5nKtuhi7CrGPg"
+				"bzz-raw://44608354e9513fa24d038f12cc26e3a8ef38170bc579bca2afd7d6334a7a6861",
+				"dweb:/ipfs/Qmdc4xT8bDXYGAWCteBnLHrqB4Qeoge5uAR3iQTZDaXMvB"
 			]
 		},
 		"governance/CMDTitles.sol": {
